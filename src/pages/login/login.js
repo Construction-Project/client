@@ -5,7 +5,6 @@ import { Link ,useNavigate} from "react-router-dom"
 import { Navigate } from "react-router-dom";
 import axios from "axios";
 var validator = require("email-validator");
-
 const Login = () => {
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
