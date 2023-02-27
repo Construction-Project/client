@@ -5,6 +5,7 @@ import { Link ,useNavigate} from "react-router-dom"
 import { Navigate } from "react-router-dom";
 import axios from "axios";
 var validator = require("email-validator");
+
 const Login = () => {
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
@@ -15,7 +16,6 @@ const Login = () => {
             alert('email is not valid')
             return
         }
-
         try{
             const response= await axios.post("http://localhost:3600/auth/login",{ userName:email,password:password})
            localStorage.setItem("token", JSON.stringify(response.data.accessToken));
@@ -24,8 +24,6 @@ const Login = () => {
         catch(err){
             setErr(err.response.data?.message)
           } 
-        
-
 
     return (
         <>
