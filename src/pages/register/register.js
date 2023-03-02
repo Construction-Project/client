@@ -30,9 +30,13 @@ const Register = () => {
     <>
       <h2>register</h2>
       <input placeholder="enter your name" onChange={e => setName(e.target.value)}></input>
+      <br></br><br></br>
       <input placeholder="enter your email" onChange={e => setEmail(e.target.value)}></input>
+      <br></br><br></br>
       <input type="password"placeholder="enter your password" onChange={e => setPassword(e.target.value)}></input>
+      <br></br><br></br>
       <button onClick={()=>registerToServer(email,password,name)}>לחץ כדי להירשם</button>
+      <br></br><br></br>
       {err && err}
       <Link to="/initiatorRegister">רוצה להירשם כיזם? לחץ כאן</Link>
     </>

@@ -24,19 +24,22 @@ const Login = () => {
         catch(err){
             setErr(err.response.data?.message)
           } 
-
+        }
     return (
         <>
             <h2>login</h2>
             <input placeholder="enter your user name" onChange={e=>setEmail(e.target.value)}></input>
+            <br></br><br></br>
             <input placeholder="enter your password" type={"password"} onChange={e=>setPassword(e.target.value)}></input>
+            <br></br><br></br>
             <button onClick={()=>loginToServer(email,password)}>לחץ לכניסה</button>
+            <br></br><br></br>
             {err && err}
 
             <Link to="/register">אתה לא רשום? לחץ כאן</Link>
         </>
     )
 }
-}
+
 export default Login
 
