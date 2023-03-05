@@ -12,8 +12,8 @@ const InitiatorRegister = () => {
     const [hp,setHp] = useState('');
     const [phone,setPhone] = useState('');
     const [address,setAddress] = useState('');
-    const [pinuyBinuy,setPinuyBinuy] = useState(true)
-    const [tama,setTama] = useState(true)
+    const [pinuyBinuy,setPinuyBinuy] = useState(false)
+    const [tama,setTama] = useState(false)
     const [description,setDescription] = useState('')
     const [companyName,setCompanyName] = useState('')
     const [err,setErr]=useState(null)
@@ -55,7 +55,7 @@ const InitiatorRegister = () => {
     <br></br><br></br>
     <input placeholder="enter your address" onChange={e=>setAddress(e.target.value)}></input>
     <br></br><br></br>
-    <input type="checkbox" onChange={setPinuyBinuy}></input>
+    <input type="checkbox" onChange={handlePinuyBinuy}></input>
     {'pinuyBinuy'} 
     <br></br>
     <input type="checkbox" onChange={handleTama}></input>
@@ -67,7 +67,7 @@ const InitiatorRegister = () => {
     <br></br><br></br>
     <button onClick={()=>registerToServer(email,password,name,hp,phone,address,pinuyBinuy,tama,description,companyName)}>לחץ כדי להירשם</button>
     <br></br><br></br>
-    
+
     {err && err}
     </>
   )
