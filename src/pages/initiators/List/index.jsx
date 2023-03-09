@@ -3,7 +3,9 @@ import { Navigate } from "react-router-dom";
 import axios from "axios";
 import './initiatorItem'
 import InitiatorItem from './initiatorItem';
-import Cities from './city';
+import Cities from '../city';
+import { Table,TableBody } from '@mui/material';
+
 
 const InitiatorsList = () => {
     const [initiators, setInitiators] = useState([]);
@@ -20,7 +22,7 @@ const InitiatorsList = () => {
         }
         fetchData()
     }, []);
-
+//cursor pointer
 
     // const getAllInitiators = async() =>{
     //     const response=await fetch('http://localhost:3600/initiator');
@@ -31,11 +33,15 @@ const InitiatorsList = () => {
     <>
     <div>initiators</div>
     {/* <button onClick={()=>getAllInitiators()}>לחץ לקבלת כל היזמים</button> */}
-    {initiators?.length && initiators.map((initiator)=>{return <InitiatorItem initiator={initiator} />})} 
+    <Table>
+      <TableBody>
+      {initiators?.length && initiators.map((initiator)=>{return <InitiatorItem initiator={initiator} />})} 
+    </TableBody>
+    </Table>
     {/* <InitiatorItem initiator={element}/> */}
 
     </>
   )
 }
 
-export default InitiatorsList
+export default InitiatorsList;

@@ -1,9 +1,4 @@
 
-
-
-
-
-
 const request = () => {
   const [name,setName] = useState('');
   const [email,setEmail] = useState('');
