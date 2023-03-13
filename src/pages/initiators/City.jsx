@@ -15,7 +15,6 @@ const Cities = () => {
         fetchData()
     }, []);
 
-
     return (   
         <>
         <select>
@@ -29,8 +28,6 @@ const Cities = () => {
 
 
 }
-
-
 export default Cities
 
 

@@ -10,7 +10,7 @@ const DisplayRating = ({stars}) => {
   return (<>
     <Typography component="legend">Read only</Typography>
     <Rating 
-    name="read-only" 
+     name="read-only" 
     value={stars} readOnly
       precision={0.5}
         // emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}

@@ -1,37 +1,15 @@
-
-
-import React, { useState ,useEffect } from 'react'
+import { useState ,useEffect } from 'react'
+import { useParams } from 'react-router-dom';
 import axios from "axios";
 import ProjectItem from './projectItem';
-import TableHead from '@mui/material/TableHead';
-import { styled } from '@mui/material/styles';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import { TableRow } from '@mui/material';
-import Paper from '@mui/material/Paper';
-import TableContainer from '@mui/material/TableContainer';
+import { styled ,TableHead,TableRow,Paper,TableContainer,TableCell,tableCellClasses} from '@mui/material';
+//import { tableCellClasses } from '@mui/material/TableCell';
+import StyledTableCell from './styleTable/StyledTableCell'
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
-}));
-
-const ProjectsList = ({initiatorId}) => {
+const ProjectsList = () => {
     const [projects , setProjects] = useState([]);
+    const {initiatorId}=useParams();
+    //console.log(initiatorId)
     useEffect(() => {
       async function fetchData() {
 
@@ -48,7 +26,6 @@ const ProjectsList = ({initiatorId}) => {
         <TableContainer component={Paper}>
         <TableHead>
           <TableRow>
-            
             <StyledTableCell align="right">address</StyledTableCell>
             <StyledTableCell align="right">city</StyledTableCell>
             <StyledTableCell align="right">status</StyledTableCell>
@@ -58,6 +35,7 @@ const ProjectsList = ({initiatorId}) => {
             <StyledTableCell align="right">startConstructionYear</StyledTableCell>
             <StyledTableCell align="right">populatingYear</StyledTableCell>
             <StyledTableCell align="right">description</StyledTableCell>
+            <StyledTableCell align="right">לעידכון</StyledTableCell>
           </TableRow>
         </TableHead>
          

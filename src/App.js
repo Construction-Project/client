@@ -1,43 +1,61 @@
+import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-dom"
+
 import Login from "./pages/login/login";
 import Register from "./pages/register";
 import InitiatorRegister from "./pages/register/initiator";
-
-//<Route  path="/register" element={<Register />}/>
-import {BrowserRouter as Router, Routes, Route } from "react-router-dom"
-// import Initiators from "./pages/initiators/List";
-// import RatingInitiator from "./pages/initiators/List/rating";
-import ProjectsList from "./pages/initiators/Single/projects/projects";
-import { useParams } from "react-router-dom";
-// import SingleIntiatorCard from "./pages/initiators/Single/Card";
-// import SingleIntiatorForm from "./pages/initiators/Single/Form";
 import SingleIntiator from "./pages/initiators/Single";
 import InitiatorsList from './pages/initiators/List'
+import RatingInitiator from "./pages/initiators/List/RatingInitiator";
+import Button from '@mui/material/Button';
+import Uploader from "./pages/Uploader";
+import ChooseTamaAndPinuyBinuy from './pages/register/ChooseTamaAndPinuyBinuy'
+const routes = [
+  { path: "/register", component: Register },
+  { path: "/login", component: Login },
+  { path: "/initiatorRegister", component: InitiatorRegister },
+  { path: "/initiators", component: InitiatorsList },
+  { path: "/initiators/:initiatorId", component: SingleIntiator },
+  { path: "/RatingInitiator", component: RatingInitiator }
+];
 
-const routes=[{path:"/register", component:Register}]
 
 function App() {
-  const {initiatorId}=useParams();
+
 
   return (
     <Router>
+      <nav className='main-nav'>
+        <Button href="/" variant="contained">
+          דף הבית
+        </Button>
+        <Button href="/login" variant="contained">
+          כניסה
+        </Button>
+        <Button href="/register" variant="contained">
+          הרשמה
+        </Button>
+        <Button href="/initiators" variant="contained">
+          יזמים
+        </Button>
+      </nav>
       <Routes>
-        <Route  path="/login" element={<Login />}/>
-        <Route  path="/register" element={<Register />}/>
-        <Route  path="/initiatorRegister" element={<InitiatorRegister />}/>
-        <Route  path="/initiators" element={<InitiatorsList />}>
-          {/*  */}
-        </Route>
-        <Route  path="initiators/:initiatorId" element={<SingleIntiator initiatorId={1}></SingleIntiator>}/>
-        {/* <Route  path="/initiators/projects" element={<ProjectsList initiatorId={}/>}/> */}
-        {/* <Route  path="/ratingInitiator" element={<RatingInitiator />}/> */}
-        {/* <Route  path="initiators/1/projects" element={<ProjectsList initiatorId={1}/>}/> */}
-        {/* <Route  path="initiators/1" element={<SingleIntiatorCard initiatorId={1}></SingleIntiatorCard>}/> */}
+        {routes.map(route => { return <Route key={route.path} path={route.path} element={<route.component />} /> }
+        )}
 
-        {/* <Route  path="/projects" element={<ProjectsList> initiatorId={1}<ProjectsList />}/> */}
-        {/* <Route path="initiators/:initiatorId/form" element={<SingleIntiatorForm initiatorId={1}></SingleIntiatorForm>}></Route> */}
+<Route path="/upload" element={<Uploader/>}></Route>
+<Route path="/ChooseTamaAndPinuyBinuy" element={<ChooseTamaAndPinuyBinuy/>}></Route>
+
+
 
       </Routes>
+
+
+
     </Router>
   );
 }
 export default App;
+
+
+
+//key={route.path} ---למה ? ? ?

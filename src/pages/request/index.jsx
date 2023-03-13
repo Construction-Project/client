@@ -25,7 +25,7 @@ const request = () => {
     <div>contact</div>
 
     <input type="name" placeholder="enter your name" onChange={e => setName(e.target.value)}></input>
-      <br></br><br></br>
+      <br></br><br></br> 
     <input placeholder="enter your email" onChange={e => setEmail(e.target.value)}></input>
       <br></br><br></br>
 

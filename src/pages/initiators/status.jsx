@@ -20,7 +20,7 @@ const Statuses = () => {
         <>
         <select>
         <option>בחר סטטוס פרויקט</option>
-            {cities?.length && cities.map((city)=>{return<option>{city.city}</option>})} 
+            {statuses?.length && statuses.map((city)=>{return<option>{city.city}</option>})} 
         </select>
         
     

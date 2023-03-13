@@ -5,7 +5,7 @@ import SingleIntiatorForm from "./Form";
 
 const SingleIntiator=()=>{
     const [isEditing,setIsEditing] = useState(false);
-        return<>
+    return<>
     {isEditing? <SingleIntiatorForm setIsEditing={setIsEditing}/>:<SingleIntiatorCard setIsEditing={setIsEditing}/>}
     </>
 }

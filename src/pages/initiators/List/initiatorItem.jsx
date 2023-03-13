@@ -1,29 +1,18 @@
 import { useParams } from "react-router-dom";
-import { Link ,useNavigate} from "react-router-dom"
-import { Navigate } from "react-router-dom";
-import { TableRow,Button } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { useState } from "react";
+
+import { Link ,useNavigate,Navigate} from "react-router-dom"
+import { TableRow,Button,styled } from '@mui/material';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import DisplayRating from "../DisplayRating";
-import { useState } from "react";
+import RatingInitiator from "./RatingInitiator";
+import StyledTableCell from '../../initiators/Single/projects/styleTable/StyledTableCell'
 
 const InitiatorItem = ({initiator}) => {
 const {id,name,phone,address,numOfProject,rating}=initiator
 const navigate=useNavigate()
-const {initiatorId}=useParams();
+//const {initiatorId}=useParams();
 
-const [rate,setRate]=useState(false);
-
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
   return (
     <>
     <TableRow />
@@ -34,12 +23,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     <StyledTableCell >{numOfProject}</StyledTableCell>
     <StyledTableCell >{rating}</StyledTableCell>
     <StyledTableCell ><DisplayRating stars={rating}></DisplayRating></StyledTableCell>
-    <StyledTableCell ><Button variant="outlined" onClick={setRate(true)}>לדירוג </Button></StyledTableCell>
+    <StyledTableCell ><RatingInitiator initiatorId={id}></RatingInitiator> </StyledTableCell>
   
     <StyledTableCell > <button onClick={()=>navigate(`${id}`)}>לפרטים נוספים</button> </StyledTableCell>
-    {/* navigate:   singleInitiatorCard  =>initiator*/}
 
-   {/* <button onClick={()=>navigate(`/project/${id}`)}>לפרטים נוספים</button> */}
     </>
   )
 }

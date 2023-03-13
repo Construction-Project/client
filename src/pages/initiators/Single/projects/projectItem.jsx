@@ -3,27 +3,9 @@ import { TableRow,TableBody ,Button} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 //import Fab from '@mui/material/Fab';
-///import EditIcon from '@mui/icons-material/Edit';
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
-}));
+//import EditIcon from '@mui/icons-material/Edit';
+import StyledTableCell from './styleTable/StyledTableCell'
+import StyledTableRow from './styleTable/StyledTableRow'
 
 
 const ProjectItem = ({project}) => {
@@ -48,11 +30,9 @@ const ProjectItem = ({project}) => {
              <StyledTableCell >{description}</StyledTableCell>
              <StyledTableCell >
 {/* 
-             <Fab   aria-label="edit">
+             <Fab  color="secondary" aria-label="edit">
           <EditIcon />
-            </Fab>
- */}
-
+            </Fab> */}
 
              </StyledTableCell>
 
@@ -65,4 +45,5 @@ const ProjectItem = ({project}) => {
   }
   
   
-  export default ProjectItem;   
+  export default ProjectItem;
+  
