@@ -8,7 +8,7 @@ import { Navigate } from "react-router-dom";
 import { validateYupSchema } from "formik";
 import ChooseTamaAndPinuyBinuy from "./ChooseTamaAndPinuyBinuy";
 
-var validator = require("email-validator");
+//var validator = require("email-validator");
 
 const InitiatorRegister = () => {
   const navigate = useNavigate();
@@ -190,7 +190,16 @@ const InitiatorRegister = () => {
         />
         <br></br>
         <br></br>
-        <ChooseTamaAndPinuyBinuy  tama38={values.tama38} pinuyBinuy={values.pinuyBinuy} onChange={handleChange} ></ChooseTamaAndPinuyBinuy>
+        {/* <ChooseTamaAndPinuyBinuy  tama38={values.tama38} pinuyBinuy={values.pinuyBinuy} onChange={handleChange} ></ChooseTamaAndPinuyBinuy> */}
+        <ChooseTamaAndPinuyBinuy
+  values={values}
+  handleChange={handleChange}
+  errors={errors}
+  touched={touched}
+  getFieldProps={getFieldProps}
+
+/>
+
       <Button  type="submit" variant="outlined">לחץ כדי להירשם</Button>
       <br></br>
       <br></br>

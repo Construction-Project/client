@@ -6,6 +6,9 @@ import InitiatorRegister from "./pages/register/initiator";
 import SingleIntiator from "./pages/initiators/Single";
 import InitiatorsList from './pages/initiators/List'
 import RatingInitiator from "./pages/initiators/List/RatingInitiator";
+import Request from "./pages/request";
+import Simulator from "./pages/simulator";
+
 import Button from '@mui/material/Button';
 import Uploader from "./pages/Uploader";
 import ChooseTamaAndPinuyBinuy from './pages/register/ChooseTamaAndPinuyBinuy'
@@ -15,7 +18,10 @@ const routes = [
   { path: "/initiatorRegister", component: InitiatorRegister },
   { path: "/initiators", component: InitiatorsList },
   { path: "/initiators/:initiatorId", component: SingleIntiator },
-  { path: "/RatingInitiator", component: RatingInitiator }
+  { path: "/RatingInitiator", component: RatingInitiator },
+  { path: "/request", component:Request  },
+  { path: "/simulator", component:Simulator  }
+
 ];
 
 
@@ -37,6 +43,13 @@ function App() {
         <Button href="/initiators" variant="contained">
           יזמים
         </Button>
+        <Button href="/request" variant="contained">
+          שליחת פניה ליזם
+        </Button>
+        <Button href="/simulator" variant="contained">
+        סימולטור
+        </Button>
+
       </nav>
       <Routes>
         {routes.map(route => { return <Route key={route.path} path={route.path} element={<route.component />} /> }

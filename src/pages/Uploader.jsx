@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react"
 import { Button } from '@mui/material';
-
 import axios from "axios"
+
 const Uploader = ({ file, setFile, label ,subscribe}) => {
   const [selectFile, setSelectFile] = useState();
-  useEffect(() => {
-    setFile(selectFile);
-  }, [selectFile])
+  // useEffect(() => {
+  //   setFile(selectFile);
+  // }, [selectFile])
 
 
     if (subscribe) {
-      console.log('here')
+      console.log('here',subscribe)
       const formData = new FormData()
       formData.append("file", selectFile)
       axios.post("http://localhost:3600/upload", formData).then(({ data }) => {

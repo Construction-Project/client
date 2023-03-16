@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate ,Navigate} from "react-router-dom"
 import axios from "axios";
 import { useFormik, FormikValues } from "formik";
 import {Button ,TextField} from '@mui/material';
 import * as yup from 'yup';
-import { Navigate } from "react-router-dom";
 
-var validator = require("email-validator");
+//var validator = require("email-validator");
 
 const Register = () => {
   const navigate = useNavigate();

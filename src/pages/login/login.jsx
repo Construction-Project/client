@@ -12,9 +12,6 @@ import * as yup from 'yup';
 var validator = require("email-validator");
 
 
-
-
-
 const Login = () => {
      const navigate=useNavigate();
 
@@ -62,40 +59,6 @@ const Login = () => {
 
       
         );
-
-
-
-
-
-
-    // const [email,setEmail] = useState('');
-    // const [password,setPassword] = useState('');
-    // const [err, setErr] = useState(null);
-    // const navigate=useNavigate();
-    // const loginToServer = async (email,password) => {
-    //     if(!validator.validate(email)){
-    //         alert('email is not valid')
-    //         return
-    //     }
-    //     try{
-    //         const response= await axios.post("http://localhost:3600/auth/login",{ userName:email,password:password})
-    //        localStorage.setItem("token", response.data.accessToken);
-    //        console.log("res",response.data);
-    //        console.log("resdgdfg",response);
-
-    //       // localStorage.setItem("userId",)
-    //         navigate('/initiators')
-    //     }
-    //     catch(err){
-    //         setErr(err.response.data?.message)
-    //       } 
-    //     }
-
-
-
-
-
-
     return (
         <>
         <form onSubmit={handleSubmit} >

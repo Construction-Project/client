@@ -50,6 +50,32 @@ const FormattedInputs = ({ label }) => {
                 }}
                 variant="standard"
             />
+            <br></br>
+            <br></br>
+            <TextField
+                label={label}
+                value={values.numberformat}
+                onChange={handleChange}
+                name="numberformat"
+                id="formatted-numberformat-input"
+                InputProps={{
+                    inputComponent: NumericFormatCustom,
+                }}
+                variant="standard"
+            />
+            <br></br>
+            <br></br>
+            <TextField
+                label={label}
+                value={values.numberformat}
+                onChange={handleChange}
+                name="numberformat"
+                id="formatted-numberformat-input"
+                InputProps={{
+                    inputComponent: NumericFormatCustom,
+                }}
+                variant="standard"
+            />
         </Box>
     );
 }

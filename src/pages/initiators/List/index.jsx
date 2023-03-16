@@ -3,8 +3,8 @@ import { Navigate } from "react-router-dom";
 import axios from "axios";
 import InitiatorItem from './initiatorItem';
 import Cities from '../City';
-import { Table,TableBody } from '@mui/material';
-
+import { Table,TableBody,TableHead ,TableRow} from '@mui/material';
+import StyledTableCell from '../../initiators/Single/projects/styleTable/StyledTableCell'
 
 const InitiatorsList = () => {
     const [initiators, setInitiators] = useState([]);
@@ -23,9 +23,23 @@ const InitiatorsList = () => {
     <div>initiators---</div>
     <Table>
 
+    <TableHead>
+
+    <TableRow>
+            <StyledTableCell align="left">יזם</StyledTableCell>
+            <StyledTableCell align="left">חברה</StyledTableCell>
+            <StyledTableCell align="right"></StyledTableCell>
+            <StyledTableCell align="right"></StyledTableCell>
+            <StyledTableCell align="right"></StyledTableCell>
+            <StyledTableCell align="right"></StyledTableCell>
+            <StyledTableCell align="right"></StyledTableCell>
+            <StyledTableCell align="right"></StyledTableCell>
+            <StyledTableCell align="right"></StyledTableCell>
+            <StyledTableCell align="right">לעידכון</StyledTableCell>
+          </TableRow>
+          </TableHead>
 
 
-      
       <TableBody>
       {initiators?.length && initiators.map((initiator)=>{return <InitiatorItem initiator={initiator} /> })}
     </TableBody>
