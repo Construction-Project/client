@@ -2,28 +2,32 @@ import { useEffect, useState } from "react"
 import { Button } from '@mui/material';
 import axios from "axios"
 
-const Uploader = ({ file, setFile, label ,subscribe}) => {
+const Uploader = ({ picture, setPicture, label }) => {
   const [selectFile, setSelectFile] = useState();
-  // useEffect(() => {
-  //   setFile(selectFile);
-  // }, [selectFile])
 
-
-    if (subscribe) {
-      console.log('here',subscribe)
-      const formData = new FormData()
+  useEffect(() => {
+    if (selectFile) {
+      const formData = new FormData();
       formData.append("file", selectFile)
+      console.log({selectFile})
       axios.post("http://localhost:3600/upload", formData).then(({ data }) => {
         if (data?.name) {
-          //setFile(data.name)
+          
+          //setPicture(data.name)
+          setPicture([...picture, data.name])
+          //setPresentPic([...presentPic, selectFile])
         }
       }).catch(err => {
         console.log("error")
       })
     }
+  }, [selectFile])
+
   const onSelectFile = (e) => {
     setSelectFile(e.target.files[0])
+    
   }
+
   return (
     <>
       <label htmlFor="file">  </label>
@@ -33,8 +37,8 @@ const Uploader = ({ file, setFile, label ,subscribe}) => {
       </Button>
     </>
   )
-}
 
+}
 export default Uploader
 
 /**          <input hidden accept="image/*" multiple type="file" />

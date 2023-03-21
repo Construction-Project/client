@@ -12,7 +12,6 @@ import ChooseTamaAndPinuyBinuy from "./ChooseTamaAndPinuyBinuy";
 
 const InitiatorRegister = () => {
   const navigate = useNavigate();
-  var validator = require("email-validator");
   const validationSchema = yup.object({
     email: yup
       .string('Enter your email')

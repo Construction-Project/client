@@ -26,7 +26,7 @@ const RatingInitiator = ({initiatorId}) => {
         'Authorization': 'Bearer ' + localStorage.getItem("token")
       }
     }
-
+//////////////////////////////////////////
     try{
    const {data} = await axios.post(`http://localhost:3600/opinion`, {stars:stars,opinion:opinion, opinionInitiator:initiatorId,opinionUser:4},config)
   

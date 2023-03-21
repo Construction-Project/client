@@ -9,7 +9,7 @@ import { useFormik, FormikValues } from "formik";
 import {Button ,TextField} from '@mui/material';
 import * as yup from 'yup';
 
-var validator = require("email-validator");
+//var validator = require("email-validator");
 
 
 const Login = () => {

@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { use } from 'react-router-dom';
 import { TableRow,TableBody ,Button} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -28,6 +28,9 @@ const ProjectItem = ({project}) => {
              <StyledTableCell >{startConstructionYear}</StyledTableCell>
              <StyledTableCell >{populatingYear}</StyledTableCell>
              <StyledTableCell >{description}</StyledTableCell>
+             <StyledTableCell ><img style={{width:"50px"}} src='http://localhost:3600/images/f0b01687-fd45-4486-914a-3333dada8359_Bell_pep.jpg' /></StyledTableCell>
+
+
              <StyledTableCell >
 {/* 
              <Fab  color="secondary" aria-label="edit">

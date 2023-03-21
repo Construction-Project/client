@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-dom"
 
-import Login from "./pages/login/login";
+
+import Login from "./pages/login";
 import Register from "./pages/register";
 import InitiatorRegister from "./pages/register/initiator";
 import SingleIntiator from "./pages/initiators/Single";
@@ -12,6 +13,8 @@ import Simulator from "./pages/simulator";
 import Button from '@mui/material/Button';
 import Uploader from "./pages/Uploader";
 import ChooseTamaAndPinuyBinuy from './pages/register/ChooseTamaAndPinuyBinuy'
+
+import { AuthContextProvider } from "./context/authContext";
 const routes = [
   { path: "/register", component: Register },
   { path: "/login", component: Login },
@@ -23,12 +26,10 @@ const routes = [
   { path: "/simulator", component:Simulator  }
 
 ];
-
-
 function App() {
-
-
   return (
+    <>
+    <AuthContextProvider>
     <Router>
       <nav className='main-nav'>
         <Button href="/" variant="contained">
@@ -58,13 +59,11 @@ function App() {
 <Route path="/upload" element={<Uploader/>}></Route>
 <Route path="/ChooseTamaAndPinuyBinuy" element={<ChooseTamaAndPinuyBinuy/>}></Route>
 
-
-
       </Routes>
-
-
-
     </Router>
+    </AuthContextProvider>
+    
+    </>
   );
 }
 export default App;
@@ -72,3 +71,6 @@ export default App;
 
 
 //key={route.path} ---למה ? ? ?
+
+
+
