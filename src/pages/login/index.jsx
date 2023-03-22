@@ -1,9 +1,10 @@
 //https://freefrontend.com/css-code-examples/#sitemap-layouts
 //https://codepen.io/andreacrawford/pen/NvqJXW
-import { useState } from "react";
+import { useState ,useContext} from "react";
 import { Link ,useNavigate} from "react-router-dom"
 import { Navigate } from "react-router-dom";
 import axios from "axios";
+import { AuthContext } from '../../context/authContext' 
 
 import { useFormik, FormikValues } from "formik";
 import {Button ,TextField} from '@mui/material';
@@ -14,6 +15,7 @@ import * as yup from 'yup';
 
 const Login = () => {
      const navigate=useNavigate();
+      const {login} =  useContext(AuthContext)
 
 
 
@@ -43,13 +45,13 @@ const Login = () => {
           //  const {data:_initiators} = await axios.put(`http://localhost:3600/initiator/${20}`,{address:values.address,name:values.name,hp:'1223',tama38:1,pinuyBinuy:1})
         console.log('in submit');
           try{
-            const response= await axios.post("http://localhost:3600/auth/login",{ userName:values.email,password:values.password})
-           localStorage.setItem("token", response.data.accessToken);
-           console.log("res",response.data);
-           console.log("resdgdfg",response);
+          //   const response= await axios.post("http://localhost:3600/auth/login",{ userName:values.email,password:values.password})
+          //  localStorage.setItem("token", response.data.accessToken);
+          //  console.log("res",response.data);
+          //  console.log("resdgdfg",response);
+          await login({ userName:values.email,password:values.password});
 
-          // localStorage.setItem("userId",)
-            navigate('/initiators')
+          navigate('/initiators')
         }
         catch(err){
             setErr(err.response.data?.message)
@@ -64,7 +66,7 @@ const Login = () => {
         <form onSubmit={handleSubmit} >
             <h2>login</h2>
     <TextField 
-         value={values.name} 
+         value={values.email} 
          id="outlined-basic" 
          label=" מייל"
          variant="outlined" 

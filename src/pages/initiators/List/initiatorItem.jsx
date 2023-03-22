@@ -15,7 +15,7 @@ const navigate=useNavigate()
 
   return (
     <>
-    <TableRow />
+    <TableRow  /*component='Button' onClick={()=>alert('success')}*/>
     <StyledTableCell >{id}</StyledTableCell>
     <StyledTableCell >{name}</StyledTableCell>
     <StyledTableCell >{phone}</StyledTableCell>
@@ -26,7 +26,7 @@ const navigate=useNavigate()
     <StyledTableCell ><RatingInitiator initiatorId={id}></RatingInitiator> </StyledTableCell>
   
     <StyledTableCell > <button onClick={()=>navigate(`${id}`)}>לפרטים נוספים</button> </StyledTableCell>
-
+</TableRow>
     </>
   )
 }

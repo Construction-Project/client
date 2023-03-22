@@ -1,15 +1,16 @@
-import { useState } from "react";
+import { useState,useContext } from "react";
 import { Link, useNavigate ,Navigate} from "react-router-dom"
 import axios from "axios";
 import { useFormik, FormikValues } from "formik";
 import {Button ,TextField} from '@mui/material';
 import * as yup from 'yup';
+import { AuthContext } from '../../context/authContext' 
 
 
 
 const Request = () => {
+ // const {token} = useContext(AuthContext)
 
-  
   const validationSchema = yup.object({
     email: yup
       .string('Enter your email')
@@ -25,11 +26,14 @@ const Request = () => {
       addressProject: '',
       comments:''
     },
+    
 
     validationSchema:validationSchema,
     onSubmit: async (values) => {
+
     const config = {
       headers: {
+       // 'Authorization': 'Bearer ' + token
         'Authorization': 'Bearer ' + localStorage.getItem("token")
       }
   }

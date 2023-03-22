@@ -1,15 +1,19 @@
-import { useState } from "react";
+import { useState,useContext } from "react";
 import {Button,TextField,Box,Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle,Rating,Stack} from '@mui/material';
 import { useFormik, FormikValues } from "formik";
 import axios from "axios";
+import { AuthContext } from '../../../context/authContext' 
 
 const RatingInitiator = ({initiatorId}) => {
 
   const [open, setOpen] = useState(false);
   const [stars, setStars] = useState(0);
   const [opinion, setOpinion] = useState('');
-
+  const {currentUser} = useContext(AuthContext);
+  
   const handleClickOpen = () => {
+    if(currentUser==null)
+        alert('אינך רשום ')
     setOpen(true);
   };
 
@@ -88,6 +92,11 @@ handleClose();
           <Button onClick={handleSubscribe}>Subscribe</Button>
         </DialogActions>
       </Dialog>
+
+
+
+
+      
     </div>
   );
 }

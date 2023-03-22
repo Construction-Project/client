@@ -4,19 +4,22 @@ import { createContext, useEffect, useState } from "react";
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
+  
   const [currentUser, setCurrentUser] = useState(
-    JSON.parse(localStorage.getItem("user")) || null
+    JSON.parse(localStorage.getItem("user") )|| null
   );
+
   const [token, setToken] = useState(
     localStorage.getItem("token") || null
   );
 
-  const login = async ({ username, password }) => {
+  const login = async ({ userName, password }) => {
+    console.log(userName)
     const res = await axios.post(
       "http://localhost:3600/auth/login",
-      { username, password },
+      { userName, password },
       {
-        //withCredentials: true,//?
+     // withCredentials: true,//?    very danger  to use it!
       }
     );
     setCurrentUser(res.data.user);
@@ -27,15 +30,16 @@ export const AuthContextProvider = ({ children }) => {
     setCurrentUser(null);
     setToken(null);
   };
-  useEffect(() => {
-    localStorage.setItem("user",JSON.stringify(currentUser));
-  }, [currentUser]);
+   useEffect(() => {
+     localStorage.setItem("user",JSON.stringify(currentUser));
+   }, [currentUser]);
   useEffect(() => {
     localStorage.setItem("token", token);
   }, [token]);
 
   return(
-    <AuthContext.Provider value={{currentUser, token, login, logout}}>
+     <AuthContext.Provider value={{currentUser, token, login, logout}}>
+
         {children}
     </AuthContext.Provider>
 

@@ -2,14 +2,23 @@ import ProjectsList from "../projects/projects";
 import { Button ,TableRow} from '@mui/material';
 import { Link ,Navigate,useNavigate,useParams} from "react-router-dom"
 import AddProject from "../projects/AddProject";
-import { useEffect ,useState} from "react";
+import { useEffect ,useState,useContext} from "react";
 import axios from 'axios'
+import { AuthContext } from '../../../../context/authContext' 
+
+
+
+
+
 const SingleIntiatorCard=({setIsEditing})=>{
 const navigate=useNavigate(); 
 
 const [initiator,setInitiator]=useState({})
 
 const {initiatorId}=useParams();
+
+const {currentUser} = useContext(AuthContext);
+
 
 //לא ידעתי איך מעבירים כפרמטר את initiator 
 //אז פשוט עשיתי עוד fetch לפי id
@@ -24,6 +33,7 @@ useEffect(() => {
       }
       fetchData()
   }, []);
+
 
 
 return <>
@@ -42,9 +52,14 @@ return <>
 <>in single card</>
 <ProjectsList />
 
+
+{currentUser.role=='initiator'&&currentUser.id==initiatorId&&
+<>
 <Button variant="outlined" onClick={()=>setIsEditing(true)}>עריכה</Button>
 
+
 <AddProject/>
+</>}
 </>
 
 }

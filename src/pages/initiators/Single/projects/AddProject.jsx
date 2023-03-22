@@ -1,4 +1,4 @@
-import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TableRow, TableBody } from '@mui/material';
+import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TableRow, TableBody ,IconButton} from '@mui/material';
 
 
 import { styled } from '@mui/material/styles';
@@ -16,6 +16,7 @@ import { AccessAlarm, ThreeDRotation } from '@material-ui/icons';
 import { Icon } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
+import ClearIcon from '@mui/icons-material/Clear';
 const AddProject = () => {
   const [status, setStatus] = useState('');
   const [city, setCity] = useState('');
@@ -66,6 +67,7 @@ const AddProject = () => {
       }
     }
 
+
     console.log('handlSubscribe');
     await axios.post('http://localhost:3600/project', {
       address: 'aaa', city: 'jerusalem', status: 'finish', initiatorId: 1, apartmentBefore: 8, apartmentAfter: 5,
@@ -87,6 +89,14 @@ const AddProject = () => {
     setOpen(false);
 
   }
+
+const handleRemovingImage=(picToRemove)=>{
+  const arr=picture.filter(pic=>picToRemove!=pic)
+  console.log(arr)
+
+  setPicture(arr)
+}
+
   return (
 
     <div>
@@ -115,8 +125,23 @@ const AddProject = () => {
 
                 <Uploader picture={picture} setPicture={setPicture} label="Add Picture" />
                 {/* {picture?.length?picture.map(pic=><>{pic}</>:<>0</>)} */}
-                {picture.length?picture.map((pic)=> <>herre {pic}</> ):<></>}
+                {picture.length?picture.map((pic)=> 
+                <> {pic}
+          
+                <IconButton onClick={()=>handleRemovingImage(pic)}>
+                      <CloseIcon />
+                </IconButton> 
+                
+                
+                </> )
+                :<></>}
+
+
               </StyledTableCell>
+
+
+              {/*      <Button onClick={()=>alert('hi')}>
+                try </Button>*/}
               <StyledTableCell ></StyledTableCell>
               <StyledTableCell ></StyledTableCell>
               <StyledTableCell ><Cities /></StyledTableCell>
