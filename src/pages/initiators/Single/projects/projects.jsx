@@ -14,6 +14,7 @@ const ProjectsList = () => {
       async function fetchData() {
 
           const {data:_projects} = await axios.get(`http://localhost:3600/project/${initiatorId}`)
+          console.log(_projects)
           if(_projects?.length) setProjects(_projects)         
           
         }

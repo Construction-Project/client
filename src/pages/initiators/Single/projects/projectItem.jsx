@@ -9,7 +9,7 @@ import StyledTableRow from './styleTable/StyledTableRow'
 
 
 const ProjectItem = ({project}) => {
-  const {address,city,status,apartmentBefore,apartmentAfter,requestYear,permitYear,startConstructionYear,populatingYear,description}=project
+  const {address,city,status,apartmentBefore,apartmentAfter,requestYear,permitYear,startConstructionYear,populatingYear,description,Project_pictures}=project
 
     return (
      <>
@@ -28,6 +28,8 @@ const ProjectItem = ({project}) => {
              <StyledTableCell >{startConstructionYear}</StyledTableCell>
              <StyledTableCell >{populatingYear}</StyledTableCell>
              <StyledTableCell >{description}</StyledTableCell>
+{             console.log(Project_pictures)
+}             <StyledTableCell >{Project_pictures.map(picture=><img key={picture.picturePath} style={{width:"50px"}} src={`http://localhost:3600/images/${picture.picturePath}`} />)}</StyledTableCell>
              <StyledTableCell ><img style={{width:"50px"}} src='http://localhost:3600/images/f0b01687-fd45-4486-914a-3333dada8359_Bell_pep.jpg' /></StyledTableCell>
 
 

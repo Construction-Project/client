@@ -69,8 +69,11 @@ const AddProject = () => {
 
 
     console.log('handlSubscribe');
+    console.log(picture);
+
+    try{
     await axios.post('http://localhost:3600/project', {
-      address: 'aaa', city: 'jerusalem', status: 'finish', initiatorId: 1, apartmentBefore: 8, apartmentAfter: 5,
+      address: 'aaa', city: 'jerusalem', status: 'finish', initiatorId: 39, apartmentBefore: 8, apartmentAfter: 5,
       requestYear: 0, permitYear: 9, populatingYear: 55, description: 'mmm', tama38: 1, pinuyBinuy: 0
       , picturesArr: picture
 
@@ -81,7 +84,10 @@ const AddProject = () => {
 
     //לשלוח 
 
-
+  }
+  catch(error){
+    console.log(error)
+  }
     if (picture) {
       alert('gfgfg');
       setSubscribe(true);
