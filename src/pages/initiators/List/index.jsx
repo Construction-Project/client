@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import axios from "axios";
 import InitiatorItem from './initiatorItem';
 import Cities from '../City';
-import { Table,TableBody,TableHead ,TableRow} from '@mui/material';
+import { Table,TableBody,TableHead ,TableRow,Input,Checkbox} from '@mui/material';
 import StyledTableCell from '../../initiators/Single/projects/styleTable/StyledTableCell'
 
 const InitiatorsList = () => {
@@ -12,20 +12,24 @@ const InitiatorsList = () => {
 
 
 
-    const[sortNumOfProject,setSortNumOfProject]=useState(false);
-    const[sortRating,SetSortRating]=useState(false);
 
     const[filterInitiatorByTamaAndPinuyBinuy,SetFilterInitiatorByTamaAndPinuyBinuy]=useState(false);
     const[searchName,SetSearchName]=useState('');
 
+  
+     const[query,SetQuery]=useState('');
+     const[tama,SetTama]=useState(true);
+     const[pin,Setpin]=useState(true);
+    const[sortNumOfProject,setSortNumOfProject]=useState(true);
+    const[sortRating,SetSortRating]=useState(true);
 
     useEffect(() => {
       async function fetchData() {
           const {data:_initiators} = await axios.get("http://localhost:3600/initiator")
           if(_initiators?.length)
           {
+            console.log(_initiators);
             setInitiators(_initiators)  
-            setFiltersInitiators(_initiators)
 
           }        
           
@@ -33,19 +37,36 @@ const InitiatorsList = () => {
         fetchData()
     }, []);
 
-    const choosenInitiators=(num)=>{
-      initiators.filter(initiator=>initiator.name.startsWith())
+    const filtered = ()=>{
+      var res=[];
+      const keys = ['name','company_name'] //fields to search in
+        res= initiators.filter((item) =>
+          keys.some((key) => item[key]?.toLowerCase().includes(query)));
 
+          // sortNumOfProject &&
+          //  res.sort((a, b) => (a.numOfProject > b.numOfProject) ? 1 : ((b.numOfProject > a.numOfProject) ? -1 : 0))
+           sortRating && res.sort((a, b) => (a.rating < b.rating) ? 1 : ((b.rating < a.rating) ? -1 : 0))
+          // res.sort((a, b) => (a.rating - b.rating || a.numOfProject?.localeCompare(b.numOfProject)));
+
+//https://mui.com/material-ui/react-toggle-button/ במקום cheakbox
+          return res; 
     }
-
-
-//cursor pointer
 
   return (   
     <>
-    <div>initiators---</div>
-    <input onChange={(e)=>{()=>choosenInitiators()}}></input>
-    <Table>
+     <div>initiators---</div>
+     <>ממוין לפי א-ב </>
+{sortRating?<>ממוין לפי דירוג </>:<></>}
+{sortNumOfProject?<>ממוין לפי מספר פרויקטים </>:<></>}
+ <Input placeholder='חיפוש לפי שם יזם/חברה' onChange={(e)=>{SetQuery(e.target.value)}}></Input>
+
+ <Checkbox defaultChecked />
+ <Checkbox defaultChecked />
+ <br></br>  <br></br> 
+
+
+
+   <Table>
 
     <TableHead>
 
@@ -65,12 +86,14 @@ const InitiatorsList = () => {
 
 
       <TableBody>
-      {filtersInitiators?.length && filtersInitiators.map((initiator)=>{return <InitiatorItem initiator={initiator} /> })}
+       {initiators?.length && filtered().map((initiator)=>{return <InitiatorItem initiator={initiator} /> })} 
     </TableBody>
-    </Table>
+    </Table> 
+    
     </>
   )
 }
 
 export default InitiatorsList;
 
+//cursor pointer

@@ -12,6 +12,8 @@ const RatingInitiator = ({initiatorId}) => {
   const {currentUser} = useContext(AuthContext);
   
   const handleClickOpen = () => {
+    console.log({currentUser})
+
     if(currentUser==null)
         alert('אינך רשום ')
     setOpen(true);
@@ -23,16 +25,13 @@ const RatingInitiator = ({initiatorId}) => {
   };
 
   const handleSubscribe = async() => {
-
     const config = {
-
       headers: {
         'Authorization': 'Bearer ' + localStorage.getItem("token")
       }
     }
-//////////////////////////////////////////
     try{
-   const {data} = await axios.post(`http://localhost:3600/opinion`, {stars:stars,opinion:opinion, opinionInitiator:initiatorId,opinionUser:4},config)
+   const {data} = await axios.post(`http://localhost:3600/opinion`, {stars:stars,opinion:opinion, opinionInitiator:initiatorId,opinionUser:currentUser.id},config)
   
 }
 catch(err){

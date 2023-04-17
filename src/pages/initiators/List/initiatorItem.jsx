@@ -9,7 +9,7 @@ import RatingInitiator from "./RatingInitiator";
 import StyledTableCell from '../../initiators/Single/projects/styleTable/StyledTableCell'
 
 const InitiatorItem = ({initiator}) => {
-const {id,name,phone,address,numOfProject,rating}=initiator
+const {id,phone,address,company_name,numOfProject,rating,tama38,pinuyBinuy,description,logo,name}=initiator
 const navigate=useNavigate()
 //const {initiatorId}=useParams();
 
@@ -18,10 +18,12 @@ const navigate=useNavigate()
     <TableRow  /*component='Button' onClick={()=>alert('success')}*/>
     <StyledTableCell >{id}</StyledTableCell>
     <StyledTableCell >{name}</StyledTableCell>
+    <StyledTableCell >{company_name}</StyledTableCell>
+
     <StyledTableCell >{phone}</StyledTableCell>
     <StyledTableCell >{address}</StyledTableCell>
-    <StyledTableCell >{numOfProject}</StyledTableCell>
-    <StyledTableCell >{rating}</StyledTableCell>
+    <StyledTableCell >{parseInt(numOfProject)}</StyledTableCell>
+    {/* <StyledTableCell >{parseInt(rating)}</StyledTableCell> */}
     <StyledTableCell ><DisplayRating stars={rating}></DisplayRating></StyledTableCell>
     <StyledTableCell ><RatingInitiator initiatorId={id}></RatingInitiator> </StyledTableCell>
   

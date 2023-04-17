@@ -14,6 +14,8 @@ import Button from '@mui/material/Button';
 import Uploader from "./pages/Uploader";
 import ChooseTamaAndPinuyBinuy from './pages/register/ChooseTamaAndPinuyBinuy'
 
+
+import Checkboxes from './pages/initiators/List/check'
 import { AuthContextProvider } from "./context/authContext";
 const routes = [
   { path: "/register", component: Register },
@@ -23,8 +25,10 @@ const routes = [
   { path: "/initiators/:initiatorId", component: SingleIntiator },
   { path: "/RatingInitiator", component: RatingInitiator },
   { path: "/request", component:Request  },
-  { path: "/simulator", component:Simulator  }
+  { path: "/simulator", component:Simulator  },
+  { path: "/Checkboxes", component:Checkboxes  }
 
+  
 ];
 function App() {
   return (
@@ -74,3 +78,4 @@ export default App;
 
 
 
+//http://192.168.101.29:3000/login

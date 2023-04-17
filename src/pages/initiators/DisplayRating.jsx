@@ -8,7 +8,7 @@ const DisplayRating = ({stars}) => {
 
 
   return (<>
-    <Typography component="legend">Read only</Typography>
+    <Typography component="legend"></Typography>
     <Rating 
      name="read-only" 
     value={stars} readOnly

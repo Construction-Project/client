@@ -9,7 +9,8 @@ import { AuthContext } from '../../context/authContext'
 
 
 const Request = () => {
- // const {token} = useContext(AuthContext)
+  const {token} = useContext(AuthContext)
+ const {currentUser} = useContext(AuthContext);
 
   const validationSchema = yup.object({
     email: yup
@@ -33,14 +34,14 @@ const Request = () => {
 
     const config = {
       headers: {
-       // 'Authorization': 'Bearer ' + token
-        'Authorization': 'Bearer ' + localStorage.getItem("token")
+       'Authorization': 'Bearer ' + token
+       //  'Authorization': 'Bearer ' + localStorage.getItem("token")
       }
   }
 
-      console.log('here')
+  alert('hi')
       try {
-        await axios.post("http://localhost:3600/request",{ name:values.name,email:values.email,addressProject:values.addressProject,comments:values.comments},config)      }
+        await axios.post("http://localhost:3600/request",{userId:currentUser.id, name:values.name,email:values.email,addressProject:values.addressProject,comments:values.comments},config)      }
        catch (err) {
          console.log(err.response.data?.message)
        }
@@ -59,8 +60,8 @@ const Request = () => {
         variant="outlined"
         {...getFieldProps("name")}
         onChange={handleChange} 
-        error={touched.email && Boolean(errors.email)}
-        helperText={touched.email && errors.email}
+        error={touched.name && Boolean(errors.name)}
+        helperText={touched.name && errors.name}
         
         />
 
@@ -108,12 +109,12 @@ const Request = () => {
 
 
 <TextField
-        value={values.addressProject}
+        value={values.comments}
         id="outlined-basic"
         label="הערות"
         type="phone"
         variant="outlined"
-        {...getFieldProps("addressProject")}
+        {...getFieldProps("comments")}
         onChange={handleChange}
         error={touched.comments && Boolean(errors.comments)}
         helperText={touched.comments && errors.comments}
@@ -129,11 +130,10 @@ const Request = () => {
       <button onClick={()=>registerToServer(email,password,name)}>לחץ כדי להירשם</button>
       <br></br><br></br> */}
       {/* {err && err} */}
-      <Button  type="submit" variant="outlined">לחץ כדי להירשם</Button>
+      <Button  type="submit" variant="outlined">שלח</Button>
       <br></br>
       <br></br>
       </form>
-      <Link to="/initiatorRegister">רוצה להירשם כיזם? לחץ כאן</Link>
     </>
 
   )
