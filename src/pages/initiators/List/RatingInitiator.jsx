@@ -10,6 +10,7 @@ const RatingInitiator = ({initiatorId}) => {
   const [stars, setStars] = useState(0);
   const [opinion, setOpinion] = useState('');
   const {currentUser} = useContext(AuthContext);
+
   
   const handleClickOpen = () => {
     console.log({currentUser})
@@ -45,9 +46,13 @@ handleClose();
 
   return (
     <div>
+      {/* {currentUser==null? */}
       <Button variant="outlined" onClick={handleClickOpen}>
         לדרוג
       </Button>
+      {/* <Button variant="outlined" onClick={handleClickOpenForbidden}>
+        לדרוג
+      </Button>} */}
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>דרוג</DialogTitle>
         <DialogContent>

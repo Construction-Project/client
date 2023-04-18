@@ -1,15 +1,19 @@
 import { useParams } from "react-router-dom";
-import { useState } from "react";
 
+import { useState,useContext } from "react";
 import { Link ,useNavigate,Navigate} from "react-router-dom"
 import { TableRow,Button,styled } from '@mui/material';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+//import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import DisplayRating from "../DisplayRating";
 import RatingInitiator from "./RatingInitiator";
+import ForbiddenRating from "./forbiddenRating";
 import StyledTableCell from '../../initiators/Single/projects/styleTable/StyledTableCell'
+import { AuthContext } from '../../../context/authContext' 
 
 const InitiatorItem = ({initiator}) => {
+const {currentUser} = useContext(AuthContext);
 const {id,phone,address,company_name,numOfProject,rating,tama38,pinuyBinuy,description,logo,name}=initiator
+
 const navigate=useNavigate()
 //const {initiatorId}=useParams();
 
@@ -25,8 +29,10 @@ const navigate=useNavigate()
     <StyledTableCell >{parseInt(numOfProject)}</StyledTableCell>
     {/* <StyledTableCell >{parseInt(rating)}</StyledTableCell> */}
     <StyledTableCell ><DisplayRating stars={rating}></DisplayRating></StyledTableCell>
-    <StyledTableCell ><RatingInitiator initiatorId={id}></RatingInitiator> </StyledTableCell>
-  
+    {currentUser!=null?
+    <StyledTableCell ><RatingInitiator initiatorId={id}></RatingInitiator> </StyledTableCell>:
+    <StyledTableCell ><ForbiddenRating></ForbiddenRating></StyledTableCell>
+  }
     <StyledTableCell > <button onClick={()=>navigate(`${id}`)}>לפרטים נוספים</button> </StyledTableCell>
 </TableRow>
     </>

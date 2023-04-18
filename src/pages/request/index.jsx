@@ -9,6 +9,7 @@ import { AuthContext } from '../../context/authContext'
 
 
 const Request = () => {
+  const[initiator,setInitiator] = useState([1,2,3]);
   const {token} = useContext(AuthContext)
  const {currentUser} = useContext(AuthContext);
 
@@ -38,10 +39,15 @@ const Request = () => {
        //  'Authorization': 'Bearer ' + localStorage.getItem("token")
       }
   }
-
-  alert('hi')
+  const {data:_initiators} = await axios.get("http://localhost:3600/initiator")
+  if(_initiators?.length) setInitiator(_initiators)  
+  console.log(initiator);
+  const initiatorId= _initiators.map(initiator=> {return {initiator:initiator.id}});
+  console.log(initiatorId);
       try {
-        await axios.post("http://localhost:3600/request",{userId:currentUser.id, name:values.name,email:values.email,addressProject:values.addressProject,comments:values.comments},config)      }
+        console.log("in try")
+        console.log(initiatorId)
+        await axios.post("http://localhost:3600/request",{userId:currentUser.id, name:values.name,email:values.email,phone:values.phone,addressProject:values.addressProject,comments:values.comments,initiatorArr:initiatorId},config)      }
        catch (err) {
          console.log(err.response.data?.message)
        }
