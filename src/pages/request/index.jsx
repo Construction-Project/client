@@ -1,17 +1,26 @@
-import { useState,useContext } from "react";
+import { useState,useContext,useEffect } from "react";
 import { Link, useNavigate ,Navigate} from "react-router-dom"
 import axios from "axios";
 import { useFormik, FormikValues } from "formik";
-import {Button ,TextField} from '@mui/material';
+import {Button ,TextField ,Input} from '@mui/material';
 import * as yup from 'yup';
 import { AuthContext } from '../../context/authContext' 
 
 
 
 const Request = () => {
-  const[initiator,setInitiator] = useState([1,2,3]);
+  const[initiators,setInitiators] = useState([]);
+  const[query,SetQuery]=useState('');
   const {token} = useContext(AuthContext)
  const {currentUser} = useContext(AuthContext);
+
+
+ const filtered = ()=>{
+  const keys = ['name','company_name'] //fields to search in
+    return initiators.filter((item) =>
+      keys.some((key) => item[key]?.toLowerCase().includes(query)));
+}
+
 
   const validationSchema = yup.object({
     email: yup
@@ -19,14 +28,29 @@ const Request = () => {
       .email('כתובת אימייל לא תקינה')
       .required('שדה חובה')
   });
+  useEffect(() => {
+    async function fetchData() {
+        const {data:_initiators} = await axios.get("http://localhost:3600/initiator")
+        if(_initiators?.length)
+        {
+          console.log("in use effect")
+          console.log(_initiators);
+          setInitiators(_initiators) 
+        }        
+        
+      }
+      fetchData()
+  }, []);
 
   const { handleSubmit, handleChange, values, getFieldProps  ,errors,touched} = useFormik({
     initialValues: {
+      //id:'',
       name: '',
       email: '',
       phone: '',
       addressProject: '',
-      comments:''
+      comments:'',
+      initiatorId:[]
     },
     
 
@@ -39,26 +63,38 @@ const Request = () => {
        //  'Authorization': 'Bearer ' + localStorage.getItem("token")
       }
   }
-  const {data:_initiators} = await axios.get("http://localhost:3600/initiator")
-  if(_initiators?.length) setInitiator(_initiators)  
-  console.log(initiator);
-  const initiatorId= _initiators.map(initiator=> {return {initiator:initiator.id}});
-  console.log(initiatorId);
+
+
+
+
+  //const {data:_initiators} = await axios.get("http://localhost:3600/initiator")
+  //if(_initiators?.length) setInitiator(_initiators)  
+  //console.log(initiator);
+  const initiatorsIdArr= filtered().map(initiator=> initiator.id);
+  //values.initiatorId=initiatorId;
+  //values.id=currentUser.id;
+  //console.log(values.id)
+  //console.log(initiatorId);
       try {
         console.log("in try")
-        console.log(initiatorId)
-        await axios.post("http://localhost:3600/request",{userId:currentUser.id, name:values.name,email:values.email,phone:values.phone,addressProject:values.addressProject,comments:values.comments,initiatorArr:initiatorId},config)      }
+        //console.log(initiatorId)initiatorsArr
+        
+        filtered().length && await axios.post("http://localhost:3600/request",{userId:currentUser.id, name:values.name,email:values.email,phone:values.phone,addressProject:values.addressProject,comments:values.comments,initiatorsArr:initiatorsIdArr},config)      }
        catch (err) {
          console.log(err.response.data?.message)
        }
     }
+
   })
+ 
 
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-      <h2>register</h2>
+      <form onSubmit={handleSubmit}  style={{paddingTop:"60px"}}>
+      <h2>request</h2>
+      <div>נבחרו {filtered().length} יזמים</div>
+      <Input placeholder='חיפוש לפי שם יזם/חברה' onChange={(e)=>{SetQuery(e.target.value)}}></Input>
       <TextField
         value={values.name}
         id="outlined-basic"

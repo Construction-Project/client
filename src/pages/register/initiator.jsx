@@ -48,12 +48,12 @@ const InitiatorRegister = () => {
 
 
       try {
-        await axios.post("http://localhost:3600/auth/register", { userName:values.email,password:values.password,name:values.name,
+        console.log(`here in register initiator`)
+        await axios.post("http://localhost:3600/auth/register", {
+       userName:values.email,password:values.password,name:values.name,
         hp:values.hp
         ,phone:values.phone,address:values.address
         ,tama38:values.tama38,pinuyBinuy:values.pinuyBinuy,description:values.description,company_name:values.companyName,
-        
-        
         role:'initiator' })
         navigate("/login")
       }
@@ -67,7 +67,7 @@ const InitiatorRegister = () => {
     <>
     <h2>initiatorRegister</h2>
     
-     <form onSubmit={handleSubmit}>
+     <form onSubmit={handleSubmit}  style={{paddingTop:"60px"}}>
       <TextField
         value={values.name}
         id="outlined-basic"

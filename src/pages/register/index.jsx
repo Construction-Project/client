@@ -56,7 +56,7 @@ const Register = () => {
   //   }
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={{paddingTop:"60px"}}>
       <h2>register</h2>
       <TextField
         value={values.email}
