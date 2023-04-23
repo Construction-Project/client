@@ -5,6 +5,7 @@ import InitiatorItem from './initiatorItem';
 import Cities from '../City';
 import { Table,TableBody,TableHead ,TableRow,Input,Checkbox} from '@mui/material';
 import StyledTableCell from '../../initiators/Single/projects/styleTable/StyledTableCell'
+import { Grid } from "@material-ui/core";
 
 const InitiatorsList = () => {
     const [initiators, setInitiators] = useState([]);
@@ -68,7 +69,7 @@ const InitiatorsList = () => {
 
    <Table>
 
-    <TableHead>
+    {/* <TableHead>
 
     <TableRow>
             <StyledTableCell align="left">יזם</StyledTableCell>
@@ -82,11 +83,14 @@ const InitiatorsList = () => {
             <StyledTableCell align="right"></StyledTableCell>
             <StyledTableCell align="right">לעידכון</StyledTableCell>
           </TableRow>
-          </TableHead>
+          </TableHead> */}
 
 
       <TableBody>
-       {initiators?.length && filtered().map((initiator)=>{return <InitiatorItem initiator={initiator} /> })} 
+      <Grid container spacing={2}>
+
+       {initiators?.length && filtered().map((initiator)=>{return <Grid item xs={4}><InitiatorItem initiator={initiator} /></Grid> })} 
+       </Grid>
     </TableBody>
     </Table> 
     

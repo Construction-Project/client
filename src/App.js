@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-do
 
 
 import Login from "./pages/login";
+import Logout from "./pages/logout";
 import Register from "./pages/register";
 import InitiatorRegister from "./pages/register/initiator";
 import SingleIntiator from "./pages/initiators/Single";
@@ -9,6 +10,7 @@ import InitiatorsList from './pages/initiators/List'
 import RatingInitiator from "./pages/initiators/List/RatingInitiator";
 import Request from "./pages/request";
 import Simulator from "./pages/simulator";
+import { AuthContext } from "./context/authContext";
 
 import Button from '@mui/material/Button';
 import Uploader from "./pages/Uploader";
@@ -29,6 +31,7 @@ import { AuthContextProvider } from "./context/authContext";
 const routes = [
   { path: "/register", component: Register },
   { path: "/login", component: Login },
+  { path: "/logout", component: Logout },
   { path: "/initiatorRegister", component: InitiatorRegister },
   { path: "/initiators", component: InitiatorsList },
   { path: "/initiators/:initiatorId", component: SingleIntiator },
@@ -65,6 +68,9 @@ function App() {
         </Button>
         <Button href="/simulator" color="inherit">
         סימולטור
+        </Button>
+        <Button onClick={<Logout></Logout>} color="inherit">
+          logout
         </Button>
         </Toolbar>
         </Container>

@@ -5,20 +5,40 @@ import { useFormik, FormikValues } from "formik";
 import {Button ,TextField ,Input} from '@mui/material';
 import * as yup from 'yup';
 import { AuthContext } from '../../context/authContext' 
+import InitiatorItem from "../initiators/List/initiatorItem";
+import Checkbox from '@mui/material/Checkbox';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import InitiatorItemLess from "./initiatorItemLess";
 
 
 
 const Request = () => {
   const[initiators,setInitiators] = useState([]);
   const[query,SetQuery]=useState('');
+  const[tama,setTama]=useState(1);
+  const[pinuiBinui,setPinuiBinui]=useState(1);
   const {token} = useContext(AuthContext)
  const {currentUser} = useContext(AuthContext);
 
 
  const filtered = ()=>{
   const keys = ['name','company_name'] //fields to search in
-    return initiators.filter((item) =>
-      keys.some((key) => item[key]?.toLowerCase().includes(query)));
+    return initiators.filter((item) =>{
+     if(
+      (query=== "" || item.name.toLowerCase().indexOf(query) > -1)
+       &&
+       (tama || item.tama===1)
+       &&
+       (pinuiBinui || item.pinuiBinui===1)
+     )
+     {
+      return true
+     }
+     return false
+
+    })
+     // keys.some((key) => item[key]?.toLowerCase().includes(query)));
 }
 
 
@@ -95,6 +115,10 @@ const Request = () => {
       <h2>request</h2>
       <div>נבחרו {filtered().length} יזמים</div>
       <Input placeholder='חיפוש לפי שם יזם/חברה' onChange={(e)=>{SetQuery(e.target.value)}}></Input>
+      <FormControlLabel  onChange={()=>{tama===1?setTama(0):setTama(1)}} control={<Checkbox defaultChecked />} label="תמא 38" />
+      <FormControlLabel  onChange={()=>{pinuiBinui===1?setPinuiBinui(0):setPinuiBinui(1)}} control={<Checkbox defaultChecked />} label="פינוי בינוי" />
+      <br></br><br></br>
+
       <TextField
         value={values.name}
         id="outlined-basic"
@@ -103,8 +127,7 @@ const Request = () => {
         {...getFieldProps("name")}
         onChange={handleChange} 
         error={touched.name && Boolean(errors.name)}
-        helperText={touched.name && errors.name}
-        
+        helperText={touched.name && errors.name} 
         />
 
 
@@ -176,17 +199,14 @@ const Request = () => {
       <br></br>
       <br></br>
       </form>
+      {initiators?.length && filtered().map((initiator)=>{return <InitiatorItem initiator={initiator} /> })} 
+      {console.log(tama,"tama")}
+      {console.log(pinuiBinui,"pinui")}
+      {console.log(!pinuiBinui,"not pinui")}
+      {console.log(initiators)}
     </>
 
   )
-
-
-
-
-
-
-
-
   // const [name,setName] = useState('');
   // const [email,setEmail] = useState('');
   // const [phone,setPhone] = useState('');
@@ -227,6 +247,7 @@ const Request = () => {
   //     <button onClick={sendRequestToinitiators}></button>
 
   //   </>
+  
 
 
 

@@ -1,14 +1,16 @@
 
+import { useState } from "react"
 import Location from "./Location/autoCompleteMap"
-import MapGov from "./Location/mapGov"
 
 
 const Simulator = () => {
+  const [location,setLocation] = useState("")
+
   return (
     <>
     <div style={{paddingTop:"60px"}}>Simulator</div>
 
-<Location></Location>
+<Location setLocation={setLocation}></Location>
 
 </>
     

@@ -73,8 +73,8 @@ const AddProject = () => {
 
     try{
     await axios.post('http://localhost:3600/project', {
-      address: 'aaa', city: 'jerusalem', status: 'finish', initiatorId: 39, apartmentBefore: 8, apartmentAfter: 5,
-      requestYear: 0, permitYear: 9, populatingYear: 55, description: 'mmm', tama38: 1, pinuyBinuy: 0
+      address: 'aaa', city: 'jerusalem', status: 'finish', initiatorId: 2, apartmentBefore: 8, apartmentAfter: 5,
+      requestYear: 0, permitYear: 9, populatingYear: 55, description: 'mmm', tama38: 1, pinuyBinuy: 1
       , picturesArr: picture
 
 
@@ -166,9 +166,6 @@ const handleRemovingImage=(picToRemove)=>{
             variant="standard"
           />
           <FormattedInputs lable={"mali"}></FormattedInputs>
-
-
-
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>

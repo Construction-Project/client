@@ -53,11 +53,9 @@ return <>
 <ProjectsList />
 
 
-{currentUser.role=='initiator'&&currentUser.id==initiatorId&&
+{currentUser?.role=='initiator'&&currentUser?.id==initiatorId&&
 <>
 <Button variant="outlined" onClick={()=>setIsEditing(true)}>עריכה</Button>
-
-
 <AddProject/>
 </>}
 </>
