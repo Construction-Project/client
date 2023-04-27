@@ -12,6 +12,11 @@ import Uploader from '../../../Uploader';
 import FormattedInputs from './numericButton';
 import axios from 'axios';
 
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+
 import { AccessAlarm, ThreeDRotation } from '@material-ui/icons';
 import { Icon } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
@@ -166,6 +171,7 @@ const handleRemovingImage=(picToRemove)=>{
             variant="standard"
           />
           <FormattedInputs lable={"mali"}></FormattedInputs>
+          
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>

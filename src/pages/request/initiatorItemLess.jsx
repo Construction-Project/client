@@ -4,22 +4,43 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { CheckBox } from '@mui/icons-material';
+import { Checkbox } from '@material-ui/core';
 
-import { Link ,useNavigate,Navigate} from "react-router-dom"
-import { useState,useContext } from "react";
+
+import { Link, useNavigate, Navigate } from "react-router-dom"
+import { useState, useContext } from "react";
 import { AuthContext } from '../../context/authContext';
 
 
 
-const InitiatorItemLess = (initiator) => {
-
+const InitiatorItemLess = ({initiator, initiatorsIds, setInitiatorsIds, selectItem, unSelectItem}) => {
+    const [isChecked, setIsChecked] = useState(true)
     const { currentUser } = useContext(AuthContext);
     const { id, phone, address, company_name, numOfProject, rating, tama38, pinuyBinuy, description, logo, name } = initiator
 
     const navigate = useNavigate()
     return (
         <>
+        {/* {console.log(initiator,id)} */}
             <Card sx={{ maxWidth: 345 }}>
+                {/* <Checkbox checked={initiatorsIds.find(id => id === initiatorsIds)}
+                    onChange={(e, checked) => {
+                        if (checked) setInitiatorsIds([...initiatorsIds, initiator.id])
+                        else setInitiatorsIds(initiatorsIds.filter(id => id !== initiator.id))
+                    }}
+                /> */}
+
+                <Checkbox checked={isChecked}
+                    onChange={(e, checked) => {
+                        //selectItem()
+                         if (checked) selectItem(id)
+                         else unSelectItem(id)
+                         setIsChecked(!isChecked)
+                        // if (checked) setInitiatorsIds([...initiatorsIds, initiator.id])
+                        // else setInitiatorsIds(initiatorsIds.filter(id => id !== initiator.id))
+                    }}
+                />
                 <CardMedia
                     component="img"
                     alt="green iguana"
@@ -28,29 +49,29 @@ const InitiatorItemLess = (initiator) => {
                 />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                        {id}
+                        {initiator.id}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                       {name}
+                        {name}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                       {company_name}
+                        {company_name}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                       {phone}
+                        {phone}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                       {address}
+                        {address}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                    {parseInt(numOfProject)}
+                        {parseInt(numOfProject)}
                     </Typography>
-                    
+
                 </CardContent>
-                <CardActions>
-                    <Button size="small" onClick={()=>navigate(`${id}`)}>לפרטים נוספים</Button>
-                    
-                </CardActions>
+                {/* <CardActions>
+                    <Button size="small" onClick={() => navigate(`${id}`)}>לפרטים נוספים</Button>
+
+                </CardActions> */}
             </Card>
             <br></br><br></br>
         </>

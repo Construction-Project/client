@@ -3,11 +3,23 @@ import SingleIntiatorCard from "./Card";
 import SingleIntiatorForm from "./Form";
 
 
-const SingleIntiator=()=>{
+const SingleIntiator=({initiator})=>{
+    // useEffect(() => {
+    //     async function fetchData() {
+    
+    //         const {data:_initiator} = await axios.get(`http://localhost:3600/initiator/${initiatorId}`)
+    //         if(_initiator) setInitiator(_initiator)     
+     
+    //       }
+    //       fetchData()
+    //   }, []);
+    
+
     const [isEditing,setIsEditing] = useState(false);
     return<>
     <div style={{paddingTop:"60px"}}></div>
-    {isEditing? <SingleIntiatorForm setIsEditing={setIsEditing}/>:<SingleIntiatorCard setIsEditing={setIsEditing}/>}
+    {console.log("ghghfgjngy",initiator)}
+    {isEditing? <SingleIntiatorForm setIsEditing={setIsEditing} initiator={initiator}/>:<SingleIntiatorCard setIsEditing={setIsEditing}/>}
 
 
    

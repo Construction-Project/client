@@ -6,7 +6,7 @@ import axios from "axios";
 import { AuthContext } from '../../../../context/authContext'
 
 
-const SingleIntiatorForm = ({ setIsEditing }) => {
+const SingleIntiatorForm = ({ setIsEditing ,initiator}) => {
 
     const {token,currentUser} = useContext(AuthContext);
 
@@ -32,6 +32,7 @@ const SingleIntiatorForm = ({ setIsEditing }) => {
 
     return <>
         in form
+        {console.log(initiator,"form ,initiator:initiator")}
         <form onSubmit={handleSubmit}  style={{paddingTop:"60px"}}>
 
         <TextField 

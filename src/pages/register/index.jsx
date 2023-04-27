@@ -56,9 +56,21 @@ const Register = () => {
   //   }
   return (
     <>
+        <div      style={{
+    display:"flex",
+flexDirection:"colom",
+alignItems:"center",
+justifyContent:"center"
+
+
+
+      }}>
       <form onSubmit={handleSubmit} style={{paddingTop:"60px"}}>
       <h2>register</h2>
-      <TextField
+     
+
+      <TextField 
+ 
         value={values.email}
         id="outlined-basic"
         label="אימייל"
@@ -112,7 +124,9 @@ const Register = () => {
       <br></br>
       <br></br>
       </form>
-      <Link to="/initiatorRegister">רוצה להירשם כיזם? לחץ כאן</Link>
+      
+      
+      <Link to="/initiatorRegister">רוצה להירשם כיזם? לחץ כאן</Link></div><div/>
     </>
 
   )

@@ -30,7 +30,7 @@ export default function Location({ setLocation }) {
                 id="free-solo-demo"
                 freeSolo
                 options={suggestions}
-                onChange={e => { setLocation(e.target.innerHTML) }}
+                onChange={e => { setAddress(e.target.innerHTML) }}
                 renderInput={(params) => <TextField {...params} label="Your location" onChange={e => setAddress(e.target.value)} />}
             />
             <MapGov address={address}></MapGov>

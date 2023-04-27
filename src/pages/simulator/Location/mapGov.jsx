@@ -30,7 +30,7 @@ const MapGov = ({ address }) => {
         <div>
             <>{cords.lat}</><br></br>
             <>{cords.lng}</><br></br>
-            <iframe id='ifrMap' frameborder='0' marginheight='0' marginwidth='0' width='450px' height='350px' src={`https://www.govmap.gov.il/map.html?bb=1&zb=1&in=1&c=${cords.lng},${cords.lat}&z=8`} > </iframe>
+            <iframe id='ifrMap' frameborder='0' marginheight='0' marginwidth='0' width='450px' height='350px' src={`https://www.govmap.gov.il/map.html?bb=1&zb=1&in=1&c=${cords.lat},${cords.lng}&z=8`} > </iframe>
         </div>
     )
 }

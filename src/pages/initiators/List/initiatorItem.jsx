@@ -53,6 +53,11 @@ const InitiatorItem = ({ initiator }) => {
       </TableRow>
        */}
       <Card sx={{ maxWidth: 345 }}>
+        {/* <Checkbox checked={intiatorsIds.find(id=>id===initiatorId)} 
+        onChange={(e,checked)=>{
+                if(checked) setIntiatorsIds([...intiatorsIds, initiator.id])
+                else setIntiatorsIds(intiatorsIds.filter(id=>id!==initiatorId))}}
+        /> */}
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">id: 
             {id}
@@ -85,7 +90,7 @@ const InitiatorItem = ({ initiator }) => {
 }
         </CardContent>
         <CardActions>
-          <Button size="small" onClick={() => navigate(`${id}`)}>לפרטים נוספים</Button>
+          <Button size="small" onClick={() => navigate(`${id}`,{initiator:"rrrr"})}>לפרטים נוספים</Button>
 
         </CardActions>
       </Card>

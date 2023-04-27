@@ -9,10 +9,8 @@ import { Grid } from "@material-ui/core";
 
 const InitiatorsList = () => {
     const [initiators, setInitiators] = useState([]);
-    const [filtersInitiators, setFiltersInitiators] = useState([]);
-
-
-
+    // const [filteredInitiators, setFilteredInitiators] = useState(initiators);
+    // const [initiatorsIds, setInitiatorsIds] = useState(initiators);
 
     const[filterInitiatorByTamaAndPinuyBinuy,SetFilterInitiatorByTamaAndPinuyBinuy]=useState(false);
     const[searchName,SetSearchName]=useState('');
