@@ -90,7 +90,7 @@ const InitiatorItem = ({ initiator }) => {
 }
         </CardContent>
         <CardActions>
-          <Button size="small" onClick={() => navigate(`${id}`,{initiator:"rrrr"})}>לפרטים נוספים</Button>
+          <Button size="small" onClick={() => navigate(`${id}`)}>לפרטים נוספים</Button>
 
         </CardActions>
       </Card>

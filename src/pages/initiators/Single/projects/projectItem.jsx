@@ -38,9 +38,9 @@ const ProjectItem = ({ project }) => {
 
 
           <StyledTableCell >                                                                                                       
-            {/* <Fab color="inherit" aria-label="edit" onClick={() => navigate(`project/${idProject}`)}>
+            <Fab color="inherit" aria-label="edit" onClick={() => navigate(`project/${idProject}`)}>
               <EditIcon />
-            </Fab> */}
+            </Fab>
           </StyledTableCell>
         </StyledTableRow>
       </TableBody>

@@ -40,7 +40,7 @@ const routes = [
   { path: "/request", component:Request  },
   { path: "/simulator", component:Simulator  },
   { path: "/Checkboxes", component:Checkboxes  },
-  { path: "/initiator/:initiatorId/project/:projectId", component: UpdateProject },
+  { path: "/initiators/:initiatorId/project/:projectId", component: UpdateProject },
 
   
 ];
