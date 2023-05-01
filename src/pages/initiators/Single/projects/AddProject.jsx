@@ -23,26 +23,38 @@ import { Icon } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import ClearIcon from '@mui/icons-material/Clear';
+import CitySelect from './CitySelect'
+import StatusSelect from './StatusSelect';
 const AddProject = () => {
   const [status, setStatus] = useState([]);
+
+
   const [city, setCity] = useState('');
   const [open, setOpen] = useState(false);
   const [picture, setPicture] = useState([]);
   const [subscribe, setSubscribe] = useState(false);
   const [lable, setLable] = useState('');
 
-   useEffect( () => {
-    async function fetchData() {
+  //  useEffect( () => {
+  //   async function fetchData() {
 
-         var {data:_status} = await axios.get(`http://localhost:3600/status`)
-         _status=_status.map(status=>status.status)
-        console.log({_status})
+  //        var {data:_status} = await axios.get(`http://localhost:3600/status`)
+  //        _status=_status.map(status=>status.status)
+  //       // var {data:_citiesList} = await axios.get(`http://localhost:3600/city`)
+  //       // _citiesList=_citiesList.map(city=>city.city)
+  //       console.log({_status})
+  //      // console.log({_citiesList})
 
-        if(_status) setStatus(_status)   }
+  //       if(_status) setStatus(_status) 
+  //       //if(_citiesList) setCitiesList(_citiesList) 
 
-    fetchData()
+      
+      
+  //     }
 
-   }, []);
+  //   fetchData()
+
+  //  }, []);
 
   // useEffect(() => {
   //   //setPicturesArr(picture?[...picturesArr,picture]:[])
@@ -84,7 +96,7 @@ const AddProject = () => {
 
     try{
     await axios.post('http://localhost:3600/project', {
-      address: 'aaa', city: 'jerusalem', status: 'finish', initiatorId: 2, apartmentBefore: 8, apartmentAfter: 5,
+      address: 'bbb', city: city, status: status, initiatorId: 2, apartmentBefore: 8, apartmentAfter: 5,
       requestYear: 0, permitYear: 9, populatingYear: 55, description: 'mmm', tama38: 1, pinuyBinuy: 1
       , picturesArr: picture
 
@@ -115,6 +127,8 @@ const handleRemovingImage=(picToRemove)=>{
 }
 
 
+
+
 return (
 
   <div>
@@ -128,32 +142,11 @@ return (
           To subscribe to this website, please enter your email address here. We
           will send updates occasionally.
         </DialogContentText>
-        <TextField
-                value={"ci"}
-                id="outlined-basic"
-                label="עיר"
-                variant="outlined"
-               // {...getFieldProps("city")}
-            />
-        <InputLabel id="demo-select-small-label">סטטוס</InputLabel>
-        <Select
-          labelId="demo-select-small-label"
-          id="demo-select-small"
-          value={""}
-          label="status"
-       //   {...getFieldProps("status")}
-        >
-          <MenuItem value="">
-            <em>בחר סטטוס</em>
-          </MenuItem>
-          
-          {status?.map((status,index)=><MenuItem value={index}>{status}</MenuItem>)}
-          {/* <MenuItem value={1}>{status[0]}</MenuItem> */}
-          {/* <MenuItem value={1}>{status?.length? status[0]:''}</MenuItem>
-          <MenuItem value={2}>{status?.length? status[1]:''}</MenuItem>
 
-    */}
-        </Select>
+ <CitySelect city={city} setCity={setCity}/>
+<StatusSelect status={status} setStatus={setStatus} ></StatusSelect>
+
+     
         <Uploader picture={picture} setPicture={setPicture} label="Add Picture" />
           {picture.length ? picture.map((pic) =>
             <> {pic}

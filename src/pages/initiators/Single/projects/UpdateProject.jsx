@@ -9,7 +9,8 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import Dialog from '@mui/material/Dialog';
 import { useTheme } from '@mui/material/styles';
 import DialogActions from '@mui/material/DialogActions';
-
+import CitySelect from './CitySelect'
+import StatusSelect from './StatusSelect';
 //address, city, status, apartmentBefore, apartmentAfter, requestYear, permitYear, startConstructionYear, populatingYear, description
 const UpdateProject = () => {
     const {projectId,initiatorId}=useParams();
@@ -19,7 +20,10 @@ const UpdateProject = () => {
     // const theme = useTheme();
     const { token, currentUser } = useContext(AuthContext);
     const[project,setProject]=useState({address:'', city:'', status:'', apartmentBefore:'', apartmentAfter:'', requestYear:'', permitYear:'', startConstructionYear:'', populatingYear:'', description:'' }); 
-   
+   const [city,setCity]=useState('');
+   const [statusChecked,setStatusChecked]=useState('');
+
+
     // const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
     // const [open, setOpen] = useState(false);
     const config = {
@@ -55,14 +59,20 @@ const UpdateProject = () => {
         initialValues: {...project},
         //validationSchema:validationSchema,
        onSubmit: async (values) => {
+        console.log(values.address)
 
-            const {data:_initiators} = await axios.put(`http://localhost:3600/project/${projectId}`,{address:values.address,city:values.city,status:values.status,initiatorId:currentUser.id,apartmentBefore:values.apartmentBefore,apartmentAfter:values.apartmentAfter,requestYear:values.requestYear, permitYear:values.permitYear, populatingYear:values.populatingYear, description:values.description },config)
+            console.log({city})
+            console.log({statusChecked})
 
-           //handleClose();
+           const {data:_initiators} = await axios.put(`http://localhost:3600/project/${projectId}`,{address:values.address,city:city,status:statusChecked,initiatorId:currentUser.id,apartmentBefore:values.apartmentBefore,apartmentAfter:values.apartmentAfter,requestYear:values.requestYear, permitYear:values.permitYear, populatingYear:values.populatingYear, description:values.description },config)
+
+          // handleClose();
        }
 
     }
    );
+
+    
 
     return (
         <div style={{ margin: "20px", paddingTop: "60px" }}>
@@ -75,20 +85,29 @@ const UpdateProject = () => {
                 variant="outlined"
                 {...getFieldProps("address")}
             />
+
+ 
+            <CitySelect city={city} setCity={setCity}
+/>
+            <StatusSelect statusChecked={statusChecked} setStatusChecked={setStatusChecked} ></StatusSelect> 
+           
+     
+{/* 
             <TextField
                 value={values.city}
                 id="outlined-basic"
                 label="עיר"
                 variant="outlined"
                 {...getFieldProps("city")}
-            />
-            <TextField
+                
+            /> */}
+            {/* <TextField
                 value={values.status}
                 id="outlined-basic"
                 label="סטטוס"
                 variant="outlined"
                 {...getFieldProps("status")}
-            />
+            /> */}
             <TextField
                 value={values.apartmentBefore}
                 id="outlined-basic"
@@ -98,7 +117,7 @@ const UpdateProject = () => {
                 onChange={(e) => {
                     setFieldValue(
                       "apartmentBefore",
-                      parseInt(e.target.value)
+                      parseInt(e.target.value)||''
                     );
                   }}
             />
@@ -112,7 +131,7 @@ const UpdateProject = () => {
                 onChange={(e) => {
                     setFieldValue(
                       "apartmentAfter",
-                      parseInt(e.target.value)
+                      parseInt(e.target.value)||''
                     );
                   }}
             />
@@ -126,7 +145,7 @@ const UpdateProject = () => {
                 onChange={(e) => {
                     setFieldValue(
                       "requestYear",
-                      parseInt(e.target.value)
+                      parseInt(e.target.value)||''
                     );
                   }}
             />
@@ -140,7 +159,7 @@ const UpdateProject = () => {
                 onChange={(e) => {
                     setFieldValue(
                       "permitYear",
-                      parseInt(e.target.value)
+                      parseInt(e.target.value)||''
                     );
                   }}
                 
@@ -155,7 +174,7 @@ const UpdateProject = () => {
                 onChange={(e) => {
                     setFieldValue(
                       "startConstructionYear",
-                      parseInt(e.target.value)
+                      parseInt(e.target.value)||''
                     );
                   }}
             />
@@ -168,7 +187,7 @@ const UpdateProject = () => {
                 onChange={(e) => {
                     setFieldValue(
                       "populatingYear",
-                      parseInt(e.target.value)
+                      parseInt(e.target.value)||''
                     );
                   }}
             />
@@ -196,5 +215,6 @@ const UpdateProject = () => {
         </div>
     );
 }
+
 
 export default UpdateProject
