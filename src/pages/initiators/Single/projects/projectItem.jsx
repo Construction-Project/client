@@ -8,7 +8,7 @@ import StyledTableCell from './styleTable/StyledTableCell'
 import StyledTableRow from './styleTable/StyledTableRow'
 import Fab from '@material-ui/core/Fab';
 import EditIcon from '@material-ui/icons/Edit';
-import UpdateProject from './updateProject';
+import UpdateProject from './UpdateProject';
 
 const ProjectItem = ({ project }) => {
   const { address, city, status, apartmentBefore, apartmentAfter, requestYear, permitYear, startConstructionYear, populatingYear, description, Project_pictures } = project
