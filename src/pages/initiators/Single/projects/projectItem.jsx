@@ -9,10 +9,11 @@ import StyledTableRow from './styleTable/StyledTableRow'
 import Fab from '@material-ui/core/Fab';
 import EditIcon from '@material-ui/icons/Edit';
 import UpdateProject from './updateProject';
+import { useNavigate,Navigate } from 'react-router-dom';
 
 const ProjectItem = ({ project }) => {
-  const { address, city, status, apartmentBefore, apartmentAfter, requestYear, permitYear, startConstructionYear, populatingYear, description, Project_pictures } = project
-
+  const { idProject ,address, city, status, apartmentBefore, apartmentAfter, requestYear, permitYear, startConstructionYear, populatingYear, description, Project_pictures } = project
+  const navigate = useNavigate()
   return (
     <>
       {/* <Table sx={{ minWidth: 700 }} aria-label="customized table"> */}
@@ -37,9 +38,9 @@ const ProjectItem = ({ project }) => {
 
 
           <StyledTableCell >                                                                                                       
-            <Fab color="inherit" aria-label="edit" onClick={<UpdateProject address={address} city={city} status={status} apartmentBefore={apartmentBefore} apartmentAfter={apartmentAfter} requestYear={requestYear} permitYear={permitYear} startConstructionYear={startConstructionYear} populatingYear={populatingYear} description={description}></UpdateProject>}>
+            {/* <Fab color="inherit" aria-label="edit" onClick={() => navigate(`project/${idProject}`)}>
               <EditIcon />
-            </Fab>
+            </Fab> */}
           </StyledTableCell>
         </StyledTableRow>
       </TableBody>

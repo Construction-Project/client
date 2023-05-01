@@ -5,9 +5,13 @@ import ProjectItem from './projectItem';
 import { styled ,TableHead,TableRow,Paper,TableContainer,TableCell,tableCellClasses} from '@mui/material';
 //import { tableCellClasses } from '@mui/material/TableCell';
 import StyledTableCell from './styleTable/StyledTableCell'
+import { Update } from '@material-ui/icons';
+import UpdateProject from './updateProject';
 
 const ProjectsList = () => {
     const [projects , setProjects] = useState([]);
+    const [updateProject,setUpdateProject]=useState(false);
+
     const {initiatorId}=useParams();
     //console.log(initiatorId)
     useEffect(() => {
@@ -23,6 +27,7 @@ const ProjectsList = () => {
 
 
     return (   
+      !updateProject?
         <>
         <TableContainer component={Paper}>
         <TableHead>
@@ -42,7 +47,8 @@ const ProjectsList = () => {
          
             {projects?.length && projects.map((project)=>{return <ProjectItem project={project}/> })} 
         </TableContainer>
-        </>
+        </>:
+<UpdateProject project={projects}></UpdateProject>
       )
 }
 

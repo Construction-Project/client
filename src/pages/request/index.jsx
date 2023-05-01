@@ -55,9 +55,11 @@ const Request = () => {
         // console.log(_initiators);
         setInitiators(_initiators)
         setFilteredInitiators(_initiators)
-        setInitiatorsIds(initiators.map((item) => { initiatorsIds.push(item.id) }))
+        const newData=_initiators.map((item) => item.id)
+        console.log(newData)
+        setInitiatorsIds(newData)
         //setInitiatorsIds([...initiatorsIds])
-        console.log(initiatorsIds,"initiatorsIds useEffect")
+        //console.log(initiatorsIds,"initiatorsIds useEffect")
       }
     }
     fetchData()

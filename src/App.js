@@ -24,10 +24,11 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Container from '@mui/material/Container';
-
+import UpdateProject from "./pages/initiators/Single/projects/updateProject";
 
 import Checkboxes from './pages/initiators/List/check'
 import { AuthContextProvider } from "./context/authContext";
+
 const routes = [
   { path: "/register", component: Register },
   { path: "/login", component: Login },
@@ -38,7 +39,8 @@ const routes = [
   { path: "/RatingInitiator", component: RatingInitiator },
   { path: "/request", component:Request  },
   { path: "/simulator", component:Simulator  },
-  { path: "/Checkboxes", component:Checkboxes  }
+  { path: "/Checkboxes", component:Checkboxes  },
+  { path: "/initiator/:initiatorId/project/:projectId", component: UpdateProject },
 
   
 ];
