@@ -1,4 +1,4 @@
-import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TableRow, TableBody ,IconButton} from '@mui/material';
+import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TableRow, TableBody, IconButton } from '@mui/material';
 
 
 import { styled } from '@mui/material/styles';
@@ -11,6 +11,7 @@ import StyledTableRow from './styleTable/StyledTableRow';
 import Uploader from '../../../Uploader';
 import FormattedInputs from './numericButton';
 import axios from 'axios';
+import { useFormik } from 'formik';
 
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -25,19 +26,10 @@ import ClearIcon from '@mui/icons-material/Clear';
 const AddProject = () => {
   const [status, setStatus] = useState('');
   const [city, setCity] = useState('');
-
-
-
   const [open, setOpen] = useState(false);
   const [picture, setPicture] = useState([]);
-  //const [presentPic,setPresentPic] = useState([]);
-
-  //const [picturesArr, setPicturesArr] = useState([]);
-
   const [subscribe, setSubscribe] = useState(false);
   const [lable, setLable] = useState('');
-
-
   // useEffect(() => {
   //   //setPicturesArr(picture?[...picturesArr,picture]:[])
   //   //
@@ -53,6 +45,18 @@ const AddProject = () => {
   const handleLable = (l) => {
     setLable(l)
   }
+  const config = {
+
+    headers: {
+      'Authorization': 'Bearer ' + localStorage.getItem("token")
+    }
+  }
+  const handleRemovingImage = (picToRemove) => {
+    const arr = picture.filter(pic => picToRemove != pic)
+    console.log(arr)
+
+    setPicture(arr)
+  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -63,123 +67,97 @@ const AddProject = () => {
     setPicture([]);
     //setPicturesArr([]);
   };
+  const { handleSubmit, handleChange, values, getFieldProps, handleSubscribe } = useFormik({// async () => {
 
-  const handlSubscribe = async () => {
-    const config = {
+    initialValues: {
+      address:'', 
+      city:'', 
+      status:0, 
+      apartmentBefore:0, 
+      apartmentAfter:0, 
+      requestYear:0, 
+      permitYear:0, 
+      startConstructionYear:0, 
+      populatingYear:0, 
+      description:''
+    },
 
-      headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem("token")
+    onsubmit: async(values) => {
+      try {
+        await axios.post('http://localhost:3600/project', {
+          address: 'aaa', city: 'jerusalem', status: 'finish', initiatorId: 2, apartmentBefore: 8, apartmentAfter: 5,
+          requestYear: 0, permitYear: 9, populatingYear: 55, description: 'mmm', tama38: 1, pinuyBinuy: 1
+          , picturesArr: picture
+
+
+        }, config)
+        if (picture) {
+          alert('gfgfg');
+          setSubscribe(true);
+        }
+        setOpen(false);
       }
-    }
-
-
-    console.log('handlSubscribe');
-    console.log(picture);
-
-    try{
-    await axios.post('http://localhost:3600/project', {
-      address: 'aaa', city: 'jerusalem', status: 'finish', initiatorId: 2, apartmentBefore: 8, apartmentAfter: 5,
-      requestYear: 0, permitYear: 9, populatingYear: 55, description: 'mmm', tama38: 1, pinuyBinuy: 1
-      , picturesArr: picture
-
-
-    }, config)
-
-    //
-
-    //לשלוח 
-
+      catch (error) {
+        console.log(error)
+      }
   }
-  catch(error){
-    console.log(error)
-  }
-    if (picture) {
-      alert('gfgfg');
-      setSubscribe(true);
-    }
-    setOpen(false);
-
-  }
-
-const handleRemovingImage=(picToRemove)=>{
-  const arr=picture.filter(pic=>picToRemove!=pic)
-  console.log(arr)
-
-  setPicture(arr)
-}
-
-  return (
-
-    <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        הכנס פרויקט חדש
-      </Button>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Subscribe</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here. We
-            will send updates occasionally.
-          </DialogContentText>
-
-          <TableBody>
-
-            <StyledTableRow>
-              <StyledTableCell >{ }</StyledTableCell>
-              <StyledTableCell >{ }</StyledTableCell>
-              <StyledTableCell >
-
-                
-                
-               
+  })
 
 
-                <Uploader picture={picture} setPicture={setPicture} label="Add Picture" />
-                {/* {picture?.length?picture.map(pic=><>{pic}</>:<>0</>)} */}
-                {picture.length?picture.map((pic)=> 
-                <> {pic}
-          
-                <IconButton onClick={()=>handleRemovingImage(pic)}>
-                      <CloseIcon />
-                </IconButton> 
-                
-                
-                </> )
-                :<></>}
+return (
 
+  <div>
+    <Button variant="outlined" onClick={handleClickOpen}>
+      הכנס פרויקט חדש
+    </Button>
+    <Dialog open={open} onClose={handleClose}>
+      <DialogTitle>Subscribe</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          To subscribe to this website, please enter your email address here. We
+          will send updates occasionally.
+        </DialogContentText>
+        <TextField
+                value={values.city}
+                id="outlined-basic"
+                label="עיר"
+                variant="outlined"
+                {...getFieldProps("city")}
+            />
+        <InputLabel id="demo-select-small-label">סטטוס</InputLabel>
+        <Select
+          labelId="demo-select-small-label"
+          id="demo-select-small"
+          value={""}
+          label="status"
+          {...getFieldProps("status")}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={1}>1</MenuItem>
+          <MenuItem value={2}>2</MenuItem>
+          <MenuItem value={3}>3</MenuItem>
+        </Select>
+        <TextField
+          autoFocus
+          margin="dense"
+          id="name"
+          label="Email Address"
+          type="email"
+          fullWidth
+          variant="standard"
+        />
+        <FormattedInputs lable={"mali"}></FormattedInputs>
 
-              </StyledTableCell>
-
-
-              {/*      <Button onClick={()=>alert('hi')}>
-                try </Button>*/}
-              <StyledTableCell ></StyledTableCell>
-              <StyledTableCell ></StyledTableCell>
-              <StyledTableCell ><Cities /></StyledTableCell>
-              <StyledTableCell ><Statuses /></StyledTableCell>
-            </StyledTableRow>
-
-          </TableBody>
-
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-            variant="standard"
-          />
-          <FormattedInputs lable={"mali"}></FormattedInputs>
-          
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handlSubscribe}>Subscribe</Button>
-        </DialogActions>
-      </Dialog>
-    </div>
-  );
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose}>Cancel</Button>
+        {/* <Button onClick={handlSubscribe}>Subscribe</Button> */}
+      </DialogActions>
+    </Dialog>
+  </div>
+);
 }
 
 
