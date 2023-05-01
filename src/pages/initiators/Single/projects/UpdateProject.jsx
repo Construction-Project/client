@@ -1,5 +1,5 @@
 import { useState, useContext,useEffect } from 'react'
-import { useParams } from "react-router-dom";
+import { useParams ,useNavigate} from "react-router-dom";
 
 import { useFormik, FormikValues } from "formik";
 import { Button, TextField } from '@mui/material';
@@ -12,12 +12,14 @@ import DialogActions from '@mui/material/DialogActions';
 
 //address, city, status, apartmentBefore, apartmentAfter, requestYear, permitYear, startConstructionYear, populatingYear, description
 const UpdateProject = () => {
-    const {projectId}=useParams();
+    const {projectId,initiatorId}=useParams();
+    const navigate=useNavigate();
 
     
     // const theme = useTheme();
     const { token, currentUser } = useContext(AuthContext);
-    const[project,setProject]=useState({}); 
+    const[project,setProject]=useState({address:'', city:'', status:'', apartmentBefore:'', apartmentAfter:'', requestYear:'', permitYear:'', startConstructionYear:'', populatingYear:'', description:'' }); 
+   
     // const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
     // const [open, setOpen] = useState(false);
     const config = {
@@ -40,43 +42,18 @@ const UpdateProject = () => {
           fetchData()
       }, []);
       
-    //   useEffect(() => {
-      
-    //       formik.setValues({
-    //         ...project
-    //       });
-        
-    //    }, [project]);
-    
+
     // const handleClickOpen = () => {
     //     setOpen(true);
     // };
     // const handleClose = () => {
     //     setOpen(false);
     // };
-   // const {address, city, status, apartmentBefore, apartmentAfter, requestYear, permitYear, startConstructionYear, populatingYear, description}=project
-   //const getData = () => project || tempData 
         
-   //const tempData = {address:'', city:'', status:'', apartmentBefore:'', apartmentAfter:'', requestYear:'', permitYear:'', startConstructionYear:'', populatingYear:'', description:'' }
-   const { formik,handleSubmit, handleChange, values, getFieldProps, handleSubscribe } = useFormik({// async () => {
-    enableReinitialize: true,
-        initialValues: {
-            address:'',
-            city:'',
-            status:'',
-            apartmentBefore: project.apartmentBefore?project.apartmentBefore:'',
-            apartmentAfter: '',//project.apartmentAfter,
-            requestYear: '',//project.requestYear,
-            permitYear: '',//project.permitYear,
-            startConstructionYear:'',//project.startConstructionYear,
-            populatingYear:'',//project.populatingYear,
-            description:'',//project.description
-        },
-       // initialValues: {getData()},
-        //enableReinitialize: {true},
-
+   const {handleSubmit, handleChange, values, getFieldProps, handleSubscribe } = useFormik({// async () => {
+        enableReinitialize: true,
+        initialValues: {...project},
         //validationSchema:validationSchema,
-
        onSubmit: async (values) => {
 
             const {data:_initiators} = await axios.put(`http://localhost:3600/project/1`,{address:values.address,city:values.city,status:values.status,initiatorId:currentUser.id,apartmentBefore:values.apartmentBefore,apartmentAfter:values.apartmentAfter,requestYear:values.requestYear, permitYear:values.permitYear, populatingYear:values.populatingYear, description:values.description },config)
@@ -167,18 +144,18 @@ const UpdateProject = () => {
             />
 
 
-        {/* //     <DialogActions>
-        //         <Button autoFocus onClick={handleClose}>
-        //             ביטול
-        //         </Button>
-        //         <Button onClick={handleSubscribe} autoFocus>
-        //             עידכון
-        //         </Button>
+             {/* <DialogActions> */}
+                <Button autoFocus onClick={()=>navigate(`/initiators/${initiatorId}`)}>
+                    ביטול
+                </Button>
+                <Button  autoFocus>
+                    עידכון
+                </Button>
 
-        //     </DialogActions>
+             {/* </DialogActions> */}
 
 
-        // </Dialog> */}
+     {/* </Dialog> */}
         </div>
     );
 }

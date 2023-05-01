@@ -1,4 +1,4 @@
-import { use } from 'react-router-dom';
+import { use, useParams } from 'react-router-dom';
 import { TableRow, TableBody, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -10,10 +10,12 @@ import Fab from '@material-ui/core/Fab';
 import EditIcon from '@material-ui/icons/Edit';
 import UpdateProject from './updateProject';
 import { useNavigate,Navigate } from 'react-router-dom';
+import InitiatorItem from '../../List/initiatorItem';
 
 const ProjectItem = ({ project }) => {
   const { idProject ,address, city, status, apartmentBefore, apartmentAfter, requestYear, permitYear, startConstructionYear, populatingYear, description, Project_pictures } = project
   const navigate = useNavigate()
+  const {initiatorId}=useParams()
   return (
     <>
       {/* <Table sx={{ minWidth: 700 }} aria-label="customized table"> */}
@@ -38,7 +40,7 @@ const ProjectItem = ({ project }) => {
 
 
           <StyledTableCell >                                                                                                       
-            <Fab color="inherit" aria-label="edit" onClick={() => navigate(`project/${idProject}`)}>
+            <Fab color="inherit" aria-label="edit" onClick={() => navigate(`/initiators/${initiatorId}/project/${idProject}`)}>
               <EditIcon />
             </Fab>
           </StyledTableCell>
