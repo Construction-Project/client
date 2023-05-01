@@ -62,6 +62,7 @@ const Request = () => {
     }
     fetchData()
   }, []);
+
   useEffect(() => {
    const dataFiltered = filtered()
    setFilteredInitiators(dataFiltered)
@@ -69,8 +70,8 @@ const Request = () => {
 
   const selectItem = (id) =>{
       console.log("selectItem", id)
-      initiatorsIds.push(id)
-      setInitiatorsIds([...initiatorsIds])
+      //initiatorsIds.push(id)
+      setInitiatorsIds([...initiatorsIds,id])
       console.log("initiatorsIds SelectItem", initiatorsIds)
       
   }

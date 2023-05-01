@@ -36,8 +36,8 @@ const ProjectItem = ({ project }) => {
           <StyledTableCell ><img style={{ width: "50px" }} src='http://localhost:3600/images/f0b01687-fd45-4486-914a-3333dada8359_Bell_pep.jpg' /></StyledTableCell>
 
 
-          <StyledTableCell >
-            <Fab color="inherit" aria-label="edit" onClick={<UpdateProject></UpdateProject>}>
+          <StyledTableCell >                                                                                                       
+            <Fab color="inherit" aria-label="edit" onClick={<UpdateProject address={address} city={city} status={status} apartmentBefore={apartmentBefore} apartmentAfter={apartmentAfter} requestYear={requestYear} permitYear={permitYear} startConstructionYear={startConstructionYear} populatingYear={populatingYear} description={description}></UpdateProject>}>
               <EditIcon />
             </Fab>
           </StyledTableCell>
