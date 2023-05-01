@@ -1,5 +1,5 @@
 
-import {InputLabel,Select} from '@mui/material';
+import {InputLabel,Select,NativeSelect} from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import { useEffect, useState } from 'react';
@@ -29,11 +29,27 @@ const StatusSelect = ({statusChecked,setStatusChecked}) => {
 
     
 <FormControl fullWidth>
+<InputLabel variant="standard" htmlFor="uncontrolled-native">
+סטטוס
+  </InputLabel>
+  <NativeSelect
+    defaultValue={statusChecked}
+    inputProps={{
+      name: 'status',
+      id: 'uncontrolled-native',
+    }}
+      onChange={handleChangeStatus}
 
-<InputLabel id="demo-select-small-label">סטטוס</InputLabel>
-<Select
+  >
+  {status?.map((status,index)=><option value={status}>{status}</option>)}
+
+  </NativeSelect>
+
+{/* <InputLabel id="demo-select-small-label">סטטוס</InputLabel> */}
+{/* <Select
   labelId="demo-select-small-label"
   id="demo-select-small"
+  defaultValue={'f'}
   value={statusChecked}
   label="status"
   onChange={handleChangeStatus}
@@ -49,7 +65,6 @@ const StatusSelect = ({statusChecked,setStatusChecked}) => {
   <MenuItem value={2}>{status?.length? status[1]:''}</MenuItem>
 
 */}
-</Select>
 </FormControl>
   )
 }

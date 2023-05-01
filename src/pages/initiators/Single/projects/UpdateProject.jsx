@@ -40,7 +40,10 @@ const UpdateProject = () => {
             console.log(_project.address)
             console.log('hi')
 
-            if(_project) setProject(_project)         
+            if(_project) {
+            setProject(_project)
+            setStatusChecked(_project.status)    
+          }     
             
           }
           fetchData()
