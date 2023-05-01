@@ -59,18 +59,6 @@ const AddProject = () => {
   const handleLable = (l) => {
     setLable(l)
   }
-  const config = {
-
-    headers: {
-      'Authorization': 'Bearer ' + localStorage.getItem("token")
-    }
-  }
-  const handleRemovingImage = (picToRemove) => {
-    const arr = picture.filter(pic => picToRemove != pic)
-    console.log(arr)
-
-    setPicture(arr)
-  }
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -81,41 +69,50 @@ const AddProject = () => {
     setPicture([]);
     //setPicturesArr([]);
   };
-  const { handleSubmit, handleChange, values, getFieldProps, handleSubscribe } = useFormik({// async () => {
 
-    initialValues: {
-      address:'', 
-      city:'', 
-      status:0, 
-      apartmentBefore:0, 
-      apartmentAfter:0, 
-      requestYear:0, 
-      permitYear:0, 
-      startConstructionYear:0, 
-      populatingYear:0, 
-      description:''
-    },
+  const handlSubscribe = async () => {
+    const config = {
 
-    onsubmit: async(values) => {
-      try {
-        await axios.post('http://localhost:3600/project', {
-          address: 'aaa', city: 'jerusalem', status: 'finish', initiatorId: 2, apartmentBefore: 8, apartmentAfter: 5,
-          requestYear: 0, permitYear: 9, populatingYear: 55, description: 'mmm', tama38: 1, pinuyBinuy: 1
-          , picturesArr: picture
-
-
-        }, config)
-        if (picture) {
-          alert('gfgfg');
-          setSubscribe(true);
-        }
-        setOpen(false);
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("token")
       }
-      catch (error) {
-        console.log(error)
-      }
+    }
+
+
+    console.log('handlSubscribe');
+    console.log(picture);
+
+    try{
+    await axios.post('http://localhost:3600/project', {
+      address: 'aaa', city: 'jerusalem', status: 'finish', initiatorId: 2, apartmentBefore: 8, apartmentAfter: 5,
+      requestYear: 0, permitYear: 9, populatingYear: 55, description: 'mmm', tama38: 1, pinuyBinuy: 1
+      , picturesArr: picture
+
+
+    }, config)
+
+    //
+
+    //לשלוח 
+
   }
-  })
+  catch(error){
+    console.log(error)
+  }
+    if (picture) {
+      alert('gfgfg');
+      setSubscribe(true);
+    }
+    setOpen(false);
+
+  }
+
+const handleRemovingImage=(picToRemove)=>{
+  const arr=picture.filter(pic=>picToRemove!=pic)
+  console.log(arr)
+
+  setPicture(arr)
+}
 
 
 return (
@@ -132,11 +129,11 @@ return (
           will send updates occasionally.
         </DialogContentText>
         <TextField
-                value={values.city}
+                value={"ci"}
                 id="outlined-basic"
                 label="עיר"
                 variant="outlined"
-                {...getFieldProps("city")}
+               // {...getFieldProps("city")}
             />
         <InputLabel id="demo-select-small-label">סטטוס</InputLabel>
         <Select
@@ -144,7 +141,7 @@ return (
           id="demo-select-small"
           value={""}
           label="status"
-          {...getFieldProps("status")}
+       //   {...getFieldProps("status")}
         >
           <MenuItem value="">
             <em>בחר סטטוס</em>
@@ -157,6 +154,14 @@ return (
 
     */}
         </Select>
+        <Uploader picture={picture} setPicture={setPicture} label="Add Picture" />
+          {picture.length ? picture.map((pic) =>
+            <> {pic}
+              <IconButton onClick={() => handleRemovingImage(pic)}>
+                <CloseIcon />
+              </IconButton>
+            </>)
+            : <></>}
         <TextField
           autoFocus
           margin="dense"
@@ -171,7 +176,7 @@ return (
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
-        {/* <Button onClick={handlSubscribe}>Subscribe</Button> */}
+        <Button onClick={handlSubscribe}>Subscribe</Button>
       </DialogActions>
     </Dialog>
   </div>
