@@ -24,12 +24,26 @@ import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import ClearIcon from '@mui/icons-material/Clear';
 const AddProject = () => {
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState([]);
   const [city, setCity] = useState('');
   const [open, setOpen] = useState(false);
   const [picture, setPicture] = useState([]);
   const [subscribe, setSubscribe] = useState(false);
   const [lable, setLable] = useState('');
+
+   useEffect( () => {
+    async function fetchData() {
+
+         var {data:_status} = await axios.get(`http://localhost:3600/status`)
+         _status=_status.map(status=>status.status)
+        console.log({_status})
+
+        if(_status) setStatus(_status)   }
+
+    fetchData()
+
+   }, []);
+
   // useEffect(() => {
   //   //setPicturesArr(picture?[...picturesArr,picture]:[])
   //   //
@@ -133,11 +147,15 @@ return (
           {...getFieldProps("status")}
         >
           <MenuItem value="">
-            <em>None</em>
+            <em>בחר סטטוס</em>
           </MenuItem>
-          <MenuItem value={1}>1</MenuItem>
-          <MenuItem value={2}>2</MenuItem>
-          <MenuItem value={3}>3</MenuItem>
+          
+          {status?.map((status,index)=><MenuItem value={index}>{status}</MenuItem>)}
+          {/* <MenuItem value={1}>{status[0]}</MenuItem> */}
+          {/* <MenuItem value={1}>{status?.length? status[0]:''}</MenuItem>
+          <MenuItem value={2}>{status?.length? status[1]:''}</MenuItem>
+
+    */}
         </Select>
         <TextField
           autoFocus

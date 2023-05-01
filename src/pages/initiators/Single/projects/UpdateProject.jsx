@@ -50,13 +50,13 @@ const UpdateProject = () => {
     //     setOpen(false);
     // };
         
-   const {handleSubmit, handleChange, values, getFieldProps, handleSubscribe } = useFormik({// async () => {
+   const {setFieldValue,handleSubmit, handleChange, values, getFieldProps, handleSubscribe } = useFormik({// async () => {
         enableReinitialize: true,
         initialValues: {...project},
         //validationSchema:validationSchema,
        onSubmit: async (values) => {
 
-            const {data:_initiators} = await axios.put(`http://localhost:3600/project/1`,{address:values.address,city:values.city,status:values.status,initiatorId:currentUser.id,apartmentBefore:values.apartmentBefore,apartmentAfter:values.apartmentAfter,requestYear:values.requestYear, permitYear:values.permitYear, populatingYear:values.populatingYear, description:values.description },config)
+            const {data:_initiators} = await axios.put(`http://localhost:3600/project/${projectId}`,{address:values.address,city:values.city,status:values.status,initiatorId:currentUser.id,apartmentBefore:values.apartmentBefore,apartmentAfter:values.apartmentAfter,requestYear:values.requestYear, permitYear:values.permitYear, populatingYear:values.populatingYear, description:values.description },config)
 
            //handleClose();
        }
@@ -95,6 +95,12 @@ const UpdateProject = () => {
                 label="מס' דירות לפני"
                 variant="outlined"
                 {...getFieldProps("apartmentBefore")}
+                onChange={(e) => {
+                    setFieldValue(
+                      "apartmentBefore",
+                      parseInt(e.target.value)
+                    );
+                  }}
             />
 
             <TextField
@@ -103,6 +109,12 @@ const UpdateProject = () => {
                 label="מס' דירות אחרי"
                 variant="outlined"
                 {...getFieldProps("apartmentAfter")}
+                onChange={(e) => {
+                    setFieldValue(
+                      "apartmentAfter",
+                      parseInt(e.target.value)
+                    );
+                  }}
             />
 
             <TextField
@@ -111,6 +123,12 @@ const UpdateProject = () => {
                 label="שנת בקשה"
                 variant="outlined"
                 {...getFieldProps("requestYear")}
+                onChange={(e) => {
+                    setFieldValue(
+                      "requestYear",
+                      parseInt(e.target.value)
+                    );
+                  }}
             />
 
             <TextField
@@ -119,6 +137,13 @@ const UpdateProject = () => {
                 label="שנת אישור"
                 variant="outlined"
                 {...getFieldProps("permitYear")}
+                onChange={(e) => {
+                    setFieldValue(
+                      "permitYear",
+                      parseInt(e.target.value)
+                    );
+                  }}
+                
             />
 
             <TextField
@@ -127,6 +152,12 @@ const UpdateProject = () => {
                 label="שנת תחילת הבניה"
                 variant="outlined"
                 {...getFieldProps("startConstructionYear")}
+                onChange={(e) => {
+                    setFieldValue(
+                      "startConstructionYear",
+                      parseInt(e.target.value)
+                    );
+                  }}
             />
              <TextField
                 value={values.populatingYear}
@@ -134,6 +165,12 @@ const UpdateProject = () => {
                 label="שנת איכלוס"
                 variant="outlined"
                 {...getFieldProps("populatingYear")}
+                onChange={(e) => {
+                    setFieldValue(
+                      "populatingYear",
+                      parseInt(e.target.value)
+                    );
+                  }}
             />
              <TextField
                 value={values.description}
@@ -148,7 +185,7 @@ const UpdateProject = () => {
                 <Button autoFocus onClick={()=>navigate(`/initiators/${initiatorId}`)}>
                     ביטול
                 </Button>
-                <Button  autoFocus>
+                <Button  autoFocus onClick={()=>handleSubmit()}>
                     עידכון
                 </Button>
 
