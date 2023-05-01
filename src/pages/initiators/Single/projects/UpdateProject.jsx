@@ -10,8 +10,8 @@ import Dialog from '@mui/material/Dialog';
 import { useTheme } from '@mui/material/styles';
 import DialogActions from '@mui/material/DialogActions';
 
-
-const UpdateProject = (address, city, status, apartmentBefore, apartmentAfter, requestYear, permitYear, startConstructionYear, populatingYear, description) => {
+//address, city, status, apartmentBefore, apartmentAfter, requestYear, permitYear, startConstructionYear, populatingYear, description
+const UpdateProject = () => {
     const {projectId}=useParams();
 
     
@@ -31,6 +31,7 @@ const UpdateProject = (address, city, status, apartmentBefore, apartmentAfter, r
   
             const {data:_project} = await axios.get(`http://localhost:3600/project/${projectId}`)
             console.log({_project})
+            console.log(_project.address)
             console.log('hi')
 
             if(_project) setProject(_project)         
@@ -38,27 +39,42 @@ const UpdateProject = (address, city, status, apartmentBefore, apartmentAfter, r
           }
           fetchData()
       }, []);
-  
+      
+    //   useEffect(() => {
+      
+    //       formik.setValues({
+    //         ...project
+    //       });
+        
+    //    }, [project]);
+    
     // const handleClickOpen = () => {
     //     setOpen(true);
     // };
     // const handleClose = () => {
     //     setOpen(false);
     // };
-    const { handleSubmit, handleChange, values, getFieldProps, handleSubscribe } = useFormik({// async () => {
-
+   // const {address, city, status, apartmentBefore, apartmentAfter, requestYear, permitYear, startConstructionYear, populatingYear, description}=project
+   //const getData = () => project || tempData 
+        
+   //const tempData = {address:'', city:'', status:'', apartmentBefore:'', apartmentAfter:'', requestYear:'', permitYear:'', startConstructionYear:'', populatingYear:'', description:'' }
+   const { formik,handleSubmit, handleChange, values, getFieldProps, handleSubscribe } = useFormik({// async () => {
+    enableReinitialize: true,
         initialValues: {
-            address: address,
-            city: city,
-            status: status,
-            apartmentBefore: apartmentBefore,
-            apartmentAfter: apartmentAfter,
-            requestYear: requestYear,
-            permitYear: permitYear,
-            startConstructionYear: startConstructionYear,
-            populatingYear: populatingYear,
-            description: description
+            address:'',
+            city:'',
+            status:'',
+            apartmentBefore: project.apartmentBefore?project.apartmentBefore:'',
+            apartmentAfter: '',//project.apartmentAfter,
+            requestYear: '',//project.requestYear,
+            permitYear: '',//project.permitYear,
+            startConstructionYear:'',//project.startConstructionYear,
+            populatingYear:'',//project.populatingYear,
+            description:'',//project.description
         },
+       // initialValues: {getData()},
+        //enableReinitialize: {true},
+
         //validationSchema:validationSchema,
 
        onSubmit: async (values) => {
@@ -72,11 +88,11 @@ const UpdateProject = (address, city, status, apartmentBefore, apartmentAfter, r
    );
 
     return (
-        <div>
+        <div style={{ margin: "20px", paddingTop: "60px" }}>
         {/* // <Dialog fullScreen={fullScreen} > */}
 
             <TextField
-                value={values.address}
+                value= {values.address}//{values.address}
                 id="outlined-basic"
                 label="כתובת"
                 variant="outlined"
