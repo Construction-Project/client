@@ -18,7 +18,7 @@ const SingleIntiator=({initiator})=>{
     const [isEditing,setIsEditing] = useState(false);
     return<>
     <div style={{paddingTop:"60px"}}></div>
-    {console.log("ghghfgjngy",initiator)}
+    {console.log("in index/single",initiator)}
     {isEditing? <SingleIntiatorForm setIsEditing={setIsEditing} initiator={initiator}/>:<SingleIntiatorCard setIsEditing={setIsEditing}/>}
 
 

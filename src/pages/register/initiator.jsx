@@ -2,15 +2,20 @@ import { useState } from "react";
 import { Link , useNavigate} from "react-router-dom"
 import axios from "axios";
 import { useFormik, FormikValues } from "formik";
-import {Button ,TextField} from '@mui/material';
+import {Button ,TextField,IconButton} from '@mui/material';
 import * as yup from 'yup';
 import { Navigate } from "react-router-dom";
 import { validateYupSchema } from "formik";
 import ChooseTamaAndPinuyBinuy from "./ChooseTamaAndPinuyBinuy";
+import UploaderLogo from "../UploaderLogo";
+import CloseIcon from '@mui/icons-material/Close';
+
+
 
 //var validator = require("email-validator");
 
 const InitiatorRegister = () => {
+  const [picture,setPicture]=useState('');
   const navigate = useNavigate();
   const validationSchema = yup.object({
     email: yup
@@ -36,6 +41,7 @@ const InitiatorRegister = () => {
       tama38:true,
       description:'',
       companyName:'',
+      
 
     },
     validationSchema:validationSchema,
@@ -53,7 +59,7 @@ const InitiatorRegister = () => {
        userName:values.email,password:values.password,name:values.name,
         hp:values.hp
         ,phone:values.phone,address:values.address
-        ,tama38:values.tama38,pinuyBinuy:values.pinuyBinuy,description:values.description,company_name:values.companyName,
+        ,tama38:values.tama38,pinuyBinuy:values.pinuyBinuy,description:values.description,company_name:values.companyName,logo:picture,
         role:'initiator' })
         navigate("/login")
       }
@@ -62,6 +68,10 @@ const InitiatorRegister = () => {
        }
     }
   })
+  const handleRemovingImage=(picToRemove)=>{
+    
+    setPicture('')
+  }
    
   return (
     <>
@@ -163,6 +173,14 @@ const InitiatorRegister = () => {
         error={touched.tama && Boolean(errors.tama)}
         helperText={touched.tama && errors.tama}      
         />
+        <UploaderLogo picture={picture} setPicture={setPicture} label="Add Picture" />
+        {picture?
+        <> {picture}
+        <IconButton onClick={() => handleRemovingImage(picture)}>
+          <CloseIcon />
+        </IconButton>
+      </>:
+      <></>}
         <br></br>
         <br></br>
         <TextField

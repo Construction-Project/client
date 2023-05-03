@@ -182,9 +182,4 @@ return (
   </div>
 );
 }
-
-
-
-
-
 export default AddProject;

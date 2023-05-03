@@ -45,7 +45,8 @@ return <>
 <h1>{initiator.tama38}</h1>
 <h1>{initiator.pinuyBinuy}</h1>
 <h1>{initiator.description}</h1>
-<h1>{initiator.logo}</h1>
+{/* <img src=`${initiator.logo}`>{}</img> */}
+{<img style={{ width: "50px" }} src={`http://localhost:3600/images/${initiator.logo}`} />}
 <h1>{initiator.name}</h1>
 <h1>{initiator.company_name}</h1>
 

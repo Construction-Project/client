@@ -37,8 +37,6 @@ const InitiatorItemLess = ({initiator, initiatorsIds, setInitiatorsIds, selectIt
                          if (checked) selectItem(id)
                          else unSelectItem(id)
                          setIsChecked(!isChecked)
-                        // if (checked) setInitiatorsIds([...initiatorsIds, initiator.id])
-                        // else setInitiatorsIds(initiatorsIds.filter(id => id !== initiator.id))
                     }}
                 />
                 <CardMedia

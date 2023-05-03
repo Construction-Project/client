@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Button } from '@mui/material';
 import axios from "axios"
 
-const Uploader = ({ picture, setPicture, label }) => {
+const UploaderLogo = ({ picture, setPicture, label }) => {
   const [selectFile, setSelectFile] = useState();
 
   useEffect(() => {
@@ -13,7 +13,7 @@ const Uploader = ({ picture, setPicture, label }) => {
       axios.post("http://localhost:3600/upload", formData).then(({ data }) => {
         if (data?.name) {
           
-          setPicture([...picture, data.name])
+          setPicture(data.name)
         }
       }).catch(err => {
         console.log("error")
@@ -37,7 +37,7 @@ const Uploader = ({ picture, setPicture, label }) => {
   )
 
 }
-export default Uploader
+export default UploaderLogo
 
 /**          <input hidden accept="image/*" multiple type="file" />
  */
