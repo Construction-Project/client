@@ -1,4 +1,4 @@
-import {InputLabel,Select} from '@mui/material';
+import {InputLabel,Select,NativeSelect} from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import { useEffect, useState } from 'react';
@@ -25,32 +25,47 @@ const CitySelect = ({city,setCity}) => {
     const handleChangeCity=(e)=>{
         setCity(e.target.value)
       }
-  return (
+  return (<>
 
-    <FormControl fullWidth>
+  <Select 
+      label='עיר'
+  native
+  style={{width:'50%'}}
+    defaultValue={city}
+    inputProps={{
+      name: 'city',
+      id: 'uncontrolled-native',
+    }}
+      onChange={handleChangeCity}
 
-<InputLabel id="demo-select-small-label">עיר</InputLabel>
-<Select
-  labelId="demo-select-small-label"
-  id="demo-select-small"
-  value={city}
+  >
+  {citiesList?.map((city,index)=><option value={city}>{city}</option>)}
 
-  label="city"
-  onChange={handleChangeCity}
+  </Select></>
+//     <FormControl fullWidth>
 
- // {...getFieldProps("status")}
->
-  <MenuItem value="">
-    <em>בחר עיר</em>
-  </MenuItem>
+// <InputLabel id="demo-select-small-label">עיר</InputLabel>
+// <Select
+//   labelId="demo-select-small-label"
+//   id="demo-select-small"
+//   value={city}
+
+//   label="city"
+//   onChange={handleChangeCity}
+
+//  // {...getFieldProps("status")}
+// >
+//   <MenuItem value="">
+//     <em>בחר עיר</em>
+//   </MenuItem>
   
-  {citiesList?.map((city,index)=><MenuItem value={city}>{city}</MenuItem>)}
-  {/* <MenuItem value={1}>{status?.length? status[0]:''}</MenuItem>
-  <MenuItem value={2}>{status?.length? status[1]:''}</MenuItem>
+//   {citiesList?.map((city,index)=><MenuItem value={city}>{city}</MenuItem>)}
+//   {/* <MenuItem value={1}>{status?.length? status[0]:''}</MenuItem>
+//   <MenuItem value={2}>{status?.length? status[1]:''}</MenuItem>
 
-*/}
-</Select>
-</FormControl>
+// */}
+// </Select>
+// </FormControl>
         
   )
 }

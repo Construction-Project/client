@@ -26,14 +26,15 @@ const StatusSelect = ({statusChecked,setStatusChecked}) => {
       }
       
   return (
+<>
 
-    
-<FormControl fullWidth>
-<InputLabel variant="standard" htmlFor="uncontrolled-native">
-סטטוס
-  </InputLabel>
-  <NativeSelect
-    defaultValue={statusChecked}
+
+
+  <Select 
+        label='סטטוס'
+        native
+        style={{width:'50%'}}
+          defaultValue={statusChecked}
     inputProps={{
       name: 'status',
       id: 'uncontrolled-native',
@@ -43,7 +44,7 @@ const StatusSelect = ({statusChecked,setStatusChecked}) => {
   >
   {status?.map((status,index)=><option value={status}>{status}</option>)}
 
-  </NativeSelect>
+  </Select>
 
 {/* <InputLabel id="demo-select-small-label">סטטוס</InputLabel> */}
 {/* <Select
@@ -65,7 +66,7 @@ const StatusSelect = ({statusChecked,setStatusChecked}) => {
   <MenuItem value={2}>{status?.length? status[1]:''}</MenuItem>
 
 */}
-</FormControl>
+</>
   )
 }
 
