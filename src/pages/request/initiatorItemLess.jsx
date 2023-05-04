@@ -31,12 +31,14 @@ const InitiatorItemLess = ({initiator, initiatorsIds, setInitiatorsIds, selectIt
                     }}
                 /> */}
 
-                <Checkbox checked={isChecked}
+                {/* <Checkbox checked={initiatorsIds.find(id=>id==initiator.id)} */}
+                <Checkbox checked={initiatorsIds.filter(id=>initiator.id==id).length} 
+
                     onChange={(e, checked) => {
                         //selectItem()
                          if (checked) selectItem(id)
                          else unSelectItem(id)
-                         setIsChecked(!isChecked)
+                         //setIsChecked(!isChecked)
                     }}
                 />
                 <CardMedia

@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-dom"
-
+import {  useContext } from "react";
 
 import Login from "./pages/login";
 import Logout from "./pages/logout";
@@ -28,7 +28,7 @@ import UpdateProject from "./pages/initiators/Single/projects/updateProject";
 
 import Checkboxes from './pages/initiators/List/check'
 import { AuthContextProvider } from "./context/authContext";
-
+import Nav from './Nav'
 const routes = [
   { path: "/register", component: Register },
   { path: "/login", component: Login },
@@ -45,44 +45,17 @@ const routes = [
   
 ];
 function App() {
+
   return (
     <>
-     <div>
-      
-      <AppBar position="fixed" sx={{backgroundColor: '#ffffff' }} >
-      <Container maxWidth="xl">
-        <Toolbar>
-      
-        <Button href="/" color="inherit">
-          דף הבית
-        </Button>
-        <Button href="/login" color="inherit">
-          כניסה
-        </Button>
-        <Button href="/register" color="inherit">
-          הרשמה
-        </Button>
-        <Button href="/initiators" color="inherit">
-          יזמים
-        </Button>
-        <Button href="/request" color="inherit">
-          שליחת פניה ליזם
-        </Button>
-        <Button href="/simulator" color="inherit">
-        סימולטור
-        </Button>
-        <Button onClick={<Logout></Logout>} color="inherit">
-          logout
-        </Button>
-        </Toolbar>
-        </Container>
-      </AppBar>
+    <AuthContextProvider>
+
+     <Router>
+
+     <Nav/>
 {/* <h1>ffff</h1>
 <iframe id='ifrMap' frameborder= '0'  marginheight= '0' marginwidth= '0' width='450px' height='350px'src= 'https://www.govmap.gov.il/map.html?bb=1&zb=1&in=1&c=218526.54,633151.31&z=8' > </iframe> */}
 
-    </div>
-    <AuthContextProvider>
-    <Router>
       {/* <nav className='main-nav'>
         <Button href="/" variant="contained">
           דף הבית

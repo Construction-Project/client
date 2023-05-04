@@ -20,8 +20,7 @@ const Request = () => {
   const [pinuiBinui, setPinuiBinui] = useState(true);
   const [filteredInitiators, setFilteredInitiators] = useState([]);
   const [initiatorsIds, setInitiatorsIds] = useState([]);
-  const { token } = useContext(AuthContext)
-  const { currentUser } = useContext(AuthContext);
+  const { token ,currentUser} = useContext(AuthContext)
   // const [filteredInitiators, setFilteredInitiators]=usestate([initiators])
 
   const filtered = () => {
@@ -70,17 +69,18 @@ const Request = () => {
    setFilteredInitiators(dataFiltered)
   }, [query, tama, pinuiBinui]);
 
+  useEffect(() => {
+    console.log({initiatorsIds})
+   }, [initiatorsIds]);
+
   const selectItem = (id) =>{
       console.log("selectItem", id)
-      //initiatorsIds.push(id)
       setInitiatorsIds([...initiatorsIds,id])
-      console.log("initiatorsIds SelectItem", initiatorsIds)
       
   }
   const unSelectItem = (id) =>{
       console.log("unSelectItem", id)
-      setInitiatorsIds(initiatorsIds.filter(ids=>id!=ids.id))
-      console.log("initiatorsIds unSelectItem", initiatorsIds)
+      setInitiatorsIds(initiatorsIds.filter(ids=>id!=ids))
   }
   const { handleSubmit, handleChange, values, getFieldProps, errors, touched } = useFormik({
     initialValues: {
@@ -96,9 +96,9 @@ const Request = () => {
     onSubmit: async (values) => {
       console.log(filteredInitiators,"filteredInitiators onSubmit")
       console.log(initiatorsIds,"initiatorsIds onSubmit")
-      const selectdAndFileredInitiators = filteredInitiators.filter(initiator => initiatorsIds.find(id => id === initiator.id))
-      const selectdAndFileredInitiators1 = initiatorsIds.filter(id => filteredInitiators.find(initiator => initiator.id === id))
-      console.log(selectdAndFileredInitiators1,"selectdAndFileredInitiators1 onSubmit")
+      //const selectdAndFileredInitiators = filteredInitiators.filter(initiator => initiatorsIds.find(id => id === initiator.id))
+      //const selectdAndFileredInitiators1 = initiatorsIds.filter(id => filteredInitiators.find(initiator => initiator.id === id))
+      //console.log(selectdAndFileredInitiators1,"selectdAndFileredInitiators1 onSubmit")
      // const selectdAndFileredInitiators2=selectdAndFileredInitiators1
       const config = {
         headers: {
@@ -117,7 +117,7 @@ const Request = () => {
       try {
         console.log("in try")
         
-        selectdAndFileredInitiators.length && await axios.post("http://localhost:3600/request", { userId: currentUser.id, name: values.name, email: values.email, phone: values.phone, addressProject: values.addressProject, comments: values.comments ,initiatorsArr:selectdAndFileredInitiators1}, config)
+        initiatorsIds.length && await axios.post("http://localhost:3600/request", { userId: currentUser.id, name: values.name, email: values.email, phone: values.phone, addressProject: values.addressProject, comments: values.comments ,initiatorsArr:initiatorsIds}, config)
       }//,initiatorsArr:selectdAndFileredInitiators1
       catch (err) {
         console.log(err.response.data?.message)
@@ -129,7 +129,7 @@ const Request = () => {
     <>
       <form onSubmit={handleSubmit} style={{ paddingTop: "60px" }}>
         <h2>request</h2>
-        <div>נבחרו {filteredInitiators.length} יזמים</div>
+        <div>הפניה תשלח ל {initiatorsIds.length} יזמים</div>
         <Input placeholder='חיפוש לפי שם יזם/חברה' onChange={(e) => { SetQuery(e.target.value) }}></Input>
         <FormControlLabel onChange={() => { setTama(!tama) }} control={<Checkbox defaultChecked />} label="תמא 38" />
         <FormControlLabel onChange={() => { setPinuiBinui(!pinuiBinui) }} control={<Checkbox defaultChecked />} label="פינוי בינוי" />

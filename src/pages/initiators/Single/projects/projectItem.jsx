@@ -11,8 +11,12 @@ import EditIcon from '@material-ui/icons/Edit';
 import UpdateProject from './updateProject';
 import { useNavigate,Navigate } from 'react-router-dom';
 import InitiatorItem from '../../List/initiatorItem';
+import { AuthContext } from '../../../../context/authContext' 
+import {  useContext } from "react";
 
 const ProjectItem = ({ project }) => {
+  const {currentUser} = useContext(AuthContext);
+
   const { idProject ,address, city, status, apartmentBefore, apartmentAfter, requestYear, permitYear, startConstructionYear, populatingYear, description, Project_pictures } = project
   const navigate = useNavigate()
   const {initiatorId}=useParams()
@@ -39,11 +43,13 @@ const ProjectItem = ({ project }) => {
           <StyledTableCell ><img style={{ width: "50px" }} src='http://localhost:3600/images/f0b01687-fd45-4486-914a-3333dada8359_Bell_pep.jpg' /></StyledTableCell>
 
 
+
+{currentUser?.role=='initiator'&&currentUser?.id==initiatorId&&
           <StyledTableCell >                                                                                                       
             <Fab color="inherit" aria-label="edit" onClick={() => navigate(`/initiators/${initiatorId}/project/${idProject}`)}>
               <EditIcon />
             </Fab>
-          </StyledTableCell>
+          </StyledTableCell>}
         </StyledTableRow>
       </TableBody>
 
