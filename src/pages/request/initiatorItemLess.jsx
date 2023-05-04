@@ -23,7 +23,7 @@ const InitiatorItemLess = ({initiator, initiatorsIds, setInitiatorsIds, selectIt
     return (
         <>
         {/* {console.log(initiator,id)} */}
-            <Card sx={{ maxWidth: 345 }}>
+            <Card sx={{ maxWidth: 345 , maxHeight:450}} raised>
                 {/* <Checkbox checked={initiatorsIds.find(id => id === initiatorsIds)}
                     onChange={(e, checked) => {
                         if (checked) setInitiatorsIds([...initiatorsIds, initiator.id])
@@ -33,7 +33,7 @@ const InitiatorItemLess = ({initiator, initiatorsIds, setInitiatorsIds, selectIt
 
                 {/* <Checkbox checked={initiatorsIds.find(id=>id==initiator.id)} */}
                 <Checkbox checked={initiatorsIds.filter(id=>initiator.id==id).length} 
-
+                    color='primary'
                     onChange={(e, checked) => {
                         //selectItem()
                          if (checked) selectItem(id)
@@ -42,29 +42,28 @@ const InitiatorItemLess = ({initiator, initiatorsIds, setInitiatorsIds, selectIt
                     }}
                 />
                 <CardMedia
-                    component="img"
-                    alt="green iguana"
-                    height="140"
-                    image="/static/images/cards/contemplative-reptile.jpg"
+                component='img'
+                    alt={initiator.description}
+                    height="140px"
+                    width='50%'
+                    src={`http://localhost:3600/images/${initiator.logo}`}
+                    sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
                 />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        {initiator.id}
+                <CardContent style={{height:'100px'}}>
+                    <Typography variant="body2" color="text.secondary">
+                        {name || ""}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        {name}
+                        {company_name || ""}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        {company_name}
+                        {phone || ""}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        {phone}
+                        {address || ""}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        {address}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        {parseInt(numOfProject)}
+                        {parseInt(numOfProject) || ""}
                     </Typography>
 
                 </CardContent>
@@ -73,7 +72,7 @@ const InitiatorItemLess = ({initiator, initiatorsIds, setInitiatorsIds, selectIt
 
                 </CardActions> */}
             </Card>
-            <br></br><br></br>
+           
         </>
     )
 

@@ -36,13 +36,13 @@ const UpdateProject = () => {
     async function fetchData() {
 
       const { data: _project } = await axios.get(`http://localhost:3600/project/${projectId}`)
-      console.log({ _project })
+      console.log("project", { _project })
       console.log(_project.address)
-      console.log('hi')
 
       if (_project) {
         setProject(_project)
         setStatusChecked(_project.status)
+        setCity(_project.city)
       }
 
     }
@@ -91,6 +91,7 @@ const UpdateProject = () => {
           {...getFieldProps("address")}
         /></Grid>
       <Grid item xs={6}>
+        {city}
         <CitySelect city={city} setCity={setCity}
         /></Grid>
 
@@ -140,7 +141,7 @@ const UpdateProject = () => {
           onChange={(e) => {
             setFieldValue(
               "apartmentAfter",
-              parseInt(e.target.value) || ''
+              parseInt(e.target.value) || (values.apartmentAfter)
             );
           }}
         /></Grid>

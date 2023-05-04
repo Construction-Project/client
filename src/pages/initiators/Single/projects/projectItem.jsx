@@ -4,7 +4,6 @@ import { styled } from '@mui/material/styles';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 //import Fab from '@mui/material/Fab';
 //import EditIcon from '@mui/icons-material/Edit';
-import StyledTableCell from './styleTable/StyledTableCell'
 import StyledTableRow from './styleTable/StyledTableRow'
 import Fab from '@material-ui/core/Fab';
 import EditIcon from '@material-ui/icons/Edit';
@@ -46,39 +45,36 @@ catch(err){
   return (
     <>
       {/* <Table sx={{ minWidth: 700 }} aria-label="customized table"> */}
-      <TableBody>
+      
 
-        <StyledTableRow>
+        <TableRow>
 
-          <StyledTableCell >{address}</StyledTableCell>
-          <StyledTableCell >{city}</StyledTableCell>
-          <StyledTableCell >{status}</StyledTableCell>
-          <StyledTableCell >{apartmentBefore}</StyledTableCell>
-          <StyledTableCell >{apartmentAfter}</StyledTableCell>
-          <StyledTableCell >{requestYear}</StyledTableCell>
-          <StyledTableCell >{permitYear}</StyledTableCell>
-          <StyledTableCell >{startConstructionYear}</StyledTableCell>
-          <StyledTableCell >{populatingYear}</StyledTableCell>
-          <StyledTableCell >{description}</StyledTableCell>
-
-          {console.log(Project_pictures)}
-          <StyledTableCell >{Project_pictures.map(picture => <img key={picture.picturePath} style={{ width: "50px" }} src={`http://localhost:3600/images/${picture.picturePath}`} />)}</StyledTableCell>
-          <StyledTableCell ><img style={{ width: "50px" }} src='http://localhost:3600/images/f0b01687-fd45-4486-914a-3333dada8359_Bell_pep.jpg' /></StyledTableCell>
-
-
-
+          <TableCell >{address}</TableCell>
+          <TableCell >{city}</TableCell>
+          <TableCell >{status}</TableCell>
+          <TableCell >{apartmentBefore}</TableCell>
+          <TableCell >{apartmentAfter}</TableCell>
+          <TableCell >{requestYear}</TableCell>
+          {/* <TableCell >{permitYear}</TableCell> */}
+          <TableCell >{startConstructionYear}</TableCell>
+          <TableCell >{populatingYear}</TableCell>
+          <TableCell >{description}</TableCell>
+          <TableCell >{Project_pictures.map(picture => <img key={picture.picturePath} style={{ width: "50px" }} src={`http://localhost:3600/images/${picture.picturePath}`} />)}</TableCell>
+          {/* <TableCell ><img style={{ width: "50px" }} src='http://localhost:3600/images/f0b01687-fd45-4486-914a-3333dada8359_Bell_pep.jpg' /></TableCell> */}
 {currentUser?.role=='initiator'&&currentUser?.id==initiatorId&&
-          <StyledTableCell >                                                                                                       
+<>
+          <TableCell >                                                                                                       
             <Fab color="inherit" aria-label="edit" onClick={() => navigate(`/initiators/${initiatorId}/project/${idProject}`)}>
               <EditIcon />
             </Fab>
+            </TableCell>
+            <TableCell>
             <Button onClick={()=>deleteProject(project.idProject)}><DeleteIcon></DeleteIcon></Button>
-
-          </StyledTableCell>
-
+          </TableCell>
+          </>
           }
-        </StyledTableRow>
-      </TableBody>
+        </TableRow>
+     
 
     </>
   )

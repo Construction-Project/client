@@ -28,11 +28,12 @@ const UploaderLogo = ({ picture, setPicture, label }) => {
 
   return (
     <>
-      <label htmlFor="file">  </label>
+      <label htmlFor="file">  
       <Button variant="contained" component="label">
-        טען תמונה מהמחשב
-        <input hidden type="file" onChange={onSelectFile} name="file" />
+       {label || "Load picture"}
+        <input hidden type="file" onChange={onSelectFile} name="file"/>
       </Button>
+      </label>
     </>
   )
 

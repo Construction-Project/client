@@ -114,7 +114,6 @@ const AddProject = () => {
     console.log(error)
   }
     if (picture) {
-      alert('gfgfg');
       setSubscribe(true);
     }
     setOpen(false);

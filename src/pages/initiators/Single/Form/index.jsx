@@ -20,7 +20,7 @@ const SingleIntiatorForm = ({ setIsEditing, initiator }) => {
             const { data: _initiator } = await axios.get(`http://localhost:3600/initiator/${currentUser.id}`)
             //if (_initiator?.length) 
             setInitiatorData(_initiator)
-            setPicture(_initiator.logo)
+            setPicture({path:_initiator.logo})
         }
         fetchData()
     }, []);
@@ -31,7 +31,6 @@ const SingleIntiatorForm = ({ setIsEditing, initiator }) => {
             'Authorization': 'Bearer ' + token
         }
     }
-
     const { handleSubmit, handleChange, values, getFieldProps } = useFormik({
         enableReinitialize: true,
         initialValues: {
@@ -51,11 +50,11 @@ const SingleIntiatorForm = ({ setIsEditing, initiator }) => {
             try {
                 const { data: _initiators } = await axios.put(`http://localhost:3600/initiator/${currentUser.id}`, { hp: values.hp, phone: values.phone, address: values.address, tama38: values.tama38, pinuyBinuy: values.pinuyBinuy, description: values.description, logo: picture.path, name: values.name, company_name: values.company_name }, config)
                 setIsEditing(false)
-                
+
             } catch (error) {
                 console.log(error)
             }
-        
+
         }
 
     });
@@ -110,7 +109,6 @@ const SingleIntiatorForm = ({ setIsEditing, initiator }) => {
                 variant="outlined"
                 {...getFieldProps("phone")}
                 onChange={handleChange} />
-
             <TextField
                 value={values.description}
                 id="outlined-basic"
@@ -118,31 +116,21 @@ const SingleIntiatorForm = ({ setIsEditing, initiator }) => {
                 variant="outlined"
                 {...getFieldProps("description")}
                 onChange={handleChange} />
-
-            <TextField
-                value={values.logo}
-                id="outlined-basic"
-                label="לוגו"
-                variant="outlined"
-                {...getFieldProps("logo")}
-                onChange={handleChange} />
-            {/* picture={picture} setPicture={setPicture}  */}
+            <img style={{ width: "50px" }} src={`http://localhost:3600/images/${picture.path}`} />
             <UploaderLogo picture={picture} setPicture={setPicture} label="Add Picture" />
-            {picture?.name&&
+            {picture?.name &&
                 <> {picture.name}
                     <IconButton onClick={() => handleRemovingImage(picture)}>
                         <CloseIcon />
                     </IconButton>
-                    </>
-              }
-
+                </>
+            }
             <Checkbox checked={values.tama38}
                 {...getFieldProps("tama38")}
             //selectItem()
             // if (checked) selectItem(id)
             // else unSelectItem(id)
             // setIsChecked(!isChecked)
-
             />
             <Checkbox checked={values.pinuyBinuy}
                 {...getFieldProps("pinuyBinuy")}
@@ -150,8 +138,6 @@ const SingleIntiatorForm = ({ setIsEditing, initiator }) => {
             {console.log(values.tama38)}
             <Button type="submit" variant="outlined">שמירה</Button>
             <Button variant="outlined" onClick={() => setIsEditing(false)}>ביטול</Button>
-
-
         </form>
     </>
     {/* <Button variant="outlined">עריכה</Button> */ }

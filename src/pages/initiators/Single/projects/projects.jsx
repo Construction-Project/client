@@ -2,9 +2,8 @@ import { useState ,useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import axios from "axios";
 import ProjectItem from './projectItem';
-import { styled ,TableHead,TableRow,Paper,TableContainer,TableCell,tableCellClasses,Alert} from '@mui/material';
+import { styled ,TableHead,TableRow,Paper,TableContainer,TableCell,tableCellClasses,Alert, Table, TableBody} from '@mui/material';
 //import { tableCellClasses } from '@mui/material/TableCell';
-import StyledTableCell from './styleTable/StyledTableCell'
 import { Update } from '@material-ui/icons';
 import UpdateProject from './updateProject';
 
@@ -31,30 +30,31 @@ const ProjectsList = () => {
       !updateProject?
         <>
         <TableContainer component={Paper}>
+          <Table  aria-label="simple table">
         <TableHead>
           <TableRow>
-            <StyledTableCell align="right">address</StyledTableCell>
-            <StyledTableCell align="right">city</StyledTableCell>
-            <StyledTableCell align="right">status</StyledTableCell>
-            <StyledTableCell align="right">apartmentBefore</StyledTableCell>
-            <StyledTableCell align="right">apartmentAfter</StyledTableCell>
-            <StyledTableCell align="right">requestYear</StyledTableCell>
-            <StyledTableCell align="right">startConstructionYear</StyledTableCell>
-            <StyledTableCell align="right">populatingYear</StyledTableCell>
-            <StyledTableCell align="right">description</StyledTableCell>
-            <StyledTableCell align="right">לעידכון</StyledTableCell>
+            <TableCell align="right">address</TableCell>
+            <TableCell align="right">city</TableCell>
+            <TableCell align="right">status</TableCell>
+            <TableCell align="right">apartmentBefore</TableCell>
+            <TableCell align="right">apartmentAfter</TableCell>
+            <TableCell align="right">requestYear</TableCell>
+            <TableCell align="right">startConstructionYear</TableCell>
+            <TableCell align="right">populatingYear</TableCell>
+            <TableCell align="right">description</TableCell>
+            <TableCell align='right'>image</TableCell>
+            <TableCell align="right">לעידכון</TableCell>
+            <TableCell align="right">delete</TableCell>
           </TableRow>
         </TableHead>
-         
+         <TableBody>
             {projects?.length?
             
             projects.map((project)=>{return <ProjectItem project={project} projectsChange={projectsChange} setProjectsChange={setProjectsChange}/> })
             :<Alert severity="info">לא נמצאו פרויקטים</Alert>
-
-            
-            } 
-
-
+            }
+             </TableBody>
+            </Table>
         </TableContainer>
         </>:
 <UpdateProject project={projects}></UpdateProject>

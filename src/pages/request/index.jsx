@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import { Link, useNavigate, Navigate } from "react-router-dom"
 import axios from "axios";
 import { useFormik, FormikValues } from "formik";
-import { Button, TextField, Input } from '@mui/material';
+import { Button, TextField, Input, Grid } from '@mui/material';
 import * as yup from 'yup';
 import { AuthContext } from '../../context/authContext'
 import InitiatorItem from "../initiators/List/initiatorItem";
@@ -194,7 +194,11 @@ const Request = () => {
         <br></br>
         <br></br>
       </form>
-      {filteredInitiators?.length && filteredInitiators.map((initiator) => { return <InitiatorItemLess unSelectItem={unSelectItem} selectItem={selectItem}  initiator={initiator} initiatorsIds={initiatorsIds} setInitiatorsIds={setInitiatorsIds} /> })}
+      {filteredInitiators?.length && 
+      <Grid container spacing={2}>
+      {filteredInitiators.map((initiator) => { 
+       return <Grid item xs={4}><InitiatorItemLess unSelectItem={unSelectItem} selectItem={selectItem}  initiator={initiator} initiatorsIds={initiatorsIds} setInitiatorsIds={setInitiatorsIds} /></Grid>
+        })}</Grid>}
       {/* {console.log(tama, "tama")}
       {console.log(initiatorsIds, "initiatorsIds")}
       {console.log(pinuiBinui, "pinui")}

@@ -17,8 +17,6 @@ const ChooseTamaAndPinuyBinuy = ({ values, errors, touched ,getFieldProps}) => {
         };
       }
       
-
-
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
     const MenuProps = {
@@ -55,10 +53,8 @@ const ChooseTamaAndPinuyBinuy = ({ values, errors, touched ,getFieldProps}) => {
 
   return (
     <>
-    <div>ChooseTamaAndPinuyBinuy</div>
-
-
-<FormControl sx={{ m: 1, width: 300 }}>
+    
+<FormControl sx={{ width: 300 }}>
         <InputLabel id="demo-multiple-chip-label" >סוגי פרויקטים שמבוצעים על ידי היזם</InputLabel>
         <Select
           labelId="demo-multiple-chip-label"
