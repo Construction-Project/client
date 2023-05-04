@@ -12,7 +12,7 @@ import CloseIcon from '@mui/icons-material/Close';
 
 const SingleIntiatorForm = ({ setIsEditing, initiator }) => {
     const [isChecked, setIsChecked] = useState(true)
-    const [picture, setPicture] = useState('')
+    const [picture, setPicture] = useState({})
     const [initiatorData, setInitiatorData] = useState({ address: '', name: '', hp: 0, company_name: '', phone: 0, tama38: false, pinuyBinuy: false, description: '', logo: '' })
     useEffect(() => {
         async function fetchData() {
@@ -48,7 +48,14 @@ const SingleIntiatorForm = ({ setIsEditing, initiator }) => {
         },
 
         onSubmit: async (values) => {
-            const { data: _initiators } = await axios.put(`http://localhost:3600/initiator/${currentUser.id}`, { hp: values.hp, phone: values.phone, address: values.address, tama38: values.tama38, pinuyBinuy: values.pinuyBinuy, description: values.description, logo: picture.path, name: values.name, company_name: values.company_name }, config)
+            try {
+                const { data: _initiators } = await axios.put(`http://localhost:3600/initiator/${currentUser.id}`, { hp: values.hp, phone: values.phone, address: values.address, tama38: values.tama38, pinuyBinuy: values.pinuyBinuy, description: values.description, logo: picture.path, name: values.name, company_name: values.company_name }, config)
+                setIsEditing(false)
+                
+            } catch (error) {
+                console.log(error)
+            }
+        
         }
 
     });
@@ -121,13 +128,13 @@ const SingleIntiatorForm = ({ setIsEditing, initiator }) => {
                 onChange={handleChange} />
             {/* picture={picture} setPicture={setPicture}  */}
             <UploaderLogo picture={picture} setPicture={setPicture} label="Add Picture" />
-            {picture ?
+            {picture?.name&&
                 <> {picture.name}
                     <IconButton onClick={() => handleRemovingImage(picture)}>
                         <CloseIcon />
                     </IconButton>
-                </> :
-                <></>}
+                    </>
+              }
 
             <Checkbox checked={values.tama38}
                 {...getFieldProps("tama38")}
