@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react'
 import { useFormik, FormikValues } from "formik";
-import { Button, TextField,IconButton } from '@mui/material';
+import { Button, TextField, IconButton } from '@mui/material';
 import axios from "axios";
 import { Checkbox } from '@material-ui/core';
 
@@ -12,6 +12,7 @@ import CloseIcon from '@mui/icons-material/Close';
 
 const SingleIntiatorForm = ({ setIsEditing, initiator }) => {
     const [isChecked, setIsChecked] = useState(true)
+    const [picture, setPicture] = useState('')
     const [initiatorData, setInitiatorData] = useState({ address: '', name: '', hp: 0, company_name: '', phone: 0, tama38: false, pinuyBinuy: false, description: '', logo: '' })
     useEffect(() => {
         async function fetchData() {
@@ -19,6 +20,7 @@ const SingleIntiatorForm = ({ setIsEditing, initiator }) => {
             const { data: _initiator } = await axios.get(`http://localhost:3600/initiator/${currentUser.id}`)
             //if (_initiator?.length) 
             setInitiatorData(_initiator)
+            setPicture(_initiator.logo)
         }
         fetchData()
     }, []);
@@ -45,14 +47,14 @@ const SingleIntiatorForm = ({ setIsEditing, initiator }) => {
             // logo: initiatorData.logo
         },
 
-        onSubmit: async (values) => {                                                                                                               
-            const { data: _initiators } = await axios.put(`http://localhost:3600/initiator/${currentUser.id}`, { hp: values.hp, phone:values.phone, address: values.address,  tama38: values.tama38, pinuyBinuy: values.pinuyBinuy ,description:values.description,logo:values.logo, name: values.name,company_name:values.company_name}, config)
+        onSubmit: async (values) => {
+            const { data: _initiators } = await axios.put(`http://localhost:3600/initiator/${currentUser.id}`, { hp: values.hp, phone: values.phone, address: values.address, tama38: values.tama38, pinuyBinuy: values.pinuyBinuy, description: values.description, logo: picture.path, name: values.name, company_name: values.company_name }, config)
         }
 
     });
     const handleRemovingImage = (picToRemove) => {
 
-        setInitiatorData.logo('')
+        setPicture('')
     }
 
     return <>
@@ -117,11 +119,11 @@ const SingleIntiatorForm = ({ setIsEditing, initiator }) => {
                 variant="outlined"
                 {...getFieldProps("logo")}
                 onChange={handleChange} />
-                 {/* picture={picture} setPicture={setPicture}  */}
-            <UploaderLogo picture={values.logo} setPicture={setInitiatorData.logo} label="Add Picture" />
-            {values.logo ?
-                <> {values.logo}
-                    <IconButton onClick={() => {handleRemovingImage(values.logo)}}>
+            {/* picture={picture} setPicture={setPicture}  */}
+            <UploaderLogo picture={picture} setPicture={setPicture} label="Add Picture" />
+            {picture ?
+                <> {picture.name}
+                    <IconButton onClick={() => handleRemovingImage(picture)}>
                         <CloseIcon />
                     </IconButton>
                 </> :
