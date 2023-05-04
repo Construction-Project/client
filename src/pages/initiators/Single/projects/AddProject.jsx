@@ -26,8 +26,9 @@ import ClearIcon from '@mui/icons-material/Clear';
 import CitySelect from './CitySelect'
 import StatusSelect from './StatusSelect';
 const AddProject = () => {
-  const [status, setStatus] = useState([]);
+ // const [status, setStatus] = useState([]);
 
+  const [statusChecked, setStatusChecked] = useState('');
 
   const [city, setCity] = useState('');
   const [open, setOpen] = useState(false);
@@ -95,10 +96,11 @@ const AddProject = () => {
     console.log(picture);
 
     try{
+      const picturesPath=picture.map(pic=>pic.path)
     await axios.post('http://localhost:3600/project', {
-      address: 'bbb', city: city, status: status, initiatorId: 2, apartmentBefore: 8, apartmentAfter: 5,
+      address: 'bbb', city: city, status: statusChecked, initiatorId: 2, apartmentBefore: 8, apartmentAfter: 5,
       requestYear: 0, permitYear: 9, populatingYear: 55, description: 'mmm', tama38: 1, pinuyBinuy: 1
-      , picturesArr: picture
+      , picturesArr: picturesPath
 
 
     }, config)
@@ -144,12 +146,12 @@ return (
         </DialogContentText>
 
  <CitySelect city={city} setCity={setCity}/>
-<StatusSelect status={status} setStatus={setStatus} ></StatusSelect>
+<StatusSelect statusChecked={statusChecked} setStatusChecked={setStatusChecked} ></StatusSelect>
 
      
         <Uploader picture={picture} setPicture={setPicture} label="Add Picture" />
           {picture.length ? picture.map((pic) =>
-            <> {pic}
+            <> {pic.name}
               <IconButton onClick={() => handleRemovingImage(pic)}>
                 <CloseIcon />
               </IconButton>

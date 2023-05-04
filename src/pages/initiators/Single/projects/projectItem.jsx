@@ -13,8 +13,31 @@ import { useNavigate,Navigate } from 'react-router-dom';
 import InitiatorItem from '../../List/initiatorItem';
 import { AuthContext } from '../../../../context/authContext' 
 import {  useContext } from "react";
+import DeleteIcon from '@mui/icons-material/Delete';
+import axios from "axios";
 
-const ProjectItem = ({ project }) => {
+const ProjectItem = ({ project ,projectsChange={projectsChange},setProjectsChange={setProjectsChange}}) => {
+
+  const deleteProject= async(id)=>{
+
+    const config = {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("token")
+      }
+    }
+    try{
+
+    
+    await axios.delete(`http://localhost:3600/project/${id}`,config)
+    setProjectsChange(!projectsChange)
+}
+catch(err){
+  console.log(err)
+}
+
+  }  
+
+
   const {currentUser} = useContext(AuthContext);
 
   const { idProject ,address, city, status, apartmentBefore, apartmentAfter, requestYear, permitYear, startConstructionYear, populatingYear, description, Project_pictures } = project
@@ -49,7 +72,11 @@ const ProjectItem = ({ project }) => {
             <Fab color="inherit" aria-label="edit" onClick={() => navigate(`/initiators/${initiatorId}/project/${idProject}`)}>
               <EditIcon />
             </Fab>
-          </StyledTableCell>}
+            <Button onClick={()=>deleteProject(project.idProject)}><DeleteIcon></DeleteIcon></Button>
+
+          </StyledTableCell>
+
+          }
         </StyledTableRow>
       </TableBody>
 

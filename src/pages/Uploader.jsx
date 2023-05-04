@@ -13,7 +13,7 @@ const Uploader = ({ picture, setPicture, label }) => {
       axios.post("http://localhost:3600/upload", formData).then(({ data }) => {
         if (data?.name) {
           
-          setPicture([...picture, data.name])
+          setPicture([...picture, {'path':data.name,'name':selectFile.name}])
         }
       }).catch(err => {
         console.log("error")

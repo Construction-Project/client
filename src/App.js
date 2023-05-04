@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router-do
 import {  useContext } from "react";
 
 import Login from "./pages/login";
-import Logout from "./pages/logout";
 import Register from "./pages/register";
 import InitiatorRegister from "./pages/register/initiator";
 import SingleIntiator from "./pages/initiators/Single";
@@ -32,7 +31,7 @@ import Nav from './Nav'
 const routes = [
   { path: "/register", component: Register },
   { path: "/login", component: Login },
-  { path: "/logout", component: Logout },
+  // { path: "/logout", component: Logout },
   { path: "/initiatorRegister", component: InitiatorRegister },
   { path: "/initiators", component: InitiatorsList },
   { path: "/initiators/:initiatorId", component: SingleIntiator },

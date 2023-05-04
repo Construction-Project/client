@@ -9,11 +9,11 @@ const UploaderLogo = ({ picture, setPicture, label }) => {
     if (selectFile) {
       const formData = new FormData();
       formData.append("file", selectFile)
-      console.log({selectFile})
+      console.log(selectFile.name)
       axios.post("http://localhost:3600/upload", formData).then(({ data }) => {
         if (data?.name) {
-          
-          setPicture(data.name)
+          console.log({data})
+          setPicture({'path':data.name,'name':selectFile.name})
         }
       }).catch(err => {
         console.log("error")

@@ -8,10 +8,11 @@ import StyledTableCell from './styleTable/StyledTableCell'
 import { Update } from '@material-ui/icons';
 import UpdateProject from './updateProject';
 
+
 const ProjectsList = () => {
     const [projects , setProjects] = useState([]);
     const [updateProject,setUpdateProject]=useState(false);
-
+  const [projectsChange,setProjectsChange]=useState(false)
     const {initiatorId}=useParams();
     //console.log(initiatorId)
     useEffect(() => {
@@ -23,7 +24,7 @@ const ProjectsList = () => {
           
         }
         fetchData()
-    }, []);
+    }, [projectsChange]);
 
 
     return (   
@@ -45,7 +46,7 @@ const ProjectsList = () => {
           </TableRow>
         </TableHead>
          
-            {projects?.length && projects.map((project)=>{return <ProjectItem project={project}/> })} 
+            {projects?.length && projects.map((project)=>{return <ProjectItem project={project} projectsChange={projectsChange} setProjectsChange={setProjectsChange}/> })} 
         </TableContainer>
         </>:
 <UpdateProject project={projects}></UpdateProject>
