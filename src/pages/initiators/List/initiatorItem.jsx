@@ -27,7 +27,6 @@ import EditIcon from '@material-ui/icons/Edit';
 const InitiatorItem = ({ initiator }) => {
   const { currentUser } = useContext(AuthContext);
   const { id, phone, address, company_name, numOfProject, rating, tama38, pinuyBinuy, description, logo, name } = initiator
-
   const navigate = useNavigate()
   //const {initiatorId}=useParams();
 

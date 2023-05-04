@@ -2,7 +2,7 @@ import { useState ,useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import axios from "axios";
 import ProjectItem from './projectItem';
-import { styled ,TableHead,TableRow,Paper,TableContainer,TableCell,tableCellClasses} from '@mui/material';
+import { styled ,TableHead,TableRow,Paper,TableContainer,TableCell,tableCellClasses,Alert} from '@mui/material';
 //import { tableCellClasses } from '@mui/material/TableCell';
 import StyledTableCell from './styleTable/StyledTableCell'
 import { Update } from '@material-ui/icons';
@@ -46,7 +46,15 @@ const ProjectsList = () => {
           </TableRow>
         </TableHead>
          
-            {projects?.length && projects.map((project)=>{return <ProjectItem project={project} projectsChange={projectsChange} setProjectsChange={setProjectsChange}/> })} 
+            {projects?.length?
+            
+            projects.map((project)=>{return <ProjectItem project={project} projectsChange={projectsChange} setProjectsChange={setProjectsChange}/> })
+            :<Alert severity="info">לא נמצאו פרויקטים</Alert>
+
+            
+            } 
+
+
         </TableContainer>
         </>:
 <UpdateProject project={projects}></UpdateProject>
