@@ -1,5 +1,5 @@
 import ProjectsList from "../projects/projects";
-import { Button ,TableRow} from '@mui/material';
+import { Button ,TableRow,Paper} from '@mui/material';
 import { Link ,Navigate,useNavigate,useParams} from "react-router-dom"
 import AddProject from "../projects/AddProject";
 import { useEffect ,useState,useContext} from "react";
@@ -45,12 +45,10 @@ return <>
 <h1>{initiator.tama38}</h1>
 <h1>{initiator.pinuyBinuy}</h1>
 <h1>{initiator.description}</h1>
-{/* <img src=`${initiator.logo}`>{}</img> */}
-{<img style={{ width: "50px" }} src={`http://localhost:3600/public/images/${initiator.logo}`} />}
-<h1>{initiator.name}</h1>
-<h1>{initiator.company_name}</h1>
+<h1>{initiator.logo}</h1>
 
-<>in single card</>
+  {initiator.logo &&<img  width={'15%'} src={`http://localhost:3600/images/${initiator.logo}`}></img>}
+
 <ProjectsList />
 
 

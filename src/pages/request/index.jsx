@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import { Link, useNavigate, Navigate } from "react-router-dom"
 import axios from "axios";
 import { useFormik, FormikValues } from "formik";
-import { Button, TextField, Input } from '@mui/material';
+import { Button, TextField, Input, Alert,AlertTitle } from '@mui/material';
 import * as yup from 'yup';
 import { AuthContext } from '../../context/authContext'
 import InitiatorItem from "../initiators/List/initiatorItem";
@@ -14,6 +14,8 @@ import InitiatorItemLess from "./initiatorItemLess";
 
 
 const Request = () => {
+  const [requestSend, setRequestSend] = useState(false);
+
   const [initiators, setInitiators] = useState([]);
   const [query, SetQuery] = useState('');
   const [tama, setTama] = useState(true);
@@ -118,6 +120,9 @@ const Request = () => {
         console.log("in try")
         
         initiatorsIds.length && await axios.post("http://localhost:3600/request", { userId: currentUser.id, name: values.name, email: values.email, phone: values.phone, addressProject: values.addressProject, comments: values.comments ,initiatorsArr:initiatorsIds}, config)
+        setRequestSend(true)
+      
+      
       }//,initiatorsArr:selectdAndFileredInitiators1
       catch (err) {
         console.log(err.response.data?.message)
@@ -127,6 +132,15 @@ const Request = () => {
   })
   return (
     <>
+{/* {requestSend?
+}    <>
+      <Alert severity="success" style={{ paddingTop: "60px" }}>
+  <AlertTitle>Success</AlertTitle>
+פנייתך נשלחה בהצלחה
+ — <strong>check it out!</strong>
+</Alert></>: */}
+
+
       <form onSubmit={handleSubmit} style={{ paddingTop: "60px" }}>
         <h2>request</h2>
         <div>הפניה תשלח ל {initiatorsIds.length} יזמים</div>
@@ -195,11 +209,7 @@ const Request = () => {
         <br></br>
       </form>
       {filteredInitiators?.length && filteredInitiators.map((initiator) => { return <InitiatorItemLess unSelectItem={unSelectItem} selectItem={selectItem}  initiator={initiator} initiatorsIds={initiatorsIds} setInitiatorsIds={setInitiatorsIds} /> })}
-      {/* {console.log(tama, "tama")}
-      {console.log(initiatorsIds, "initiatorsIds")}
-      {console.log(pinuiBinui, "pinui")}
-      {console.log(!pinuiBinui, "not pinui")}
-      {console.log(initiators)} */}
+
     </>
 
   )
@@ -247,7 +257,7 @@ const Request = () => {
 
 
 
-  // )
+  // )}
 }
 
 export default Request
