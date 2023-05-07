@@ -58,16 +58,18 @@ const InitiatorRegister = () => {
 
       try {
         console.log(`here in register initiator`)
+        console.log({values});
         await axios.post("http://localhost:3600/auth/register", {
           userName: values.email, password: values.password, name: values.name,
           hp: values.hp
           , phone: values.phone, address: values.address
-          , tama38: values.tama38, pinuyBinuy: values.pinuyBinuy, description: values.description, company_name: values.companyName, logo: picture.path,
+          , tama38: values.tama38, pinuyBinuy: values.pinuyBinuy, description: values.description, company_name: values.companyName, logo: picture?.path,
           role: 'initiator'
         })
         navigate("/login")
       }
       catch (err) {
+        console.log({err})
         console.log(err.response.data?.message)
       }
     }
@@ -190,7 +192,7 @@ const InitiatorRegister = () => {
               />
             </Grid>
             <Grid item xs={6}>
-            {!picture && <UploaderLogo picture={picture} setPicture={setPicture} label="Add Picture" />}
+            {!picture && <UploaderLogo picture={picture} setPicture={setPicture} label="טען לוגו" />}
               {picture &&
                 <Chip
                   label={picture.name}

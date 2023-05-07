@@ -29,20 +29,29 @@ const ChooseTamaAndPinuyBinuy = ({ values, errors, touched ,getFieldProps}) => {
     };
     const names=['tama38','pinuyBinuy'];
     const theme = useTheme();
-    const [projetTypes, setProjetTypes] = useState([]);
+    const [projectTypes, setProjectTypes] = useState([]);
 
     React.useEffect(() => {
-      console.log(projetTypes,"dsf",projetTypes.includes('tama38'))
-      projetTypes.includes('tama38')?values.tama38=true:values.tama38=false   
-      projetTypes.includes('pinuyBinuy')?values.pinuyBinuy=true:values.pinuyBinuy=false   
-    }, [projetTypes]);
+
+      values.pinuyBinuy && setProjectTypes([...projectTypes,'pinuyBinuy'])
+      values.tama38&& setProjectTypes([...projectTypes,'tama38'])
+      values.pinuyBinuy && values.tama38&& setProjectTypes([...projectTypes,'pinuyBinuy','tama38'])
+
+
+    }, []);
+    
+    React.useEffect(() => {
+      console.log(projectTypes,"dsf",projectTypes.includes('tama38'))
+      projectTypes.includes('tama38')?values.tama38=true:values.tama38=false   
+      projectTypes.includes('pinuyBinuy')?values.pinuyBinuy=true:values.pinuyBinuy=false   
+    }, [projectTypes]);
     const handleChange = (event) => {
-        console.log('before',{projetTypes})
+        console.log('before',{projectTypes})
 
         const {
           target: { value },
         } = event;
-        setProjetTypes(
+        setProjectTypes(
           // On autofill we get a stringified value.
           typeof value === 'string' ? value.split(',') : value,
         );
@@ -60,7 +69,7 @@ const ChooseTamaAndPinuyBinuy = ({ values, errors, touched ,getFieldProps}) => {
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
-          value={projetTypes}
+          value={projectTypes}
           onChange={handleChange}
           input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
           renderValue={(selected) => (

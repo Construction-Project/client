@@ -30,10 +30,10 @@ const UploaderLogo = ({ picture, setPicture, label }) => {
 
   return (
     <>
-      <label htmlFor="file">
-      <button variant="contained" component="label" avatar={<Avatar><UploadIcon></UploadIcon></Avatar>}>
-      <input hidden type="file" onChange={onSelectFile} name="file" />
-        <Chip
+      {/* <Button variant="contained" component="label" avatar={<Avatar><UploadIcon></UploadIcon></Avatar>}> */}
+      {/* <input hidden type="file" onChange={onSelectFile} name="file" /> */}
+        {/* <Chip
+
           hidden type="file"
           label={label || "Load picture"}
           variant="contained"
@@ -41,14 +41,15 @@ const UploaderLogo = ({ picture, setPicture, label }) => {
           onChange={onSelectFile}
           name="file"
           avatar={<Avatar><UploadIcon></UploadIcon></Avatar>}
-        // onDelete={() => handleRemovingImage(picture)}
-        />
-        </button>
-        <Button variant="contained" component="label">
+        
+        
+          // onDelete={() => handleRemovingImage(picture)}
+        /> */}
+         <Button variant="contained" component="label">
+         <UploadIcon></UploadIcon>
           {label || "Load picture"}
           <input hidden type="file" onChange={onSelectFile} name="file" />
-        </Button>
-      </label>
+        </Button> 
     </>
   )
 
