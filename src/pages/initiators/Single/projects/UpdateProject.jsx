@@ -37,7 +37,7 @@ const UpdateProject = () => {
 
       const { data: _project } = await axios.get(`http://localhost:3600/project/${projectId}`)
       console.log("project", { _project })
-      console.log(_project.address)
+      console.log(_project)
 
       if (_project) {
         setProject(_project)
@@ -96,6 +96,7 @@ const UpdateProject = () => {
         /></Grid>
 
       <Grid item xs={6}>
+        {statusChecked}
         <StatusSelect statusChecked={statusChecked} setStatusChecked={setStatusChecked} ></StatusSelect> </Grid>
 
 

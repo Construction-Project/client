@@ -94,7 +94,8 @@ const InitiatorRegister = () => {
                 onChange={handleChange}
                 error={touched.email && Boolean(errors.email)}
                 helperText={touched.email && errors.email}
-              /></Grid>
+              />
+              </Grid>
             <Grid item xs={6}>
               <TextField
                 value={values.email}
