@@ -32,7 +32,7 @@ const InitiatorItemLess = ({initiator, initiatorsIds, setInitiatorsIds, selectIt
                 /> */}
 
                 {/* <Checkbox checked={initiatorsIds.find(id=>id==initiator.id)} */}
-                <Checkbox checked={initiatorsIds.filter(id=>initiator.id==id).length} 
+                <Checkbox checked={initiatorsIds.map(id=>initiator.id==id).length} 
                     color='primary'
                     onChange={(e, checked) => {
                         //selectItem()

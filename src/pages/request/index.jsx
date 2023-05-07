@@ -42,6 +42,17 @@ const Request = () => {
     })
     return f
   }
+
+  const selectAll=()=>{
+    console.log({filteredInitiators})
+
+    console.log('fccv',[...new Set(initiatorsIds,filteredInitiators.map(initiator=>initiator.id))])
+   setInitiatorsIds([...new Set(initiatorsIds,filteredInitiators.map(initiator=>initiator.id))]);  
+  }
+  const unSelectAll=()=>{
+    
+  }
+
   const validationSchema = yup.object({
     email: yup
       .string('Enter your email')
@@ -147,6 +158,9 @@ const Request = () => {
         <Input placeholder='חיפוש לפי שם יזם/חברה' onChange={(e) => { SetQuery(e.target.value) }}></Input>
         <FormControlLabel onChange={() => { setTama(!tama) }} control={<Checkbox defaultChecked />} label="תמא 38" />
         <FormControlLabel onChange={() => { setPinuiBinui(!pinuiBinui) }} control={<Checkbox defaultChecked />} label="פינוי בינוי" />
+        <FormControlLabel onChange={() => {  selectAll()}} control={<Checkbox defaultChecked />} label="בחר הכל"/>
+        <FormControlLabel onChange={() => {  }} control={<Checkbox  />} label="בטל הכל"/>
+
         <br></br><br></br>
 
         <TextField
