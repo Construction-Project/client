@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import { Link, useNavigate, Navigate } from "react-router-dom"
 import axios from "axios";
 import { useFormik, FormikValues } from "formik";
-import { Button, TextField, Input, Grid } from '@mui/material';
+import { Button, TextField, Input, Grid,Alert,AlertTitle } from '@mui/material';
 import * as yup from 'yup';
 import { AuthContext } from '../../context/authContext'
 import InitiatorItem from "../initiators/List/initiatorItem";
@@ -15,14 +15,20 @@ import SearchIcon from '@mui/icons-material/Search';
 
 
 const Request = () => {
+  const navigate = useNavigate();
+
   const [requestSend, setRequestSend] = useState(false);
 
+  
   const [initiators, setInitiators] = useState([]);
   const [query, SetQuery] = useState('');
   const [tama, setTama] = useState(true);
   const [pinuiBinui, setPinuiBinui] = useState(true);
   const [filteredInitiators, setFilteredInitiators] = useState([]);
   const [initiatorsIds, setInitiatorsIds] = useState([]);
+
+  const [selectAllChecked,setSelectAllChecked]=useState(true)
+  const [unSelectAllChecked,setUnSelectAllChecked]=useState(false)
   const { token ,currentUser} = useContext(AuthContext)
   // const [filteredInitiators, setFilteredInitiators]=usestate([initiators])
 
@@ -45,13 +51,22 @@ const Request = () => {
   }
 
   const selectAll=()=>{
-    console.log({filteredInitiators})
+    setSelectAllChecked(true)
+    setUnSelectAllChecked(false)
 
-    console.log('fccv',[...new Set(initiatorsIds,filteredInitiators.map(initiator=>initiator.id))])
-   setInitiatorsIds([...new Set(initiatorsIds,filteredInitiators.map(initiator=>initiator.id))]);  
+    console.log({filteredInitiators})
+    console.log({initiatorsIds})
+
+    console.log('fccv',[...new Set(initiatorsIds.concat(filteredInitiators.map(initiator=>initiator.id)))])
+   setInitiatorsIds([...new Set(initiatorsIds.concat(filteredInitiators.map(initiator=>initiator.id)))]);  
   }
   const unSelectAll=()=>{
-    
+    setSelectAllChecked(false)
+    setUnSelectAllChecked(true)
+
+
+    setInitiatorsIds(initiatorsIds.filter(initiator=>!filteredInitiators.map(initiator=>initiator.id).includes(initiator)))  
+
   }
 
   const validationSchema = yup.object({
@@ -89,11 +104,14 @@ const Request = () => {
 
   const selectItem = (id) =>{
       console.log("selectItem", id)
+      setUnSelectAllChecked(false)
       setInitiatorsIds([...initiatorsIds,id])
       
   }
   const unSelectItem = (id) =>{
       console.log("unSelectItem", id)
+
+      setSelectAllChecked(false)
       setInitiatorsIds(initiatorsIds.filter(ids=>id!=ids))
   }
   const { handleSubmit, handleChange, values, getFieldProps, errors, touched } = useFormik({
@@ -137,6 +155,8 @@ const Request = () => {
       
       }//,initiatorsArr:selectdAndFileredInitiators1
       catch (err) {
+        console.log(err)
+
         console.log(err.response.data?.message)
       }
     }
@@ -144,24 +164,28 @@ const Request = () => {
   })
   return (
     <>
-{/* {requestSend?
-}    <>
-      <Alert severity="success" style={{ paddingTop: "60px" }}>
-  <AlertTitle>Success</AlertTitle>
-פנייתך נשלחה בהצלחה
- — <strong>check it out!</strong>
-</Alert></>: */}
-
-
-      <form onSubmit={handleSubmit} style={{ paddingTop: "60px" }}>
+{currentUser?
+    <>
+{requestSend?
+  <>  
+  <Alert severity="success" style={{ paddingTop: "60px" }}>
+  <AlertTitle><strong>{currentUser?.name +', '}</strong>
+    פנייתך נשלחה בהצלחה</AlertTitle>
+  הפניה נשלחה ליזמים שבחרת
+ — <strong>עקוב אחר התגובות</strong>
+</Alert>
+<Link to='/'>חזרה לדף הבית</Link>
+</>
+:<>
+<form onSubmit={handleSubmit} style={{ paddingTop: "60px" }}>
         <h2>request</h2>
         <div>הפניה תשלח ל {initiatorsIds.length} יזמים</div>
         <Input placeholder='חיפוש לפי שם יזם/חברה' onChange={(e) => { SetQuery(e.target.value) }}></Input>
         
         <FormControlLabel onChange={() => { setTama(!tama) }} control={<Checkbox defaultChecked />} label="תמא 38" />
         <FormControlLabel onChange={() => { setPinuiBinui(!pinuiBinui) }} control={<Checkbox defaultChecked />} label="פינוי בינוי" />
-        <FormControlLabel onChange={() => {  selectAll()}} control={<Checkbox defaultChecked />} label="בחר הכל"/>
-        <FormControlLabel onChange={() => {  }} control={<Checkbox  />} label="בטל הכל"/>
+        <FormControlLabel  control={<Checkbox defaultChecked onChange={(e)=>e.target.checked ? selectAll(e) :setSelectAllChecked(false)} checked={selectAllChecked}/>} label="בחר הכל"/>
+        <FormControlLabel control={<Checkbox  />} label="בטל הכל" onChange={(e)=>e.target.checked ? unSelectAll():setUnSelectAllChecked(false)} checked={unSelectAllChecked}/>
 
         <br></br><br></br>
 
@@ -227,13 +251,23 @@ const Request = () => {
       {filteredInitiators?.length && 
       <Grid container spacing={2}>
       {filteredInitiators.map((initiator) => { 
-       return <Grid item xs={4}><InitiatorItemLess unSelectItem={unSelectItem} selectItem={selectItem}  initiator={initiator} initiatorsIds={initiatorsIds} setInitiatorsIds={setInitiatorsIds} /></Grid>
-        })}</Grid>}
-      {/* {console.log(tama, "tama")}
-      {console.log(initiatorsIds, "initiatorsIds")}
-      {console.log(pinuiBinui, "pinui")}
-      {console.log(!pinuiBinui, "not pinui")}
-      {console.log(initiators)} */}
+       return <Grid item xs={4}><InitiatorItemLess unSelectItem={unSelectItem} selectItem={selectItem}  initiator={initiator} initiatorsIds={initiatorsIds} setInitiatorsIds={setInitiatorsIds} checked={initiatorsIds.filter(id=>initiator.id==id).length}/></Grid>
+        })}</Grid>}</>
+
+
+
+      }
+    </>
+    
+   :  <Alert severity="error" style={{ paddingTop: "60px" }}>
+   <AlertTitle>
+      אינך רשום </AlertTitle>
+      כדי לשלוח פניה ליזמים עליך להתחבר
+      {/* <Link onClick={()=>navigate("/login")}>היכנס</Link> */}
+            <Link to="/login">היכנס</Link>
+
+
+ </Alert> }
     </>
 
   )
@@ -282,6 +316,7 @@ const Request = () => {
 
 
   // )}
+  
 }
 
 export default Request
