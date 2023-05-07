@@ -14,6 +14,7 @@ import { Chip, Card, Grid } from "@material-ui/core";
 
 
 
+
 //var validator = require("email-validator");
 
 const InitiatorRegister = () => {
@@ -196,6 +197,7 @@ const InitiatorRegister = () => {
                   variant="outlined"
                   onDelete={() => handleRemovingImage(picture)}
                 />}
+                {/* UploadIcon */}
             </Grid>
             <Grid item xs={6}>
               <Button type="submit" variant="outlined">לחץ כדי להירשם</Button>

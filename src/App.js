@@ -62,6 +62,8 @@ function App() {
               {/* <Route path="/forbiddenRating"element={<forbiddenRating/>}></Route> */}
             </Routes>
           </Router>
+
+          {/* <Home></Home> */}
         </AuthContextProvider>
       </ThemeProvider>
     </div>

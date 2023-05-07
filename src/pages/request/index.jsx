@@ -10,6 +10,7 @@ import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import InitiatorItemLess from "./initiatorItemLess";
+import SearchIcon from '@mui/icons-material/Search';
 
 
 
@@ -156,6 +157,7 @@ const Request = () => {
         <h2>request</h2>
         <div>הפניה תשלח ל {initiatorsIds.length} יזמים</div>
         <Input placeholder='חיפוש לפי שם יזם/חברה' onChange={(e) => { SetQuery(e.target.value) }}></Input>
+        
         <FormControlLabel onChange={() => { setTama(!tama) }} control={<Checkbox defaultChecked />} label="תמא 38" />
         <FormControlLabel onChange={() => { setPinuiBinui(!pinuiBinui) }} control={<Checkbox defaultChecked />} label="פינוי בינוי" />
         <FormControlLabel onChange={() => {  selectAll()}} control={<Checkbox defaultChecked />} label="בחר הכל"/>
