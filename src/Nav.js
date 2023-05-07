@@ -16,6 +16,10 @@ import ApartmentIcon from '@mui/icons-material/Apartment';
 import HomeIcon from '@mui/icons-material/Home';
 import LoginIcon from '@mui/icons-material/Login';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import Box from '@mui/material/Box';
+
+
+
 const Nav = () => {
   const { currentUser, logout } = useContext(AuthContext);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -39,8 +43,6 @@ const Nav = () => {
     <AppBar position="fixed" color='primary'>
       <Container sx={{ height: "500px" }}>
         <Toolbar>
-          <Grid sx={{ display: "flex-end", width: '100%' }} container justifyContent='space-between'>
-            <Grid item justifyContent='flex-end'>
               <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
@@ -51,6 +53,7 @@ const Nav = () => {
               >
                 <AccountCircle />
               </IconButton>
+              {currentUser && <Typography>{`hi ${currentUser.name}`}</Typography>}
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
@@ -74,36 +77,32 @@ const Nav = () => {
               {/* {currentUser && <Button onClick={() => logout()} color="inherit">
               logout
             </Button>} */}
-              {currentUser && <Typography>{`hi ${currentUser.name}`}</Typography>}
-            </Grid>
-            <Grid item>
-              <Button  style={{width:"7vw"}} href="/simulator" color="inherit">
+              
+              <Button style={{ width: "10vw" }} href="/simulator" color="inherit">
                 סימולטור
                 <TroubleshootIcon></TroubleshootIcon>
               </Button>
-              <Button style={{width:"10vw"}}
+              <Button style={{ width: "10vw" }}
                 href="/request" color="inherit">
                 שליחת פניה ליזם
                 <ForwardToInboxIcon></ForwardToInboxIcon>
               </Button>
-              <Button  style={{width:"7vw"}}href="/initiators" color="inherit">
+              <Button style={{ width: "10vw" }} href="/initiators" color="inherit">
                 יזמים
                 <ApartmentIcon></ApartmentIcon>
               </Button>
-              <Button  style={{width:"7vw"}}href="/register" color="inherit">
+              <Button style={{ width: "10vw" }} href="/register" color="inherit">
                 הרשמה
                 <ExitToAppIcon></ExitToAppIcon>
               </Button>
-              <Button  style={{width:"7vw"}}href="/login" color="inherit">
+              <Button style={{ width: "10vw" }} href="/login" color="inherit">
                 כניסה
                 <LoginIcon></LoginIcon>
               </Button>
-              <Button  style={{width:"7vw"}}href="/" color="inherit">
+              <Button style={{ width: "10vw" }} href="/" color="inherit">
                 דף הבית
                 <HomeIcon></HomeIcon>
               </Button>
-            </Grid>
-          </Grid>
         </Toolbar>
       </Container>
     </AppBar>

@@ -9,6 +9,7 @@ import InitiatorsList from './pages/initiators/List'
 import RatingInitiator from "./pages/initiators/List/RatingInitiator";
 import Request from "./pages/request";
 import Simulator from "./pages/simulator";
+import Home from "./pages/Home";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { AuthContext } from "./context/authContext";
 import './App.css'
@@ -25,6 +26,7 @@ import { AuthContextProvider } from "./context/authContext";
 import Nav from './Nav'
 import { cyan } from "@mui/material/colors";
 const routes = [
+  { path: "/", component: Home },
   { path: "/register", component: Register },
   { path: "/login", component: Login },
   // { path: "/logout", component: Logout },
@@ -63,7 +65,7 @@ function App() {
             </Routes>
           </Router>
 
-          {/* <Home></Home> */}
+         
         </AuthContextProvider>
       </ThemeProvider>
     </div>
