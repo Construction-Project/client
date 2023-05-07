@@ -34,20 +34,26 @@ const Request = () => {
 
   const filtered = () => {
     const keys = ['name', 'company_name'] //fields to search in
-   const f= initiators.filter((item) => {
+   return initiators.filter((item) => {
+    debugger;
+
     //console.log("adsfasdf", item)
       if (
         (query === "" || item.name.toLowerCase().indexOf(query) > -1)
-        &&(
-        (tama=== item.tama38 )
+        && 
+        (
+        (tama===true&&pinuiBinui===true)
         ||
-        (pinuiBinui=== item.pinuyBinuy))
-      ) {
+        (tama==true==item.tama38 )
+        ||
+        (pinuiBinui===true=== item.pinuyBinuy)
+        )
+      ) 
+      
         return true
-      }
+      
       return false
     })
-    return f
   }
 
   const selectAll=()=>{
