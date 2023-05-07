@@ -35,7 +35,6 @@ const Request = () => {
   const filtered = () => {
     const keys = ['name', 'company_name'] //fields to search in
    return initiators.filter((item) => {
-    debugger;
 
     //console.log("adsfasdf", item)
       if (
@@ -44,9 +43,9 @@ const Request = () => {
         (
         (tama===true&&pinuiBinui===true)
         ||
-        (tama==true==item.tama38 )
+        (tama==true&& tama==item.tama38 )
         ||
-        (pinuiBinui===true=== item.pinuyBinuy)
+        (pinuiBinui===true&&pinuiBinui === item.pinuyBinuy)
         )
       ) 
       
