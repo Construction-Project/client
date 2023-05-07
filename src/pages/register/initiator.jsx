@@ -10,7 +10,7 @@ import ChooseTamaAndPinuyBinuy from "./ChooseTamaAndPinuyBinuy";
 import UploaderLogo from "../UploaderLogo";
 import CloseIcon from '@mui/icons-material/Close';
 import { Chip, Card, Grid } from "@material-ui/core";
-
+import { InputTextarea } from "primereact/inputtextarea";
 
 
 
@@ -168,7 +168,7 @@ const InitiatorRegister = () => {
              
             </Grid>
             <Grid item xs={6}>
-              <TextField
+              {/* <TextField
                 value={values.description}
                 id="outlined-basic"
                 label="תאור"
@@ -177,7 +177,11 @@ const InitiatorRegister = () => {
                 onChange={handleChange}
                 error={touched.description && Boolean(errors.description)}
                 helperText={touched.description && errors.description}
-              />
+              /> */}
+              <span className="p-float-label">
+                <InputTextarea id="description" value={values.description} onChange={handleChange} rows={5} cols={30} label="תאור"/>
+                <label htmlFor="description">Description</label>
+            </span>
             </Grid>
              <Grid item xs={6}>
               {/* <ChooseTamaAndPinuyBinuy  tama38={values.tama38} pinuyBinuy={values.pinuyBinuy} onChange={handleChange} ></ChooseTamaAndPinuyBinuy> */}
