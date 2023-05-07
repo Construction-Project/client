@@ -14,7 +14,7 @@ import { AuthContext } from '../../context/authContext';
 
 
 
-const InitiatorItemLess = ({initiator, initiatorsIds, setInitiatorsIds, selectItem, unSelectItem}) => {
+const InitiatorItemLess = ({initiator, initiatorsIds, setInitiatorsIds, selectItem, unSelectItem,checked}) => {
     const [isChecked, setIsChecked] = useState(true)
     const { currentUser } = useContext(AuthContext);
     const { id, phone, address, company_name, numOfProject, rating, tama38, pinuyBinuy, description, logo, name } = initiator
@@ -32,7 +32,9 @@ const InitiatorItemLess = ({initiator, initiatorsIds, setInitiatorsIds, selectIt
                 /> */}
 
                 {/* <Checkbox checked={initiatorsIds.find(id=>id==initiator.id)} */}
-                <Checkbox checked={initiatorsIds.map(id=>initiator.id==id).length} 
+                {/* <Checkbox checked={initiatorsIds.filter(id=>initiator.id==id).length}  */}
+                <Checkbox checked={checked} 
+
                     color='primary'
                     onChange={(e, checked) => {
                         //selectItem()
