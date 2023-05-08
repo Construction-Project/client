@@ -39,27 +39,26 @@ catch(err){
 
   const {currentUser} = useContext(AuthContext);
 
-  const { idProject ,address, city, status, apartmentBefore, apartmentAfter, requestYear, permitYear, startConstructionYear, populatingYear, description, Project_pictures } = project
+  const { idProject ,address, City,Status, status,city, apartmentBefore, apartmentAfter, requestYear, permitYear, startConstructionYear, populatingYear, description, Project_pictures } = project
   const navigate = useNavigate()
   const {initiatorId}=useParams()
   return (
     <>
       {/* <Table sx={{ minWidth: 700 }} aria-label="customized table"> */}
       
+{console.log(city)}
+        <TableRow onClick={() => navigate(`/initiators/${initiatorId}/project/${idProject}/details`)}>
 
-        <TableRow>
-
-          <TableCell >{address}</TableCell>
-          <TableCell >{city}</TableCell>
-          <TableCell >{status}</TableCell>
-          <TableCell >{apartmentBefore}</TableCell>
+          <TableCell>{address} {City.city}</TableCell>
+          <TableCell >{Status.status}</TableCell>
+          {/* <TableCell >{apartmentBefore}</TableCell>
           <TableCell >{apartmentAfter}</TableCell>
           <TableCell >{requestYear}</TableCell>
-          {/* <TableCell >{permitYear}</TableCell> */}
+          <TableCell >{permitYear}</TableCell>
           <TableCell >{startConstructionYear}</TableCell>
           <TableCell >{populatingYear}</TableCell>
-          <TableCell >{description}</TableCell>
-          <TableCell >{Project_pictures.map(picture => <img key={picture.picturePath} style={{ width: "50px" }} src={`http://localhost:3600/images/${picture.picturePath}`} />)}</TableCell>
+          <TableCell >{description}</TableCell> */}
+          {/* <TableCell >{Project_pictures.map(picture => <img key={picture.picturePath} style={{ width: "50px" }} src={`http://localhost:3600/images/${picture.picturePath}`} />)}</TableCell> */}
           {/* <TableCell ><img style={{ width: "50px" }} src='http://localhost:3600/images/f0b01687-fd45-4486-914a-3333dada8359_Bell_pep.jpg' /></TableCell> */}
 {currentUser?.role=='initiator'&&currentUser?.id==initiatorId&&
 <>

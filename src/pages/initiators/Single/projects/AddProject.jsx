@@ -48,7 +48,10 @@ const AddProject = () => {
             Let Google help apps determine location. This means sending anonymous
             location data to Google, even when no apps are running.
           </DialogContentText>
-          <Button>ghfgjftg</Button>
+          <CitySelect city={city} setCity={setCity}/>
+          {/* <StatusSelect statusChecked={status}setStatusChecked={setStatus}></StatusSelect> */}
+          {/* <StatusSelect statusChecked={status} setStatusChecked={setStatus} ></StatusSelect> */}
+        
           {/* <Grid item xs={6}>
         {city}
         <CitySelect city={city} setCity={setCity}

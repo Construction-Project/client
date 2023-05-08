@@ -18,7 +18,7 @@ const ProjectsList = () => {
       async function fetchData() {
 
           const {data:_projects} = await axios.get(`http://localhost:3600/project/?initiatorId=${initiatorId}`)
-          console.log(_projects)
+          console.log({_projects})
           if(_projects?.length) setProjects(_projects)         
           
         }
@@ -33,16 +33,16 @@ const ProjectsList = () => {
           <Table  aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="right">address</TableCell>
-            <TableCell align="right">city</TableCell>
+            <TableCell align="right">כתובת הפרויקט</TableCell>
+            {/* <TableCell align="right">city</TableCell> */}
             <TableCell align="right">status</TableCell>
-            <TableCell align="right">apartmentBefore</TableCell>
+            {/* <TableCell align="right">apartmentBefore</TableCell>
             <TableCell align="right">apartmentAfter</TableCell>
             <TableCell align="right">requestYear</TableCell>
             <TableCell align="right">startConstructionYear</TableCell>
             <TableCell align="right">populatingYear</TableCell>
             <TableCell align="right">description</TableCell>
-            <TableCell align='right'>image</TableCell>
+            <TableCell align='right'>image</TableCell> */}
             <TableCell align="right">לעידכון</TableCell>
             <TableCell align="right">delete</TableCell>
           </TableRow>

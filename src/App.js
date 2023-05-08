@@ -10,6 +10,7 @@ import RatingInitiator from "./pages/initiators/List/RatingInitiator";
 import Request from "./pages/request";
 import Simulator from "./pages/simulator";
 import Home from "./pages/Home";
+import ProjectDetails from "./pages/initiators/Single/projects/ProjectDetails";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { AuthContext } from "./context/authContext";
 import './App.css'
@@ -38,6 +39,7 @@ const routes = [
   { path: "/simulator", component: Simulator },
   { path: "/Checkboxes", component: Checkboxes },
   { path: "/initiators/:initiatorId/project/:projectId", component: UpdateProject },
+  { path: "/initiators/:initiatorId/project/:projectId/details", component: ProjectDetails },
 ];
 
 const theme = createTheme({
@@ -65,7 +67,7 @@ function App() {
             </Routes>
           </Router>
 
-         
+
         </AuthContextProvider>
       </ThemeProvider>
     </div>
