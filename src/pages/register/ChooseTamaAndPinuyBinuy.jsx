@@ -69,6 +69,7 @@ const ChooseTamaAndPinuyBinuy = ({ values, errors, touched ,getFieldProps}) => {
     <>
     
 <FormControl sx={{ width: 300 }}>
+  
         <InputLabel id="demo-multiple-chip-label" >סוגי פרויקטים שמבוצעים על ידי היזם</InputLabel>
         <Select
           labelId="demo-multiple-chip-label"
@@ -77,7 +78,7 @@ const ChooseTamaAndPinuyBinuy = ({ values, errors, touched ,getFieldProps}) => {
           value={projectTypes}
           onChange={handleChange}
           input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
-
+          required
           // touched={touched}
           renderValue={(selected) => (
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>

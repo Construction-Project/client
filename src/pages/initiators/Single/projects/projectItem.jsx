@@ -15,7 +15,7 @@ import {  useContext } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from "axios";
 
-const ProjectItem = ({ project ,projectsChange={projectsChange},setProjectsChange={setProjectsChange}}) => {
+const ProjectItem = ({ project, setProjects,loadProject,setLoadProject}) => {
 
   const deleteProject= async(id)=>{
 
@@ -28,7 +28,9 @@ const ProjectItem = ({ project ,projectsChange={projectsChange},setProjectsChang
 
     
     await axios.delete(`http://localhost:3600/project/${id}`,config)
-    setProjectsChange(!projectsChange)
+      setProjects(null)
+     setLoadProject(!loadProject)
+    //refetch()
 }
 catch(err){
   console.log(err)
