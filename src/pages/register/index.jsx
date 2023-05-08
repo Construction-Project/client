@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Link, useNavigate ,Navigate} from "react-router-dom"
+import { Link, useNavigate, Navigate } from "react-router-dom"
 import axios from "axios";
 import { useFormik, FormikValues } from "formik";
-import {Button ,TextField} from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import * as yup from 'yup';
-
+import { Box } from "@mui/system";
 //var validator = require("email-validator");
 
 const Register = () => {
@@ -20,23 +20,23 @@ const Register = () => {
       .required('שדה חובה'),
   });
 
-  const { handleSubmit, handleChange, values, getFieldProps  ,errors,touched} = useFormik({
+  const { handleSubmit, handleChange, values, getFieldProps, errors, touched } = useFormik({
     initialValues: {
       email: '',
       password: '',
       name: ''
     },
 
-    validationSchema:validationSchema,
+    validationSchema: validationSchema,
     onSubmit: async (values) => {
       console.log('here')
       try {
         await axios.post("http://localhost:3600/auth/register", { userName: values.email, password: values.password, name: values.name })
         navigate("/login")
       }
-       catch (err) {
-         console.log(err.response.data?.message)
-       }
+      catch (err) {
+        console.log(err.response.data?.message)
+      }
     }
   })
   // const registerToServer = async (email,password,name) => {
@@ -56,77 +56,69 @@ const Register = () => {
   //   }
   return (
     <>
-        <div      style={{
-    display:"flex",
-flexDirection:"colom",
-alignItems:"center",
-justifyContent:"center"
+    <Box flexDirection={'column'}>
+      <div style={{
+        display: "flex",
+        flexDirection: "colom",
+        alignItems: "center",
+        justifyContent: "center"
 
 
 
       }}>
-      <form onSubmit={handleSubmit} style={{paddingTop:"60px"}}>
-      <h2>register</h2>
-     
+        <form onSubmit={handleSubmit} style={{ paddingTop: "60px" }}>
+          <h2>register</h2>
 
-      <TextField 
- 
-        value={values.email}
-        id="outlined-basic"
-        label="אימייל"
-        variant="outlined"
-        {...getFieldProps("email")}
-        onChange={handleChange} 
-        error={touched.email && Boolean(errors.email)}
-        helperText={touched.email && errors.email}
-        
-        />
 
-        <br></br>
-        <br></br>
-      <TextField
-        value={values.password}
-        id="outlined-basic"
-        label="סיסמא"
-        type="password"
-        variant="outlined"
-        {...getFieldProps("password")}
-        onChange={handleChange}
-        error={touched.email && Boolean(errors.email)}
-        helperText={touched.email && errors.email}
-        
-        />
-        <br></br>
-        <br></br>
-      <TextField
-        value={values.name}
-        id="outlined-basic"
-        label="שם"
-        variant="outlined"
-        {...getFieldProps("name")}
-        onChange={handleChange} 
-        error={touched.email && Boolean(errors.email)}
-        helperText={touched.email && errors.email}
-        
-        />
-        <br></br>
-        <br></br>
-      {/* <input placeholder="enter your name" onChange={e => setName(e.target.value)}></input>
-      <br></br><br></br>
-      <input placeholder="enter your email" onChange={e => setEmail(e.target.value)}></input>
-      <br></br><br></br>
-      <input type="password"placeholder="enter your password" onChange={e => setPassword(e.target.value)}></input>
-      <br></br><br></br>
-      <button onClick={()=>registerToServer(email,password,name)}>לחץ כדי להירשם</button>
-      <br></br><br></br> */}
-      {/* {err && err} */}
-      <Button  type="submit" variant="outlined">לחץ כדי להירשם</Button>
-      <br></br>
-      <br></br>
-      </form>
-      
-      
-      <Link to="/initiatorRegister">רוצה להירשם כיזם? לחץ כאן</Link></div><div/>
+          <TextField
+
+            value={values.email}
+            id="outlined-basic"
+            label="אימייל"
+            variant="outlined"
+            {...getFieldProps("email")}
+            onChange={handleChange}
+            error={touched.email && Boolean(errors.email)}
+            helperText={touched.email && errors.email}
+
+          />
+
+          <br></br>
+          <br></br>
+          <TextField
+            value={values.password}
+            id="outlined-basic"
+            label="סיסמא"
+            type="password"
+            variant="outlined"
+            {...getFieldProps("password")}
+            onChange={handleChange}
+            error={touched.email && Boolean(errors.email)}
+            helperText={touched.email && errors.email}
+
+          />
+          <br></br>
+          <br></br>
+          <TextField
+            value={values.name}
+            id="outlined-basic"
+            label="שם"
+            variant="outlined"
+            {...getFieldProps("name")}
+            onChange={handleChange}
+            error={touched.email && Boolean(errors.email)}
+            helperText={touched.email && errors.email}
+
+          />
+          <br></br>
+          <br></br>
+          <Button type="submit" variant="outlined">לחץ כדי להירשם</Button>
+
+        </form>
+
+
+        <Link to="/initiatorRegister">רוצה להירשם כיזם? לחץ כאן</Link></div><div />
+        </Box>
     </>
 
   )

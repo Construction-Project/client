@@ -79,9 +79,11 @@ navigate( `/initiators/${initiatorId}/update-project/${idProject}`)
 
           
           }
-
         </TableRow>
-     
+        {/* <Fab color="inherit" aria-label="edit" onClick={() => navigate(`/initiators/${initiatorId}/project/${idProject}`)}>
+              <EditIcon />
+            </Fab> */}
+           <Button onClick={()=>deleteProject(project.idProject)}><DeleteIcon></DeleteIcon></Button>
 
     </>
   )

@@ -18,6 +18,8 @@ import { Icon } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import CloseIcon from '@mui/icons-material/Close';
 import ClearIcon from '@mui/icons-material/Clear';
+import CitySelect from './CitySelect';
+import StatusSelect from './StatusSelect';
 const AddProject = () => {
   const { token, currentUser } = useContext(AuthContext);
 
@@ -36,18 +38,6 @@ const AddProject = () => {
   const [lable, setLable] = useState('');
 
 
-  // useEffect(() => {
-  //   //setPicturesArr(picture?[...picturesArr,picture]:[])
-  //   //
-  //   console.log('in')
-  //   console.log({picture})
-  //   if(picturesArr.length<1)
-  //     setPicturesArr([picture])
-  //   else
-  //   setPicturesArr([...picturesArr,picture])
-  //   console.log(picturesArr,"picturesArr")
-
-  // }, [picture]);
   const handleLable = (l) => {
     setLable(l)
   }
@@ -66,7 +56,7 @@ const AddProject = () => {
     const config = {
 
       headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem("token")
+        'Authorization': 'Bearer ' +token
       }
     }
 
@@ -123,12 +113,11 @@ const handleRemovingImage=(picToRemove)=>{
           <TableBody>
 
             <StyledTableRow>
-              <StyledTableCell >{ }</StyledTableCell>
-              <StyledTableCell >{ }</StyledTableCell>
               <StyledTableCell >
 
-                
-                
+                <StatusSelect statusChecked={status} setStatusChecked={setStatus}/>
+                <CitySelect city={city} setCity={setCity} />
+
                
 
 
@@ -153,8 +142,12 @@ const handleRemovingImage=(picToRemove)=>{
                 try </Button>*/}
               <StyledTableCell ></StyledTableCell>
               <StyledTableCell ></StyledTableCell>
-              <StyledTableCell ><Cities /></StyledTableCell>
-              <StyledTableCell ><Statuses /></StyledTableCell>
+              {/* <StyledTableCell ><Cities /></StyledTableCell> */}
+              {/* <StyledTableCell ><Statuses /></StyledTableCell> */}
+              
+              {/* <StatusSelect/> */}
+
+
             </StyledTableRow>
 
           </TableBody>
@@ -187,3 +180,19 @@ const handleRemovingImage=(picToRemove)=>{
 
 
 export default AddProject;
+
+
+
+
+  // useEffect(() => {
+  //   //setPicturesArr(picture?[...picturesArr,picture]:[])
+  //   //
+  //   console.log('in')
+  //   console.log({picture})
+  //   if(picturesArr.length<1)
+  //     setPicturesArr([picture])
+  //   else
+  //   setPicturesArr([...picturesArr,picture])
+  //   console.log(picturesArr,"picturesArr")
+
+  // }, [picture]);
