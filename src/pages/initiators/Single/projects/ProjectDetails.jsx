@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from 'react'
 import { useParams, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import SwipeableTextMobileStepper from './ProjectImage';
 
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -27,9 +28,10 @@ const ProjectDetails = () => {
         fetchData()
     }, []);
     return (<>
+
     <Box sx={{ mt:'300px', alignItems:'center',width: 1/4 ,boxShadow: 0,boxShadow: 4,
           borderRadius: 4,}} > 
-    <Card sx={{ minWidth: 675,width:'200px',height:'200px' }}>
+    <Card sx={{ minWidth: 675,width:'200px',height:'400px' }}>
       <CardContent>
         <Typography sx={{alignItems:'center', fontSize: 20 ,textAlign:'center'}} color="text.secondary" gutterBottom>
              {project.City.city}-{project.address}
@@ -41,23 +43,40 @@ const ProjectDetails = () => {
       <Typography sx={{ mb: 1.5,textAlign:'center' }} color="text.secondary">
       תמ"א 38
       </Typography>}
-      <Box>
+      <Typography sx={{ mb: 1.5,textAlign:'center' }} color="text.secondary">
+      סטטוס הפרויקט: {project.Status.status}
+      </Typography>
+      
+        <Box sx={{display:'grid'}}>
+        <Typography sx={{ mb: 1.5 ,textAlign:'end'}} color="text.secondary">
+        שנת בקשה: {project.requestYear}
+        </Typography>
+        <Typography sx={{ mb: 1.5 ,textAlign:'start'}} color="text.secondary">
+        שנת היתר: {project.permitYear}
+        </Typography>
+        </Box>
+        <Box sx={{display:'grid'}}>
+        <Typography sx={{ mb: 1.5 ,textAlign:'end'}} color="text.secondary">
+       תחילת הבניה: {project.startConstructionYear}
+        </Typography>
+        <Typography sx={{ mb: 1.5 ,textAlign:'start'}} color="text.secondary">
+        שנת אכלוס: {project.populatingYear}
+        </Typography>
+        </Box>
+        <Box sx={{display:'grid'}}>
         <Typography sx={{ mb: 1.5 ,textAlign:'end'}} color="text.secondary">
         מספר הדירות לפני: {project.apartmentBefore}
         </Typography>
         <Typography sx={{ mb: 1.5 ,textAlign:'start'}} color="text.secondary">
-        מספר הדירות אחרי: {project.apartmentAfter}
+    מספר הדירות אחרי: {project.apartmentAfter}
         </Typography>
         </Box>
-        <Typography variant="body2">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
-        </Typography>
+        
       </CardContent>
 
     </Card>
     </Box>
+    <SwipeableTextMobileStepper images={project.Project_pictures}></SwipeableTextMobileStepper>
     </>)
 }
 export default ProjectDetails;
