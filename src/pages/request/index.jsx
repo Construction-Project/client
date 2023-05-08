@@ -34,20 +34,25 @@ const Request = () => {
 
   const filtered = () => {
     const keys = ['name', 'company_name'] //fields to search in
-   const f= initiators.filter((item) => {
+   return initiators.filter((item) => {
+
     //console.log("adsfasdf", item)
       if (
         (query === "" || item.name.toLowerCase().indexOf(query) > -1)
-        &&(
-        (tama=== item.tama38 )
+        && 
+        (
+        (tama===true&&pinuiBinui===true)
         ||
-        (pinuiBinui=== item.pinuyBinuy))
-      ) {
+        (tama==true&& tama==item.tama38 )
+        ||
+        (pinuiBinui===true&&pinuiBinui === item.pinuyBinuy)
+        )
+      ) 
+      
         return true
-      }
+      
       return false
     })
-    return f
   }
 
   const selectAll=()=>{
@@ -184,8 +189,12 @@ const Request = () => {
         
         <FormControlLabel onChange={() => { setTama(!tama) }} control={<Checkbox defaultChecked />} label="תמא 38" />
         <FormControlLabel onChange={() => { setPinuiBinui(!pinuiBinui) }} control={<Checkbox defaultChecked />} label="פינוי בינוי" />
-        <FormControlLabel  control={<Checkbox defaultChecked onChange={(e)=>e.target.checked ? selectAll(e) :setSelectAllChecked(false)} checked={selectAllChecked}/>} label="בחר הכל"/>
-        <FormControlLabel control={<Checkbox  />} label="בטל הכל" onChange={(e)=>e.target.checked ? unSelectAll():setUnSelectAllChecked(false)} checked={unSelectAllChecked}/>
+        <FormControlLabel  
+        control={<Checkbox defaultChecked onChange={(e)=>e.target.checked ? selectAll(e) : unSelectAll()} checked={selectAllChecked}/>}
+         label="בחר הכל"/>
+        <FormControlLabel control={<Checkbox  />} 
+        label="בטל הכל" onChange={(e)=>e.target.checked ? unSelectAll():setUnSelectAllChecked(false)} 
+        checked={unSelectAllChecked}/>
 
         <br></br><br></br>
 

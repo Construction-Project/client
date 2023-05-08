@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import axios from "axios";
 import { useFormik, FormikValues } from "formik";
-import { Button, TextField, IconButton } from '@mui/material';
+import { Button, TextField, IconButton,Alert ,AlertTitle} from '@mui/material';
 import * as yup from 'yup';
 import { Navigate } from "react-router-dom";
 import { validateYupSchema } from "formik";
@@ -19,8 +19,11 @@ import { InputTextarea } from "primereact/inputtextarea";
 
 const InitiatorRegister = () => {
   const [picture, setPicture] = useState();
+  const [duplicate,setDuplicate]= useState(false);
   const navigate = useNavigate();
-  const validationSchema = yup.object({
+  const validationSchema = yup.object().shape({
+    
+   
     email: yup
       .string('Enter your email')
       .email('כתובת אימייל לא תקינה')
@@ -30,8 +33,29 @@ const InitiatorRegister = () => {
       .required('שדה חובה'),
     hp: yup
       .string('הכנס מספר רישוי')
-      .required('שדה חובה')
-  });
+      .required('שדה חובה'),
+    name: yup
+      .string('Enter your name')
+      .required('שדה חובה'),
+      tama38: yup
+      .boolean(),
+      pinuyBinuy: yup
+      .boolean()
+
+
+  })
+//.test(
+//     'email or mobile',
+//     'email or mobile is required',
+//     (value) =>{
+//       console.log('ffffffffrrr',value.tama38 || value.pinuyBinuy)
+//        return value.tama38 || value.pinuyBinuy
+//       }
+// )    
+    // (value, 'tama38') || (value, 'pinuyBinuy')
+
+  
+  ;
   const { handleSubmit, handleChange, values, getFieldProps, errors, touched } = useFormik({
     initialValues: {
       email: '',
@@ -50,10 +74,6 @@ const InitiatorRegister = () => {
     validationSchema: validationSchema,
 
     onSubmit: async (values) => {
-      console.log('here')
-      console.log(values.tama38)
-      console.log(values.pinuyBinuy)
-
 
 
       try {
@@ -62,14 +82,22 @@ const InitiatorRegister = () => {
         await axios.post("http://localhost:3600/auth/register", {
           userName: values.email, password: values.password, name: values.name,
           hp: values.hp
-          , phone: values.phone, address: values.address
-          , tama38: values.tama38, pinuyBinuy: values.pinuyBinuy, description: values.description, company_name: values.companyName, logo: picture?.path,
+          , phone: values.phone, 
+          address: values.address
+          , tama38: values.tama38,
+           pinuyBinuy: values.pinuyBinuy, description: values.description, company_name: values.companyName, logo: picture?.path,
           role: 'initiator'
         })
         navigate("/login")
       }
       catch (err) {
-        console.log({err})
+
+        if(err.response.status==409){
+          setDuplicate(true)
+
+        }
+        console.log(err.response.status)
+
         console.log(err.response.data?.message)
       }
     }
@@ -81,6 +109,10 @@ const InitiatorRegister = () => {
   return (
     <>
       <h2>initiatorRegister</h2>
+      {duplicate&&<Alert severity="error"><AlertTitle>
+         שם משתמש תפוס </AlertTitle></Alert>}
+
+          
       <Card style={{margin:'auto',width:'60%',padding:'2%',marginTop:'5%'}}>
         <form onSubmit={handleSubmit} style={{ paddingTop: "60px" }}>
           <Grid container spacing={3}>
@@ -191,8 +223,7 @@ const InitiatorRegister = () => {
               <ChooseTamaAndPinuyBinuy
                 values={values}
                 handleChange={handleChange}
-                errors={errors}
-                touched={touched}
+
                 getFieldProps={getFieldProps}
               />
             </Grid>

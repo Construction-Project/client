@@ -7,7 +7,7 @@ import axios from "axios";
 import { AuthContext } from '../../context/authContext' 
 
 import { useFormik, FormikValues } from "formik";
-import {Button ,TextField} from '@mui/material';
+import {Alert, Button ,TextField,AlertTitle} from '@mui/material';
 import * as yup from 'yup';
 
 //var validator = require("email-validator");
@@ -54,13 +54,15 @@ const Login = () => {
           navigate('/initiators')
         }
         catch(err){
-            setErr(err.response.data?.message)
+            console.log(err.response);
+            setErr(err.response)
           } 
         }
         }
         );
     return (
         <>
+        {err&&<></>}
         <form onSubmit={handleSubmit} style={{paddingTop:"60px"}}>
             <h2>login</h2>
          <TextField 
@@ -98,7 +100,9 @@ const Login = () => {
             <input placeholder="enter your password" type={"password"} onChange={e=>setPassword(e.target.value)}></input>
             <br></br><br></br> */}
             {/* <button onClick={()=>loginToServer(email,password)}>לחץ לכניסה</button> */}
-            {err && err}
+            {/* {err && err} */}
+{err?.status==401 && <Alert severity="error"><AlertTitle>
+        שם משתמש או סיסמה שגויים </AlertTitle></Alert>}
             <Button type="submit">לחץ לכניסה</Button>
             </form>
             <Link to="/register">אתה לא רשום? לחץ כאן</Link>
