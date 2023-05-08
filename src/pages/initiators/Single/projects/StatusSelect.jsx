@@ -12,6 +12,7 @@ const StatusSelect = ({statusChecked,setStatusChecked}) => {
         async function fetchData() {
     
              var {data:_status} = await axios.get(`http://localhost:3600/status`)
+            // _status=_status.map(status=>status.status)
             console.log({_status})
             if(_status) setStatus(_status) 
           }
@@ -41,7 +42,7 @@ const StatusSelect = ({statusChecked,setStatusChecked}) => {
       onChange={handleChangeStatus}
 
   >
-  {status?.map((status,index)=><option value={status.statusId}>{status}</option>)}
+  {status?.map((status,index)=><option value={status.statusId}>{status.status}</option>)}
 
   </Select>
 

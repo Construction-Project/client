@@ -33,8 +33,10 @@ const Request = () => {
   // const [filteredInitiators, setFilteredInitiators]=usestate([initiators])
 
   const filtered = () => {
+    const keys = ['name', 'company_name'] //fields to search in
    return initiators.filter((item) => {
 
+    //console.log("adsfasdf", item)
       if (
         (query === "" || item.name.toLowerCase().indexOf(query) > -1)
         && 
@@ -53,6 +55,25 @@ const Request = () => {
     })
   }
 
+  const selectAll=()=>{
+    setSelectAllChecked(true)
+    setUnSelectAllChecked(false)
+
+    console.log({filteredInitiators})
+    console.log({initiatorsIds})
+
+    console.log('fccv',[...new Set(initiatorsIds.concat(filteredInitiators.map(initiator=>initiator.id)))])
+   setInitiatorsIds([...new Set(initiatorsIds.concat(filteredInitiators.map(initiator=>initiator.id)))]);  
+  }
+  const unSelectAll=()=>{
+    setSelectAllChecked(false)
+    setUnSelectAllChecked(true)
+
+
+    setInitiatorsIds(initiatorsIds.filter(initiator=>!filteredInitiators.map(initiator=>initiator.id).includes(initiator)))  
+
+  }
+
   const validationSchema = yup.object({
     email: yup
       .string('Enter your email')
@@ -63,10 +84,15 @@ const Request = () => {
     async function fetchData() {
       const { data: _initiators } = await axios.get("http://localhost:3600/initiator")
       if (_initiators?.length) {
+        // console.log("in use effect")
+        // console.log(_initiators);
         setInitiators(_initiators)
         setFilteredInitiators(_initiators)
         const newData=_initiators.map((item) => item.id)
+        console.log(newData)
         setInitiatorsIds(newData)
+        //setInitiatorsIds([...initiatorsIds])
+        //console.log(initiatorsIds,"initiatorsIds useEffect")
       }
     }
     fetchData()
@@ -82,27 +108,29 @@ const Request = () => {
    }, [initiatorsIds]);
 
    useEffect(() => {
+    //selectAllChecked
     console.log('fccv',[...new Set(initiatorsIds.concat(filteredInitiators.map(initiator=>initiator.id)))])
-    selectAllChecked && setInitiatorsIds([...new Set(initiatorsIds.concat(filteredInitiators.map(initiator=>initiator.id)))])
-    !selectAllChecked && setInitiatorsIds(initiatorsIds.filter(initiator=>!filteredInitiators.map(initiator=>initiator.id).includes(initiator)))  
+    selectAllChecked ? setInitiatorsIds([...new Set(initiatorsIds.concat(filteredInitiators.map(initiator=>initiator.id)))])
+    : setInitiatorsIds(initiatorsIds.filter(initiator=>!filteredInitiators.map(initiator=>initiator.id).includes(initiator)))  
 
    }, [selectAllChecked]);
 
 
   const selectItem = (id) =>{
       console.log("selectItem", id)
-      //setUnSelectAllChecked(false)
+      setUnSelectAllChecked(false)
       setInitiatorsIds([...initiatorsIds,id])
       
   }
   const unSelectItem = (id) =>{
       console.log("unSelectItem", id)
 
-      //setSelectAllChecked(false)
+      setSelectAllChecked(false)
       setInitiatorsIds(initiatorsIds.filter(ids=>id!=ids))
   }
   const { handleSubmit, handleChange, values, getFieldProps, errors, touched } = useFormik({
     initialValues: {
+      //id:'',
       name: '',
       email: '',
       phone: '',
@@ -112,13 +140,26 @@ const Request = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-
+      console.log(filteredInitiators,"filteredInitiators onSubmit")
+      console.log(initiatorsIds,"initiatorsIds onSubmit")
+      //const selectdAndFileredInitiators = filteredInitiators.filter(initiator => initiatorsIds.find(id => id === initiator.id))
+      //const selectdAndFileredInitiators1 = initiatorsIds.filter(id => filteredInitiators.find(initiator => initiator.id === id))
+      //console.log(selectdAndFileredInitiators1,"selectdAndFileredInitiators1 onSubmit")
+     // const selectdAndFileredInitiators2=selectdAndFileredInitiators1
       const config = {
         headers: {
           'Authorization': 'Bearer ' + token
+          //  'Authorization': 'Bearer ' + localStorage.getItem("token")
         }
       }
-
+      //const {data:_initiators} = await axios.get("http://localhost:3600/initiator")
+      //if(_initiators?.length) setInitiator(_initiators)  
+      //console.log(initiator);
+      //setFilteredInitiators = filtered().map(initiator => initiator.id);
+      //values.initiatorId=initiatorId;
+      //values.id=currentUser.id;
+      //console.log(values.id)
+      //console.log(initiatorId);
       try {
         console.log("in try")
         
@@ -157,13 +198,19 @@ const Request = () => {
         
         <FormControlLabel onChange={() => { setTama(!tama) }} control={<Checkbox defaultChecked />} label="תמא 38" />
         <FormControlLabel onChange={() => { setPinuiBinui(!pinuiBinui) }} control={<Checkbox defaultChecked />} label="פינוי בינוי" />
-
+        {/* <FormControlLabel  
+        control={<Checkbox defaultChecked 
+          onChange={(e)=>e.target.checked ? selectAll(e) : unSelectAll()} checked={selectAllChecked}/>}
+         label="בחר הכל"/> */}
   <FormControlLabel  
         control={<Checkbox defaultChecked 
           onChange={(e)=> setSelectAllChecked(e.target.checked)} checked={selectAllChecked}/>}
          label="בחר הכל"/>
 
- 
+        {/* <FormControlLabel control={<Checkbox  />} 
+        label="בטל הכל" 
+        onChange={(e)=>e.target.checked ? unSelectAll():setUnSelectAllChecked(false)} 
+        checked={unSelectAllChecked}/> */}
 
         <br></br><br></br>
 

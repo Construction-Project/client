@@ -135,7 +135,7 @@ const handleRemovingImage=(picToRemove)=>{
                 <Uploader picture={picture} setPicture={setPicture} label="Add Picture" />
                 {/* {picture?.length?picture.map(pic=><>{pic}</>:<>0</>)} */}
                 {picture.length?picture.map((pic)=> 
-                <> {pic}
+                <> {pic.name}
           
                 <IconButton onClick={()=>handleRemovingImage(pic)}>
                       <CloseIcon />
