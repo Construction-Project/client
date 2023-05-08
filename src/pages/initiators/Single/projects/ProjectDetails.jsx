@@ -28,7 +28,7 @@ const ProjectDetails = () => {
         fetchData()
     }, []);
     return (<>
-
+<Box>
     <Box sx={{ mt:'300px', alignItems:'center',width: 1/4 ,boxShadow: 0,boxShadow: 4,
           borderRadius: 4,}} > 
     <Card sx={{ minWidth: 675,width:'200px',height:'400px' }}>
@@ -47,7 +47,7 @@ const ProjectDetails = () => {
       סטטוס הפרויקט: {project.Status.status}
       </Typography>
       
-        <Box sx={{display:'grid'}}>
+        <Box sx={{display:'flex' }} justifyContent='space-evenly'>
         <Typography sx={{ mb: 1.5 ,textAlign:'end'}} color="text.secondary">
         שנת בקשה: {project.requestYear}
         </Typography>
@@ -55,7 +55,7 @@ const ProjectDetails = () => {
         שנת היתר: {project.permitYear}
         </Typography>
         </Box>
-        <Box sx={{display:'grid'}}>
+        <Box  sx={{display:'flex' }} justifyContent='space-evenly'>
         <Typography sx={{ mb: 1.5 ,textAlign:'end'}} color="text.secondary">
        תחילת הבניה: {project.startConstructionYear}
         </Typography>
@@ -63,7 +63,7 @@ const ProjectDetails = () => {
         שנת אכלוס: {project.populatingYear}
         </Typography>
         </Box>
-        <Box sx={{display:'grid'}}>
+        <Box sx={{display:'flex' }} justifyContent='space-evenly'>
         <Typography sx={{ mb: 1.5 ,textAlign:'end'}} color="text.secondary">
         מספר הדירות לפני: {project.apartmentBefore}
         </Typography>
@@ -77,6 +77,7 @@ const ProjectDetails = () => {
     </Card>
     </Box>
     <SwipeableTextMobileStepper images={project.Project_pictures}></SwipeableTextMobileStepper>
+    </Box>
     </>)
 }
 export default ProjectDetails;

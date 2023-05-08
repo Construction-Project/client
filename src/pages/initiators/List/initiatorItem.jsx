@@ -16,7 +16,8 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-
+import Avatar from '@mui/material/Avatar';
+import { Box } from "@mui/system";
 //
 
 
@@ -24,7 +25,7 @@ import Typography from '@mui/material/Typography';
 import Fab from '@material-ui/core/Fab';
 import EditIcon from '@material-ui/icons/Edit';
 
-const InitiatorItem = ({ initiator ,loadInitiator,setLoadInitiator}) => {
+const InitiatorItem = ({ initiator, loadInitiator, setLoadInitiator }) => {
   const { currentUser } = useContext(AuthContext);
   const { id, phone, address, company_name, numOfProject, rating, tama38, pinuyBinuy, description, logo, name } = initiator
   const navigate = useNavigate()
@@ -40,8 +41,8 @@ const InitiatorItem = ({ initiator ,loadInitiator,setLoadInitiator}) => {
         <StyledTableCell >{phone}</StyledTableCell>
         <StyledTableCell >{address}</StyledTableCell>
         <StyledTableCell >{parseInt(numOfProject)}</StyledTableCell> */}
-        {/* <StyledTableCell >{parseInt(rating)}</StyledTableCell> */}
-        {/* <StyledTableCell ><DisplayRating stars={rating}></DisplayRating></StyledTableCell>
+      {/* <StyledTableCell >{parseInt(rating)}</StyledTableCell> */}
+      {/* <StyledTableCell ><DisplayRating stars={rating}></DisplayRating></StyledTableCell>
         {currentUser != null ?
           <StyledTableCell ><RatingInitiator initiatorId={id}></RatingInitiator> </StyledTableCell> :
           <StyledTableCell ><ForbiddenRating></ForbiddenRating></StyledTableCell>
@@ -57,41 +58,49 @@ const InitiatorItem = ({ initiator ,loadInitiator,setLoadInitiator}) => {
                 if(checked) setIntiatorsIds([...intiatorsIds, initiator.id])
                 else setIntiatorsIds(intiatorsIds.filter(id=>id!==initiatorId))}}
         /> */}
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">id: 
+        <CardContent sx={{alignItems:'center'}}>
+          <Avatar
+           sx={{alignItems:'center'}}
+            alt={initiator.name || initiator.company_name}
+            src={`http://localhost:3600/images/${initiator.logo}`}
+
+          />
+          <Typography   sx={{ mb: 1.5 ,textAlign:'center'}} gutterBottom variant="h5" component="div">id:
             {id}
           </Typography>
-          <Typography variant="body2" color="text.secondary">name:
+          <Typography sx={{ mb: 1.5 ,textAlign:'center'}} variant="body2" color="text.secondary">name:
             {name}
           </Typography>
-          <Typography variant="body2" color="text.secondary">שם חברה: 
+          <Typography  sx={{ mb: 1.5 ,textAlign:'center'}} variant="body2" color="text.secondary">שם חברה:
             {company_name}
           </Typography>
-          <Typography variant="body2" color="text.secondary">פלאפון:
+          <Typography  sx={{ mb: 1.5 ,textAlign:'center'}} variant="body2" color="text.secondary">פלאפון:
             {phone}
           </Typography>
-          <Typography variant="body2" color="text.secondary">כתובת:
+          <Typography  sx={{ mb: 1.5 ,textAlign:'center'}} variant="body2" color="text.secondary">כתובת:
             {address}
           </Typography>
-          <Typography variant="body2" color="text.secondary">מספר פרויקטים שבוצעו: 
+          <Typography  sx={{ mb: 1.5 ,textAlign:'center'}} variant="body2" color="text.secondary">מספר פרויקטים שבוצעו:
             {parseInt(numOfProject)}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-          <DisplayRating stars={rating}></DisplayRating>
+          <Typography  sx={{ mb: 1.5 ,textAlign:'center'}} variant="body2" color="text.secondary">
+            <DisplayRating stars={rating}></DisplayRating>
           </Typography>
-          {currentUser?
-          <Typography variant="body2" color="text.secondary">
-          <RatingInitiator initiatorId={id} loadInitiator={loadInitiator} setLoadInitiator={setLoadInitiator}></RatingInitiator>
-          </Typography>:
-          <Typography variant="body2" color="text.secondary">
-          <ForbiddenRating></ForbiddenRating>
-          </Typography>
-}
+          <Box  sx={{display:'flex' }} justifyContent='space-evenly'></Box>
+          {currentUser ?
+            <Typography  sx={{ mb: 1.5 ,textAlign:'center'}} variant="body2" color="text.secondary">
+              <RatingInitiator initiatorId={id} loadInitiator={loadInitiator} setLoadInitiator={setLoadInitiator}></RatingInitiator>
+            </Typography> :
+            <Typography  sx={{ mb: 1.5 ,textAlign:'center'}} variant="body2" color="text.secondary">
+              <ForbiddenRating></ForbiddenRating>
+            </Typography>
+          }
         </CardContent>
-        <CardActions>
-          <Button size="small" onClick={() => navigate(`${id}`)}>לפרטים נוספים</Button>
+        <CardActions sx={{alignItems:'center'}}>
+          <Button sx={{alignItems:'center'}}size="small" onClick={() => navigate(`${id}`)}>לפרטים נוספים</Button>
 
         </CardActions>
+        
       </Card>
 
 

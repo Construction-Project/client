@@ -65,17 +65,19 @@ catch(err){
 {currentUser?.role=='initiator'&&currentUser?.id==initiatorId&&
 <>
           <TableCell >                                                                                                       
-            <Fab color="inherit" aria-label="edit" onClick={() => navigate(`/initiators/${initiatorId}/project/${idProject}`)}>
-              <EditIcon />
-            </Fab>
+           
             </TableCell>
             <TableCell>
-            <Button onClick={()=>deleteProject(project.idProject)}><DeleteIcon></DeleteIcon></Button>
+           
           </TableCell>
           </>
           }
+          
         </TableRow>
-     
+        {/* <Fab color="inherit" aria-label="edit" onClick={() => navigate(`/initiators/${initiatorId}/project/${idProject}`)}>
+              <EditIcon />
+            </Fab> */}
+           <Button onClick={()=>deleteProject(project.idProject)}><DeleteIcon></DeleteIcon></Button>
 
     </>
   )

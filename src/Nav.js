@@ -43,6 +43,7 @@ const Nav = () => {
     <AppBar position="fixed" color='primary'>
       <Container sx={{ height: "500px" }}>
         <Toolbar>
+          
               <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
@@ -50,9 +51,11 @@ const Nav = () => {
                 onClick={handleMenu}
                 color="inherit"
                 sx={{ fontSize: 40, marginTop: "8px" }}
+                
               >
                 <AccountCircle />
               </IconButton>
+           
               {currentUser && <Typography>{`hi ${currentUser.name}`}</Typography>}
               <Menu
                 id="menu-appbar"
