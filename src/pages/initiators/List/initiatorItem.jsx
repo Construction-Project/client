@@ -24,7 +24,7 @@ import Typography from '@mui/material/Typography';
 import Fab from '@material-ui/core/Fab';
 import EditIcon from '@material-ui/icons/Edit';
 
-const InitiatorItem = ({ initiator }) => {
+const InitiatorItem = ({ initiator ,loadInitiator,setLoadInitiator}) => {
   const { currentUser } = useContext(AuthContext);
   const { id, phone, address, company_name, numOfProject, rating, tama38, pinuyBinuy, description, logo, name } = initiator
   const navigate = useNavigate()
@@ -81,7 +81,7 @@ const InitiatorItem = ({ initiator }) => {
           </Typography>
           {currentUser?
           <Typography variant="body2" color="text.secondary">
-          <RatingInitiator initiatorId={id}></RatingInitiator>
+          <RatingInitiator initiatorId={id} loadInitiator={loadInitiator} setLoadInitiator={setLoadInitiator}></RatingInitiator>
           </Typography>:
           <Typography variant="body2" color="text.secondary">
           <ForbiddenRating></ForbiddenRating>

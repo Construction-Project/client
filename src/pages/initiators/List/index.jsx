@@ -22,6 +22,8 @@ const InitiatorsList = () => {
     const[sortNumOfProject,setSortNumOfProject]=useState(true);
     const[sortRating,SetSortRating]=useState(true);
 
+    const[loadInitiator,setLoadInitiator]=useState(false);
+
     useEffect(() => {
       async function fetchData() {
           const {data:_initiators} = await axios.get("http://localhost:3600/initiator")
@@ -34,7 +36,7 @@ const InitiatorsList = () => {
           
         }
         fetchData()
-    }, []);
+    }, [loadInitiator]);
 
     const filtered = ()=>{
       var res=[];
@@ -87,7 +89,7 @@ const InitiatorsList = () => {
       <TableBody>
       <Grid container spacing={2}>
 
-       {initiators?.length && filtered().map((initiator)=>{return <Grid item xs={4}><InitiatorItem initiator={initiator} /></Grid> })} 
+       {initiators?.length && filtered().map((initiator)=>{return <Grid item xs={4}><InitiatorItem initiator={initiator} loadInitiator={loadInitiator}  setLoadInitiator={setLoadInitiator}/></Grid> })} 
        </Grid>
     </TableBody>
     </Table> 

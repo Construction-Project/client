@@ -4,7 +4,7 @@ import { useFormik, FormikValues } from "formik";
 import axios from "axios";
 import { AuthContext } from '../../../context/authContext' 
 
-const RatingInitiator = ({initiatorId}) => {
+const RatingInitiator = ({initiatorId,loadInitiator,setLoadInitiator}) => {
 
   const [open, setOpen] = useState(false);
   const [stars, setStars] = useState(0);
@@ -33,7 +33,7 @@ const RatingInitiator = ({initiatorId}) => {
     }
     try{
    const {data} = await axios.post(`http://localhost:3600/opinion`, {stars:stars,opinion:opinion, opinionInitiator:initiatorId,opinionUser:currentUser.id},config)
-  
+   setLoadInitiator(!loadInitiator)
 }
 catch(err){
   console.log("Axios error: ", err.response.data.message);
