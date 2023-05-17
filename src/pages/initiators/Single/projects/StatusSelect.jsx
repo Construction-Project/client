@@ -1,9 +1,8 @@
 
-import {InputLabel,Select,NativeSelect} from '@mui/material';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
+import {InputLabel,Select, FormControl} from '@mui/material';
+
 
 const StatusSelect = ({statusChecked,setStatusChecked}) => {
     const [status, setStatus] = useState([]);
@@ -28,23 +27,17 @@ const StatusSelect = ({statusChecked,setStatusChecked}) => {
   return (
 <>
 
-
-
-  <Select 
-        label='סטטוס'
-        native
-        style={{width:'50%'}}
-          defaultValue={statusChecked}
-    inputProps={{
-      name: 'status',
-      id: 'uncontrolled-native',
-    }}
-      onChange={handleChangeStatus}
-
+<FormControl fullWidth>
+  <InputLabel>סטטוס</InputLabel>
+  <Select  
+    label='סטטוס'
+    native
+    defaultValue={statusChecked}
+    onChange={handleChangeStatus}
   >
-  {status?.map((status,index)=><option value={status.statusId}>{status.status}</option>)}
-
+      {status?.map((status,index)=><option value={status.statusId}>{status.status}</option>)}
   </Select>
+  </FormControl>
 
 {/* <InputLabel id="demo-select-small-label">סטטוס</InputLabel> */}
 {/* <Select
