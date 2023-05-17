@@ -50,7 +50,10 @@ catch(err){
       {/* <Table sx={{ minWidth: 700 }} aria-label="customized table"> */}
       
 {console.log(city)}
-        <TableRow onClick={() => navigate(`/initiators/${initiatorId}/project/${idProject}/details`)}>
+        <TableRow onClick={() => 
+          
+           navigate(`/initiators/${initiatorId}/project/${idProject}`)
+          }>
 
           <TableCell>{address} {City.city}</TableCell>
           <TableCell >{Status.status}</TableCell>
@@ -64,16 +67,19 @@ catch(err){
           {/* <TableCell >{Project_pictures.map(picture => <img key={picture.picturePath} style={{ width: "50px" }} src={`http://localhost:3600/images/${picture.picturePath}`} />)}</TableCell> */}
           {/* <TableCell ><img style={{ width: "50px" }} src='http://localhost:3600/images/f0b01687-fd45-4486-914a-3333dada8359_Bell_pep.jpg' /></TableCell> */}
 {currentUser?.role=='initiator'&&currentUser?.id==initiatorId&&
-<>
-          <TableCell >                                                                                                       
-           
-            </TableCell>
-            <TableCell>
-           
-          </TableCell>
+<>            <Button onClick={(e)=>{ e.stopPropagation(); deleteProject(project.idProject)}}><DeleteIcon></DeleteIcon></Button>
+
+<Fab color="inherit" aria-label="edit" onClick={(e) =>{ e.stopPropagation();
+navigate( `/initiators/${initiatorId}/update-project/${idProject}`)
+}}
+>
+   <EditIcon />
+ </Fab>
+        
           </>
-          }
+
           
+          }
         </TableRow>
         {/* <Fab color="inherit" aria-label="edit" onClick={() => navigate(`/initiators/${initiatorId}/project/${idProject}`)}>
               <EditIcon />

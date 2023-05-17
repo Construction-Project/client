@@ -55,25 +55,6 @@ const Request = () => {
     return sortRating?res.sort((a,b)=>(a.rating < b.rating) ? 1 : ((b.rating < a.rating) ? -1 : 0)):res
   }
 
-  const selectAll = () => {
-    setSelectAllChecked(true)
-    setUnSelectAllChecked(false)
-
-    console.log({ filteredInitiators })
-    console.log({ initiatorsIds })
-
-    console.log('fccv', [...new Set(initiatorsIds.concat(filteredInitiators.map(initiator => initiator.id)))])
-    setInitiatorsIds([...new Set(initiatorsIds.concat(filteredInitiators.map(initiator => initiator.id)))]);
-  }
-  const unSelectAll = () => {
-    setSelectAllChecked(false)
-    setUnSelectAllChecked(true)
-
-
-    setInitiatorsIds(initiatorsIds.filter(initiator => !filteredInitiators.map(initiator => initiator.id).includes(initiator)))
-
-  }
-
   const validationSchema = yup.object({
     email: yup
       .string('Enter your email')
@@ -84,15 +65,10 @@ const Request = () => {
     async function fetchData() {
       const { data: _initiators } = await axios.get("http://localhost:3600/initiator")
       if (_initiators?.length) {
-        // console.log("in use effect")
-        // console.log(_initiators);
         setInitiators(_initiators)
         setFilteredInitiators(_initiators)
-        const newData = _initiators.map((item) => item.id)
-        console.log(newData)
+        const newData=_initiators.map((item) => item.id)
         setInitiatorsIds(newData)
-        //setInitiatorsIds([...initiatorsIds])
-        //console.log(initiatorsIds,"initiatorsIds useEffect")
       }
     }
     fetchData()
@@ -107,21 +83,29 @@ const Request = () => {
     console.log({ initiatorsIds })
   }, [initiatorsIds]);
 
-  const selectItem = (id) => {
-    console.log("selectItem", id)
-    setUnSelectAllChecked(false)
-    setInitiatorsIds([...initiatorsIds, id])
 
+   useEffect(() => {
+    console.log('fccv',[...new Set(initiatorsIds.concat(filteredInitiators.map(initiator=>initiator.id)))])
+    selectAllChecked && setInitiatorsIds([...new Set(initiatorsIds.concat(filteredInitiators.map(initiator=>initiator.id)))])
+    !selectAllChecked && setInitiatorsIds(initiatorsIds.filter(initiator=>!filteredInitiators.map(initiator=>initiator.id).includes(initiator)))  
+
+   }, [selectAllChecked]);
+
+
+  const selectItem = (id) =>{
+      console.log("selectItem", id)
+      //setUnSelectAllChecked(false)
+      setInitiatorsIds([...initiatorsIds,id])
+      
   }
   const unSelectItem = (id) => {
     console.log("unSelectItem", id)
 
-    setSelectAllChecked(false)
-    setInitiatorsIds(initiatorsIds.filter(ids => id != ids))
+      //setSelectAllChecked(false)
+      setInitiatorsIds(initiatorsIds.filter(ids=>id!=ids))
   }
   const { handleSubmit, handleChange, values, getFieldProps, errors, touched } = useFormik({
     initialValues: {
-      //id:'',
       name: '',
       email: '',
       phone: '',
@@ -140,17 +124,9 @@ const Request = () => {
       const config = {
         headers: {
           'Authorization': 'Bearer ' + token
-          //  'Authorization': 'Bearer ' + localStorage.getItem("token")
         }
       }
-      //const {data:_initiators} = await axios.get("http://localhost:3600/initiator")
-      //if(_initiators?.length) setInitiator(_initiators)  
-      //console.log(initiator);
-      //setFilteredInitiators = filtered().map(initiator => initiator.id);
-      //values.initiatorId=initiatorId;
-      //values.id=currentUser.id;
-      //console.log(values.id)
-      //console.log(initiatorId);
+
       try {
         console.log("in try")
 
@@ -168,40 +144,33 @@ const Request = () => {
 
   })
   return (
+<>
+{currentUser?
     <>
-      {currentUser ?
-        <>
-          {requestSend ?
-            <>
-              <Alert severity="success" style={{ paddingTop: "60px" }}>
-                <AlertTitle><strong>{currentUser?.name + ', '}</strong>
-                  פנייתך נשלחה בהצלחה</AlertTitle>
-                הפניה נשלחה ליזמים שבחרת
-                — <strong>עקוב אחר התגובות</strong>
-              </Alert>
-              <Link to='/'>חזרה לדף הבית</Link>
-            </>
-            : <>
+{requestSend?
+  <>  
+  <Alert severity="success" style={{ paddingTop: "60px" }}>
+  <AlertTitle><strong>{currentUser?.name +', '}</strong>
+    פנייתך נשלחה בהצלחה</AlertTitle>
+  הפניה נשלחה ליזמים שבחרת
+ — <strong>עקוב אחר התגובות</strong>
+</Alert>
+<Link to='/'>חזרה לדף הבית</Link>
+</>
+:<>
+<form onSubmit={handleSubmit} style={{ paddingTop: "60px" }}>
+        <h2>request</h2>
+        <div>הפניה תשלח ל {initiatorsIds.length} יזמים</div>
+        <Input placeholder='חיפוש לפי שם יזם/חברה' onChange={(e) => { SetQuery(e.target.value) }}></Input>
+        
+        <FormControlLabel onChange={() => { setTama(!tama) }} control={<Checkbox defaultChecked />} label="תמא 38" />
+        <FormControlLabel onChange={() => { setPinuiBinui(!pinuiBinui) }} control={<Checkbox defaultChecked />} label="פינוי בינוי" />
+        <FormControlLabel onChange={() => { setSortRating(!sortRating) }} control={<Checkbox/>} label="מיון לפי דרוג" />
 
-              <form onSubmit={handleSubmit} style={{ paddingTop: "60px" }}>
-                <h2>request</h2>
-                <Typography textAlign='center'>הפניה תשלח ל {initiatorsIds.length} יזמים</Typography>
-                <Card margin={'90px'}>
-                  <Box sx={{ display: 'flex' }} justifyContent='space-evenly'>
-                    <Input placeholder='חיפוש לפי שם יזם/חברה' onChange={(e) => { SetQuery(e.target.value) }}></Input>
-
-                    <FormControlLabel onChange={() => { setTama(!tama) }} control={<Checkbox defaultChecked />} label="תמא 38" />
-                    <FormControlLabel onChange={() => { setPinuiBinui(!pinuiBinui) }} control={<Checkbox defaultChecked />} label="פינוי בינוי" />
-                    <FormControlLabel onChange={() => { setSortRating(!sortRating) }} control={<Checkbox/>} label="מיון לפי דרוג" />
-                    <FormControlLabel
-                      control={<Checkbox defaultChecked onChange={(e) => e.target.checked ? selectAll(e) : unSelectAll()} checked={selectAllChecked} />}
-                      label="בחר הכל" />
-                    <FormControlLabel control={<Checkbox />}
-                      label="בטל הכל" onChange={(e) => e.target.checked ? unSelectAll() : setUnSelectAllChecked(false)}
-                      checked={unSelectAllChecked} />
-                  </Box>
-                </Card>
-
+  <FormControlLabel  
+        control={<Checkbox defaultChecked 
+          onChange={(e)=> setSelectAllChecked(e.target.checked)} checked={selectAllChecked}/>}
+         label="בחר הכל"/>
                 <Card margin={'100px'}>
                   <Box sx={{ display: 'flex' }} justifyContent={'center'} spacing={'70px '}>
                     <TextField
@@ -267,78 +236,31 @@ const Request = () => {
                   </Box>
                 </Card>
 
-                <br></br>
-                <br></br>
               </form>
               {filteredInitiators?.length &&
                 <Grid container spacing={2}>
                   {filteredInitiators.map((initiator) => {
                     return <Grid item xs={4}><InitiatorItemLess unSelectItem={unSelectItem} selectItem={selectItem} initiator={initiator} initiatorsIds={initiatorsIds} setInitiatorsIds={setInitiatorsIds} checked={initiatorsIds.filter(id => initiator.id == id).length} /></Grid>
-                  })}</Grid>}</>
-
-
-
-          }
+                  })}</Grid>}
+                  
         </>
 
-        : <Alert severity="error" style={{ paddingTop: "60px" }}>
-          <AlertTitle>
-            אינך רשום </AlertTitle>
-          כדי לשלוח פניה ליזמים עליך להתחבר
-          {/* <Link onClick={()=>navigate("/login")}>היכנס</Link> */}
-          <Link to="/login">היכנס</Link>
 
 
-        </Alert>}
-    </>
+      }
+    </>:
+    <>
+
+     <Alert severity="error" style={{ paddingTop: "60px" }}>
+   <AlertTitle>
+      אינך רשום </AlertTitle>
+      כדי לשלוח פניה ליזמים עליך להתחבר
+            <Link to="/login">היכנס</Link>
+
+
+        </Alert></>}</>
 
   )
-  // const [name,setName] = useState('');
-  // const [email,setEmail] = useState('');
-  // const [phone,setPhone] = useState('');
-  // const [addressProject,setAddressProject] = useState('');
-  // const [comments,setComments] = useState('');
-
-
-  // const [err, setErr] = useState(null);
-  // const navigate=useNavigate();
-
-  // const sendRequestToinitiators= async()=>{
-  //   const config = {
-  //     headers: {
-  //       'Authorization': 'Bearer ' + localStorage.getItem("token")
-  //     }
-  // }
-  //     await axios.post("http://localhost:3600/request",{ name:name,email:email,addressProject:addressProject,comments:comments},config)
-  // }
-  // return (
-
-  //   <>
-
-  //   <div>contact</div>
-
-  //   <input type="name" placeholder="enter your name" onChange={e => setName(e.target.value)}></input>
-  //     <br></br><br></br> 
-  //   <input placeholder="enter your email" onChange={e => setEmail(e.target.value)}></input>
-  //     <br></br><br></br>
-
-  //   <input placeholder="enter your phone" onChange={e => setPhone(e.target.value)}></input>
-  //     <br></br><br></br>
-  //     <input placeholder="enter your address" onChange={e => setAddressProject(e.target.value)}></input>
-  //     <br></br><br></br>
-  //     <input placeholder="enter comments" onChange={e => setComments(e.target.value)}></input>
-  //     <br></br><br></br>    
-
-
-  //     <button onClick={sendRequestToinitiators}></button>
-
-  //   </>
-
-
-
-
-  // )}
-
 }
 
 export default Request

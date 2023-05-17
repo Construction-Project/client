@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from 'react'
 import { useParams, useNavigate } from "react-router-dom";
 
 import { useFormik, FormikValues } from "formik";
-import {Card, Grid, Button, TextField, Typography } from '@mui/material';
+import {Card, Grid, Button, TextField, Typography,Alert,AlertTitle } from '@mui/material';
 import axios from "axios";
 import { AuthContext } from '../../../../context/authContext'
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -22,6 +22,7 @@ const UpdateProject = () => {
   const [project, setProject] = useState({ address: '', city: '', status: '', apartmentBefore: '', apartmentAfter: '', requestYear: '', permitYear: '', startConstructionYear: '', populatingYear: '', description: '' });
   const [city, setCity] = useState('');
   const [statusChecked, setStatusChecked] = useState('');
+  const [update, setUpdate] = useState(false);
 
 
   // const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
@@ -67,8 +68,15 @@ const UpdateProject = () => {
       console.log({ city })
       console.log({ statusChecked })
 
+      try{
       const { data: _initiators } = await axios.put(`http://localhost:3600/project/${projectId}`, { address: values.address, city: city, status: statusChecked, initiatorId: currentUser.id, apartmentBefore: values.apartmentBefore, apartmentAfter: values.apartmentAfter, requestYear: values.requestYear, permitYear: values.permitYear, populatingYear: values.populatingYear, description: values.description }, config)
+        setUpdate(true)
 
+
+    }
+catch(err){
+  console.log(err)
+}
       // handleClose();
     }
 
@@ -78,6 +86,19 @@ const UpdateProject = () => {
 
 
   return (
+    <>
+    {update?
+    
+    <Alert severity="success" style={{ paddingTop: "60px" }}>
+   <AlertTitle>
+הפרויקט עודכן בהצלחה
+      </AlertTitle>
+      {/* כדי לשלוח פניה ליזמים עליך להתחבר */}
+
+
+ </Alert>
+    :
+    <>
 <Card style={{margin:'35%',width:'30%',padding:'2%',marginTop:'5%'}}>
   <Typography style={{direction:'rtl'}}>עדכון פרטים</Typography>   
   <br/> <Grid container spacing={3}  >
@@ -91,12 +112,12 @@ const UpdateProject = () => {
           {...getFieldProps("address")}
         /></Grid>
       <Grid item xs={6}>
-        {city}
+        {/* {city} */}
         <CitySelect city={city} setCity={setCity}
         /></Grid>
 
       <Grid item xs={6}>
-        {statusChecked}
+        {/* {statusChecked} */}
         <StatusSelect statusChecked={statusChecked} setStatusChecked={setStatusChecked} ></StatusSelect> </Grid>
 
 
@@ -228,7 +249,7 @@ const UpdateProject = () => {
 
 
       {/* </Dialog> */}
-    </Grid></Card>
+    </Grid></Card></>}</>
   );
 }
 
