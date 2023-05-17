@@ -14,6 +14,7 @@ import { AuthContext } from '../../../../context/authContext'
 import {  useContext } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from "axios";
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
 
 const ProjectItem = ({ project, setProjects,loadProject,setLoadProject}) => {
 
@@ -77,6 +78,7 @@ catch(err){
         {/* <Fab color="inherit" aria-label="edit" onClick={() => navigate(`/initiators/${initiatorId}/project/${idProject}`)}>
               <EditIcon />
             </Fab> */}
+<ModeEditIcon onClick={() => navigate(`/initiators/${initiatorId}/project/${idProject}`)}></ModeEditIcon>
            <Button onClick={()=>deleteProject(project.idProject)}><DeleteIcon></DeleteIcon></Button>
 
     </>

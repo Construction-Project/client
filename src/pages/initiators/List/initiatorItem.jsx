@@ -58,9 +58,8 @@ const InitiatorItem = ({ initiator, loadInitiator, setLoadInitiator }) => {
                 if(checked) setIntiatorsIds([...intiatorsIds, initiator.id])
                 else setIntiatorsIds(intiatorsIds.filter(id=>id!==initiatorId))}}
         /> */}
-        <CardContent sx={{alignItems:'center'}}>
+        <CardContent sx={{alignItems:'end'}}>
           <Avatar
-           sx={{alignItems:'center'}}
             alt={initiator.name || initiator.company_name}
             src={`http://localhost:3600/images/${initiator.logo}`}
 

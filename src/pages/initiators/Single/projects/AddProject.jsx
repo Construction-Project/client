@@ -12,6 +12,7 @@ import Uploader from '../../../Uploader';
 import FormattedInputs from './numericButton';
 import axios from 'axios';
 import { AuthContext } from '../../../../context/authContext'
+import { Chip, Card, Grid } from "@material-ui/core";
 
 import { AccessAlarm, ThreeDRotation } from '@material-ui/icons';
 import { Icon } from '@mui/material';
@@ -137,9 +138,12 @@ const handleRemovingImage=(picToRemove)=>{
                 {picture.length?picture.map((pic)=> 
                 <> {pic}
           
-                <IconButton onClick={()=>handleRemovingImage(pic)}>
-                      <CloseIcon />
-                </IconButton> 
+               
+                <Chip
+                  label={pic.name}
+                  variant="outlined"
+                  onDelete={() => handleRemovingImage(pic)}
+                />
                 
                 
                 </> )

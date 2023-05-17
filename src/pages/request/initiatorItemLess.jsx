@@ -11,6 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import { Link, useNavigate, Navigate } from "react-router-dom"
 import { useState, useContext } from "react";
 import { AuthContext } from '../../context/authContext';
+import DisplayRating from '../initiators/DisplayRating';
 
 
 
@@ -23,7 +24,7 @@ const InitiatorItemLess = ({ initiator, initiatorsIds, setInitiatorsIds, selectI
     return (
         <>
             {/* {console.log(initiator,id)} */}
-            <Card sx={{ maxWidth: 345, maxHeight: 450 }} raised>
+            <Card sx={{ minHeight: 200, maxWidth: 345, maxHeight: 450 }} raised>
                 {/* <Checkbox checked={initiatorsIds.find(id => id === initiatorsIds)}
                     onChange={(e, checked) => {
                         if (checked) setInitiatorsIds([...initiatorsIds, initiator.id])
@@ -43,7 +44,7 @@ const InitiatorItemLess = ({ initiator, initiatorsIds, setInitiatorsIds, selectI
                         //setIsChecked(!isChecked)
                     }}
                 />
-               
+
                 {/* <CardMedia
                     component='img'
                     alt={initiator.description}
@@ -53,27 +54,29 @@ const InitiatorItemLess = ({ initiator, initiatorsIds, setInitiatorsIds, selectI
                     sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
                 /> */}
 
-                <CardContent style={{ height: '100px' }}>
+                <CardContent style={{ height: '150px' }}>
                     <Avatar
                         alt={initiator.name || initiator.company_name}
                         src={`http://localhost:3600/images/${initiator.logo}`}
 
                     />
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography sx={{ textAlign: 'center' }} variant="body2" color="text.secondary">
                         {name || ""}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography sx={{ textAlign: 'center' }} variant="body2" color="text.secondary">
                         {company_name || ""}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography sx={{ textAlign: 'center' }} variant="body2" color="text.secondary">
                         {phone || ""}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography sx={{ textAlign: 'center' }} variant="body2" color="text.secondary">
                         {address || ""}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography sx={{ textAlign: 'center' }} variant="body2" color="text.secondary">
                         {parseInt(numOfProject) || ""}
                     </Typography>
+                    <Typography sx={{ textAlign: 'center' }} variant="body2" color="text.secondary">
+                        <DisplayRating stars={rating}></DisplayRating></Typography>
                 </CardContent>
                 {/* <CardActions>
                     <Button size="small" onClick={() => navigate(`${id}`)}>לפרטים נוספים</Button>

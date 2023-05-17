@@ -68,7 +68,7 @@ const Login = () => {
          <TextField 
          value={values.email} 
          id="outlined-basic" 
-         label=" מייל"
+         label=" *מייל"
          variant="outlined" 
           {...getFieldProps("email")} 
           onChange={handleChange}
@@ -82,7 +82,7 @@ const Login = () => {
   <TextField 
          value={values.password} 
          id="outlined-basic" 
-         label=" סיסמה"
+         label=" *סיסמה"
          variant="outlined" 
           {...getFieldProps("password")} 
           onChange={handleChange}
