@@ -24,9 +24,6 @@ const UpdateProject = () => {
   const [statusChecked, setStatusChecked] = useState('');
   const [update, setUpdate] = useState(false);
 
-
-  // const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-  // const [open, setOpen] = useState(false);
   const config = {
     headers: {
       'Authorization': 'Bearer ' + token
@@ -51,25 +48,13 @@ const UpdateProject = () => {
   }, []);
 
 
-  // const handleClickOpen = () => {
-  //     setOpen(true);
-  // };
-  // const handleClose = () => {
-  //     setOpen(false);
-  // };
-
   const { setFieldValue, handleSubmit, handleChange, values, getFieldProps, handleSubscribe } = useFormik({// async () => {
     enableReinitialize: true,
     initialValues: { ...project },
     //validationSchema:validationSchema,
     onSubmit: async (values) => {
-      console.log(values.address)
-
-      console.log({ city })
-      console.log({ statusChecked })
-
-      try {
-        const { data: _initiators } = await axios.put(`http://localhost:3600/project/${projectId}`, { address: values.address, city: city, status: statusChecked, initiatorId: currentUser.id, apartmentBefore: values.apartmentBefore, apartmentAfter: values.apartmentAfter, requestYear: values.requestYear, permitYear: values.permitYear, populatingYear: values.populatingYear, description: values.description }, config)
+      try{
+      const { data: _initiators } = await axios.put(`http://localhost:3600/project/${projectId}`, { address: values.address, city: city, status: statusChecked, initiatorId: currentUser.id, apartmentBefore: values.apartmentBefore, apartmentAfter: values.apartmentAfter, requestYear: values.requestYear, permitYear: values.permitYear, populatingYear: values.populatingYear, description: values.description }, config)
         setUpdate(true)
 
 
@@ -96,29 +81,28 @@ const UpdateProject = () => {
           {/* כדי לשלוח פניה ליזמים עליך להתחבר */}
 
 
-        </Alert>
-        :
-        <>
-          <Card style={{ margin: '35%', width: '30%', padding: '2%', marginTop: '5%' }}>
-            <Typography style={{ direction: 'rtl' }}>עדכון פרטים</Typography>
-            <br /> <Grid container spacing={3}  >
-              {/* // <Dialog fullScreen={fullScreen} > */}
-              <Grid item xs={6}>
-                <TextField
-                  value={values.address}//{values.address}
-                  id="outlined-basic"
-                  label="כתובת"
-                  variant="outlined"
-                  {...getFieldProps("address")}
-                /></Grid>
-              <Grid item xs={6}>
-                {/* {city} */}
-                <CitySelect city={city} setCity={setCity}
-                /></Grid>
+ </Alert>
+    :
+    <>
+<Card style={{margin:'35%',width:'30%',padding:'2%',marginTop:'5%'}}>
+  <Typography style={{direction:'rtl'}}>עדכון פרטים</Typography>   
+  <br/> <Grid container spacing={3}  >
+      {/* // <Dialog fullScreen={fullScreen} > */}
+      <Grid item xs={6}>
+        <TextField
+          value={values.address}//{values.address}
+          id="outlined-basic"
+          label="כתובת"
+          variant="outlined"
+          {...getFieldProps("address")}
+        /></Grid>
+      <Grid item xs={6}>
+        {/* {city} */}
+        <CitySelect  getFieldProps={getFieldProps}/></Grid>
 
-              <Grid item xs={6}>
-                {/* {statusChecked} */}
-                <StatusSelect statusChecked={statusChecked} setStatusChecked={setStatusChecked} ></StatusSelect> </Grid>
+      <Grid item xs={6}>
+        {/* {statusChecked} */}
+        <StatusSelect getFieldProps={getFieldProps} ></StatusSelect> </Grid>
 
 
               {/* 

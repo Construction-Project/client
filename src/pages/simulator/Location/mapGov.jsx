@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
-
-
+// import Proj4 from "proj4"
 const MapGov = ({ address }) => {
 
     const [cords, setCords] = useState({})
@@ -25,12 +24,13 @@ const MapGov = ({ address }) => {
 
         
     }, [address])
-    // `https://www.govmap.gov.il/map.html?bb=1&zb=1&in=1&c=${cords.lat},${cords.lng}&z=8`
+    
+
     return (
         <div>
             <>{cords.lat}</><br></br>
             <>{cords.lng}</><br></br>
-            <iframe id='ifrMap' frameborder='0' marginheight='0' marginwidth='0' width='450px' height='350px' src={`https://www.govmap.gov.il/map.html?bb=1&zb=1&in=1&c=${cords.lat},${cords.lng}&z=8`} > </iframe>
+            <iframe id='ifrMap' frameborder='0' marginheight='0' marginwidth='0' width='450px' height='350px' src={`https://www.govmap.gov.il/map.html?bb=1&zb=1&in=1&c=${cords.lat*1000},${cords.lng*1000}&z=8`} > </iframe>
         </div>
     )
 }

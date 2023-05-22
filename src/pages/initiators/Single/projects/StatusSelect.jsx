@@ -1,10 +1,10 @@
 
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import {InputLabel,Select, FormControl} from '@mui/material';
+import {InputLabel,Select, FormControl,MenuItem} from '@mui/material';
 
 
-const StatusSelect = ({statusChecked,setStatusChecked}) => {
+const StatusSelect = ({getFieldProps}) => {
     const [status, setStatus] = useState([]);
 
     useEffect( () => {
@@ -21,7 +21,7 @@ const StatusSelect = ({statusChecked,setStatusChecked}) => {
        }, []);
 
     const handleChangeStatus=(e)=>{
-        setStatusChecked(e.target.value)
+        //setStatusChecked(e.target.value)
       }
       
   return (
@@ -30,14 +30,21 @@ const StatusSelect = ({statusChecked,setStatusChecked}) => {
 <FormControl fullWidth>
   <InputLabel>סטטוס</InputLabel>
   <Select  
-    label='סטטוס'
-    native
-    defaultValue={statusChecked}
-    onChange={handleChangeStatus}
+    label='Status'
+    {...getFieldProps("status")}
+
+    //native
+    //defaultValue={statusChecked}
+    //onChange={handleChangeStatus}
   >
-      {status?.map((status,index)=><option value={status.statusId}>{status.status}</option>)}
+
+
+      {status?.map((status,index)=><MenuItem  key={status.statusId} value={status.statusId}>{status.status}</MenuItem>)}
   </Select>
   </FormControl>
+
+
+
 
 {/* <InputLabel id="demo-select-small-label">סטטוס</InputLabel> */}
 {/* <Select

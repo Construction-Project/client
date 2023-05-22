@@ -5,6 +5,7 @@ import { useFormik, FormikValues } from "formik";
 import { Button, TextField } from '@mui/material';
 import * as yup from 'yup';
 import { Box } from "@mui/system";
+import { Margin } from "@mui/icons-material";
 //var validator = require("email-validator");
 
 const Register = () => {
@@ -39,33 +40,21 @@ const Register = () => {
       }
     }
   })
-  // const registerToServer = async (email,password,name) => {
-  //   if(!validator.validate(email)){
-  //       alert('email is not valid')
-  //       return
-  //   }
 
-  //   alert('valid')
-  //   try{
-  //     await axios.post("http://localhost:3600/auth/register",{ userName:email,password:password,name:name})
-  //     navigate("/login")
-  //   }
-  //   catch(err){
-  //     setErr(err.response.data?.message)
-  //   }  
-  //   }
   return (
     <>
-    
-     
+ 
+
         <form onSubmit={handleSubmit} style={{ paddingTop: "60px" }}>
+        <Box sx={{ display: 'flex',flexWrap: "wrap" ,gap:"10px"}} justifyContent={'space-between'} alignItems={'center'}
+     flexDirection={'column'} spacing={'70px'}>
           <h2>register</h2>
 
 
-          <TextField
+          <TextField 
 
             value={values.email}
-            id="outlined-basic"
+           // InputLabelProps={{shrink:true}}
             label="אימייל"
             variant="outlined"
             {...getFieldProps("email")}
@@ -75,9 +64,9 @@ const Register = () => {
 
           />
 
-          <br></br>
-          <br></br>
+
           <TextField
+          // InputLabelProps={{shrink:true}}
             value={values.password}
             id="outlined-basic"
             label="סיסמא"
@@ -89,9 +78,10 @@ const Register = () => {
             helperText={touched.email && errors.email}
 
           />
-          <br></br>
-          <br></br>
+
           <TextField
+           // InputLabelProps={{shrink:true}}
+            InputProps={{notched:false}}
             value={values.name}
             id="outlined-basic"
             label="שם"
@@ -102,15 +92,10 @@ const Register = () => {
             helperText={touched.email && errors.email}
 
           />
-          <br></br>
-          <br></br>
           <Button type="submit" variant="outlined">לחץ כדי להירשם</Button>
-
+        </Box>
         </form>
-
-
         <Link to="/initiatorRegister">רוצה להירשם כיזם? לחץ כאן</Link><div />
-        
     </>
 
   )

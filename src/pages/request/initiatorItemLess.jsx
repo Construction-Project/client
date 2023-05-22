@@ -7,11 +7,11 @@ import Typography from '@mui/material/Typography';
 import { CheckBox } from '@mui/icons-material';
 import { Checkbox } from '@material-ui/core';
 import Avatar from '@mui/material/Avatar';
+import DisplayRating from '../initiators/DisplayRating';
 
 import { Link, useNavigate, Navigate } from "react-router-dom"
 import { useState, useContext } from "react";
 import { AuthContext } from '../../context/authContext';
-import DisplayRating from '../initiators/DisplayRating';
 
 
 
@@ -21,7 +21,8 @@ const InitiatorItemLess = ({ initiator, initiatorsIds, setInitiatorsIds, selectI
     const { id, phone, address, company_name, numOfProject, rating, tama38, pinuyBinuy, description, logo, name } = initiator
 
     const navigate = useNavigate()
-    return (
+    return 
+    (
         <>
             {/* {console.log(initiator,id)} */}
             <Card sx={{ minHeight: 200, maxWidth: 345, maxHeight: 450 }} raised>
