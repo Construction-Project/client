@@ -7,7 +7,7 @@ import axios from "axios";
 import { AuthContext } from '../../context/authContext' 
 
 import { useFormik, FormikValues } from "formik";
-import {Alert, Button ,TextField,AlertTitle} from '@mui/material';
+import {Alert, Button ,TextField,AlertTitle,Box, Typography} from '@mui/material';
 import * as yup from 'yup';
 
 //var validator = require("email-validator");
@@ -43,14 +43,9 @@ const Login = () => {
 
          onSubmit: async(values)=>{
           //  const {data:_initiators} = await axios.put(`http://localhost:3600/initiator/${20}`,{address:values.address,name:values.name,hp:'1223',tama38:1,pinuyBinuy:1})
-        console.log('in submit');
+       // console.log('in submit');
           try{
-          //   const response= await axios.post("http://localhost:3600/auth/login",{ userName:values.email,password:values.password})
-          //  localStorage.setItem("token", response.data.accessToken);
-          //  console.log("res",response.data);
-          //  console.log("resdgdfg",response);
           await login({ userName:values.email,password:values.password});
-
           navigate('/initiators')
         }
         catch(err){
@@ -62,10 +57,16 @@ const Login = () => {
         );
     return (
         <>
-        {err&&<></>}
+    
+
+
         <form onSubmit={handleSubmit} style={{paddingTop:"60px"}}>
-            <h2>login</h2>
+    <Box sx={{ display: 'flex'}} justifyContent={'center'} alignItems={'center'}
+     flexDirection={'column'} spacing={'70px'} >
+
+        <Typography textAlign={'center'}>login</Typography>
          <TextField 
+          
          value={values.email} 
          id="outlined-basic" 
          label=" מייל"
@@ -77,11 +78,11 @@ const Login = () => {
 
           />
 
-          <br/>
 
-  <TextField 
+  <TextField
          value={values.password} 
          id="outlined-basic" 
+         type="password"
          label=" סיסמה"
          variant="outlined" 
           {...getFieldProps("password")} 
@@ -91,21 +92,12 @@ const Login = () => {
 
           
           />
-
-
-
-
-            {/* <input placeholder="enter your user name" onChange={e=>setEmail(e.target.value)}></input>
-            <br></br><br></br>
-            <input placeholder="enter your password" type={"password"} onChange={e=>setPassword(e.target.value)}></input>
-            <br></br><br></br> */}
-            {/* <button onClick={()=>loginToServer(email,password)}>לחץ לכניסה</button> */}
-            {/* {err && err} */}
 {err?.status==401 && <Alert severity="error"><AlertTitle>
         שם משתמש או סיסמה שגויים </AlertTitle></Alert>}
-            <Button type="submit">לחץ לכניסה</Button>
+            <Button type="submit">לחץ לכניסה</Button> </Box>
             </form>
             <Link to="/register">אתה לא רשום? לחץ כאן</Link>
+           
         </>
     )
 }

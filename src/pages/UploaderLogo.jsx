@@ -45,7 +45,7 @@ const UploaderLogo = ({ picture, setPicture, label }) => {
         
           // onDelete={() => handleRemovingImage(picture)}
         /> */}
-         <Button variant="contained" component="label">
+         <Button variant="outlined" component="label">
          <UploadIcon></UploadIcon>
           {label || "Load picture"}
           <input hidden type="file" onChange={onSelectFile} name="file" />

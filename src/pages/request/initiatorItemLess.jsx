@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import { CheckBox } from '@mui/icons-material';
 import { Checkbox } from '@material-ui/core';
 import Avatar from '@mui/material/Avatar';
+import DisplayRating from '../initiators/DisplayRating';
 
 import { Link, useNavigate, Navigate } from "react-router-dom"
 import { useState, useContext } from "react";
@@ -23,7 +24,7 @@ const InitiatorItemLess = ({ initiator, initiatorsIds, setInitiatorsIds, selectI
     return (
         <>
             {/* {console.log(initiator,id)} */}
-            <Card sx={{ maxWidth: 345, maxHeight: 450 }} raised>
+            <Card sx={{ maxWidth: 345, maxHeight: 450 ,minHeight:250}} raised>
                 {/* <Checkbox checked={initiatorsIds.find(id => id === initiatorsIds)}
                     onChange={(e, checked) => {
                         if (checked) setInitiatorsIds([...initiatorsIds, initiator.id])
@@ -73,6 +74,9 @@ const InitiatorItemLess = ({ initiator, initiatorsIds, setInitiatorsIds, selectI
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                         {parseInt(numOfProject) || ""}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        { <DisplayRating stars={rating}></DisplayRating> || ""}
                     </Typography>
                 </CardContent>
                 {/* <CardActions>

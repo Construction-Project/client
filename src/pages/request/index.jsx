@@ -183,6 +183,7 @@ const Request = () => {
                   />
                   
                   <TextField
+
                     value={values.email}
                     id="outlined-basic"
                     label="אימייל"
@@ -193,8 +194,7 @@ const Request = () => {
                     helperText={touched.email && errors.email}
                   />
                 </Box>
-                <br></br>
-                <br></br>
+               
                 <Box sx={{ display: 'flex'}} justifyContent={'center'} >
                 <TextField
                   value={values.phone}
