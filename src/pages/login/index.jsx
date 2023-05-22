@@ -9,6 +9,7 @@ import { AuthContext } from '../../context/authContext'
 import { useFormik, FormikValues } from "formik";
 import {Alert, Button ,TextField,AlertTitle} from '@mui/material';
 import * as yup from 'yup';
+import { Box } from "@mui/system";
 
 //var validator = require("email-validator");
 
@@ -62,6 +63,16 @@ const Login = () => {
         );
     return (
         <>
+        <Box  flexDirection={'column'}>
+        <div style={{
+        display: "flex",
+        flexDirection: "colom",
+        alignItems: "center",
+        justifyContent: "center"
+
+
+
+      }}/>
         {err&&<></>}
         <form onSubmit={handleSubmit} style={{paddingTop:"60px"}}>
             <h2>login</h2>
@@ -106,6 +117,7 @@ const Login = () => {
             <Button type="submit">לחץ לכניסה</Button>
             </form>
             <Link to="/register">אתה לא רשום? לחץ כאן</Link>
+            </Box>
         </>
     )
 }

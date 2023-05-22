@@ -5,8 +5,8 @@ import InitiatorItem from './initiatorItem';
 import Cities from '../City';
 import { Table, TableBody, TableHead, TableRow, Input, Checkbox } from '@mui/material';
 import StyledTableCell from '../../initiators/Single/projects/styleTable/StyledTableCell'
-import { Grid } from "@material-ui/core";
-
+import { Grid, Typography } from "@material-ui/core";
+import FormControlLabel from '@mui/material/FormControlLabel';
 const InitiatorsList = () => {
   const [initiators, setInitiators] = useState([]);
   // const [filteredInitiators, setFilteredInitiators] = useState(initiators);
@@ -19,7 +19,7 @@ const InitiatorsList = () => {
   const [query, SetQuery] = useState('');
   const [tama, SetTama] = useState(true);
   const [sortNumOfProject, setSortNumOfProject] = useState(true);
-  const [sortRating, SetSortRating] = useState(true);
+  const [sortRating, SetSortRating] = useState(false);
   const [pinuiBinui, setPinuiBinui] = useState(true);
   const [filteredInitiators, setFilteredInitiators] = useState([]);
   const [loadInitiator, setLoadInitiator] = useState(false);
@@ -75,14 +75,15 @@ const InitiatorsList = () => {
     <>
 
       <div style={{ paddingTop: "60px" }}>initiators---</div>
-      <>ממוין לפי א-ב </>
-      {sortRating ? <>ממוין לפי דירוג </> : <></>}
-      {sortNumOfProject ? <>ממוין לפי מספר פרויקטים </> : <></>}
+      
+      {sortRating ? <Typography>ממוין לפי דירוג, ממוין לפי א-ב </Typography> : <Typography>ממוין לפי א-ב </Typography>}
+      
+     
       <Input placeholder='חיפוש לפי שם יזם/חברה' onChange={(e) => { SetQuery(e.target.value) }}></Input>
-
-      <Checkbox defaultChecked />
-      <Checkbox defaultChecked />
-      <br></br>  <br></br>
+        
+        <FormControlLabel onChange={() => { SetTama(!tama) }} control={<Checkbox defaultChecked />} label="תמא 38" />
+        <FormControlLabel onChange={() => { setPinuiBinui(!pinuiBinui) }} control={<Checkbox defaultChecked />} label="פינוי בינוי" />
+        <FormControlLabel onChange={() => { SetSortRating(!sortRating) }} control={<Checkbox/>} label="מיון לפי דרוג" />
 
 
 

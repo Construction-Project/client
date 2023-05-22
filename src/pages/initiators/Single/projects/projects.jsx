@@ -32,7 +32,8 @@ const ProjectsList = () => {
         <>
         {/* {loadProject &&projects==null&&<h1>loading</h1>} */}
         <TableContainer component={Paper}>
-          <Table  aria-label="simple table">
+          {/* sx={{size:"large",width: 700,justifyContent:'center'}} */}
+          <Table  aria-label="simple table" style={{width:'30%',padding:'2%',marginTop:'2%',marginLeft:'35%'}}>
         <TableHead>
           <TableRow>
             <TableCell align="right">כתובת הפרויקט</TableCell>
@@ -45,8 +46,7 @@ const ProjectsList = () => {
             <TableCell align="right">populatingYear</TableCell>
             <TableCell align="right">description</TableCell>
             <TableCell align='right'>image</TableCell> */}
-            <TableCell align="right">לעידכון</TableCell>
-            <TableCell align="right">delete</TableCell>
+
           </TableRow>
         </TableHead>
          <TableBody>

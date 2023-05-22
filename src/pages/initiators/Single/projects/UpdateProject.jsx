@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from 'react'
 import { useParams, useNavigate } from "react-router-dom";
 
 import { useFormik, FormikValues } from "formik";
-import {Card, Grid, Button, TextField, Typography,Alert,AlertTitle } from '@mui/material';
+import { Card, Grid, Button, TextField, Typography, Alert, AlertTitle } from '@mui/material';
 import axios from "axios";
 import { AuthContext } from '../../../../context/authContext'
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -68,15 +68,15 @@ const UpdateProject = () => {
       console.log({ city })
       console.log({ statusChecked })
 
-      try{
-      const { data: _initiators } = await axios.put(`http://localhost:3600/project/${projectId}`, { address: values.address, city: city, status: statusChecked, initiatorId: currentUser.id, apartmentBefore: values.apartmentBefore, apartmentAfter: values.apartmentAfter, requestYear: values.requestYear, permitYear: values.permitYear, populatingYear: values.populatingYear, description: values.description }, config)
+      try {
+        const { data: _initiators } = await axios.put(`http://localhost:3600/project/${projectId}`, { address: values.address, city: city, status: statusChecked, initiatorId: currentUser.id, apartmentBefore: values.apartmentBefore, apartmentAfter: values.apartmentAfter, requestYear: values.requestYear, permitYear: values.permitYear, populatingYear: values.populatingYear, description: values.description }, config)
         setUpdate(true)
 
 
-    }
-catch(err){
-  console.log(err)
-}
+      }
+      catch (err) {
+        console.log(err)
+      }
       // handleClose();
     }
 
@@ -87,41 +87,41 @@ catch(err){
 
   return (
     <>
-    {update?
-    
-    <Alert severity="success" style={{ paddingTop: "60px" }}>
-   <AlertTitle>
-הפרויקט עודכן בהצלחה
-      </AlertTitle>
-      {/* כדי לשלוח פניה ליזמים עליך להתחבר */}
+      {update ?
+
+        <Alert severity="success" style={{ paddingTop: "60px" }}>
+          <AlertTitle>
+            הפרויקט עודכן בהצלחה
+          </AlertTitle>
+          {/* כדי לשלוח פניה ליזמים עליך להתחבר */}
 
 
- </Alert>
-    :
-    <>
-<Card style={{margin:'35%',width:'30%',padding:'2%',marginTop:'5%'}}>
-  <Typography style={{direction:'rtl'}}>עדכון פרטים</Typography>   
-  <br/> <Grid container spacing={3}  >
-      {/* // <Dialog fullScreen={fullScreen} > */}
-      <Grid item xs={6}>
-        <TextField
-          value={values.address}//{values.address}
-          id="outlined-basic"
-          label="כתובת"
-          variant="outlined"
-          {...getFieldProps("address")}
-        /></Grid>
-      <Grid item xs={6}>
-        {/* {city} */}
-        <CitySelect city={city} setCity={setCity}
-        /></Grid>
+        </Alert>
+        :
+        <>
+          <Card style={{ margin: '35%', width: '30%', padding: '2%', marginTop: '5%' }}>
+            <Typography style={{ direction: 'rtl' }}>עדכון פרטים</Typography>
+            <br /> <Grid container spacing={3}  >
+              {/* // <Dialog fullScreen={fullScreen} > */}
+              <Grid item xs={6}>
+                <TextField
+                  value={values.address}//{values.address}
+                  id="outlined-basic"
+                  label="כתובת"
+                  variant="outlined"
+                  {...getFieldProps("address")}
+                /></Grid>
+              <Grid item xs={6}>
+                {/* {city} */}
+                <CitySelect city={city} setCity={setCity}
+                /></Grid>
 
-      <Grid item xs={6}>
-        {/* {statusChecked} */}
-        <StatusSelect statusChecked={statusChecked} setStatusChecked={setStatusChecked} ></StatusSelect> </Grid>
+              <Grid item xs={6}>
+                {/* {statusChecked} */}
+                <StatusSelect statusChecked={statusChecked} setStatusChecked={setStatusChecked} ></StatusSelect> </Grid>
 
 
-      {/* 
+              {/* 
             <TextField
                 value={values.city}
                 id="outlined-basic"
@@ -130,126 +130,126 @@ catch(err){
                 {...getFieldProps("city")}
                 
             /> */}
-      {/* <TextField
+              {/* <TextField
                 value={values.status}
                 id="outlined-basic"
                 label="סטטוס"
                 variant="outlined"
                 {...getFieldProps("status")}
             /> */}
-      <Grid item xs={6}>
+              <Grid item xs={6}>
 
-        <TextField
-          value={values.apartmentBefore}
-          id="outlined-basic"
-          label="מס' דירות לפני"
-          variant="outlined"
-          {...getFieldProps("apartmentBefore")}
-          onChange={(e) => {
-            setFieldValue(
-              "apartmentBefore",
-              parseInt(e.target.value) || ''
-            );
-          }}
-        /></Grid>
-      <Grid item xs={6}>
+                <TextField
+                  value={values.apartmentBefore}
+                  id="outlined-basic"
+                  label="מס' דירות לפני"
+                  variant="outlined"
+                  {...getFieldProps("apartmentBefore")}
+                  onChange={(e) => {
+                    setFieldValue(
+                      "apartmentBefore",
+                      parseInt(e.target.value) || ''
+                    );
+                  }}
+                /></Grid>
+              <Grid item xs={6}>
 
-        <TextField
-          value={values.apartmentAfter}
-          id="outlined-basic"
-          label="מס' דירות אחרי"
-          variant="outlined"
-          {...getFieldProps("apartmentAfter")}
-          onChange={(e) => {
-            setFieldValue(
-              "apartmentAfter",
-              parseInt(e.target.value) || (values.apartmentAfter)
-            );
-          }}
-        /></Grid>
-      <Grid item xs={6}>
+                <TextField
+                  value={values.apartmentAfter}
+                  id="outlined-basic"
+                  label="מס' דירות אחרי"
+                  variant="outlined"
+                  {...getFieldProps("apartmentAfter")}
+                  onChange={(e) => {
+                    setFieldValue(
+                      "apartmentAfter",
+                      parseInt(e.target.value) || (values.apartmentAfter)
+                    );
+                  }}
+                /></Grid>
+              <Grid item xs={6}>
 
-        <TextField
-          value={values.requestYear}
-          id="outlined-basic"
-          label="שנת בקשה"
-          variant="outlined"
-          {...getFieldProps("requestYear")}
-          onChange={(e) => {
-            setFieldValue(
-              "requestYear",
-              parseInt(e.target.value) || ''
-            );
-          }}
-        /></Grid><Grid item xs={6}>
-
-
-        <TextField
-          value={values.permitYear}
-          id="outlined-basic"
-          label="שנת אישור"
-          variant="outlined"
-          {...getFieldProps("permitYear")}
-          onChange={(e) => {
-            setFieldValue(
-              "permitYear",
-              parseInt(e.target.value) || ''
-            );
-          }}
-
-        /></Grid><Grid item xs={6}>
+                <TextField
+                  value={values.requestYear}
+                  id="outlined-basic"
+                  label="שנת בקשה"
+                  variant="outlined"
+                  {...getFieldProps("requestYear")}
+                  onChange={(e) => {
+                    setFieldValue(
+                      "requestYear",
+                      parseInt(e.target.value) || ''
+                    );
+                  }}
+                /></Grid><Grid item xs={6}>
 
 
-        <TextField
-          value={values.startConstructionYear}
-          id="outlined-basic"
-          label="שנת תחילת הבניה"
-          variant="outlined"
-          {...getFieldProps("startConstructionYear")}
-          onChange={(e) => {
-            setFieldValue(
-              "startConstructionYear",
-              parseInt(e.target.value) || ''
-            );
-          }}
-        /></Grid><Grid item xs={6}>
+                <TextField
+                  value={values.permitYear}
+                  id="outlined-basic"
+                  label="שנת אישור"
+                  variant="outlined"
+                  {...getFieldProps("permitYear")}
+                  onChange={(e) => {
+                    setFieldValue(
+                      "permitYear",
+                      parseInt(e.target.value) || ''
+                    );
+                  }}
 
-        <TextField
-          value={values.populatingYear}
-          id="outlined-basic"
-          label="שנת איכלוס"
-          variant="outlined"
-          {...getFieldProps("populatingYear")}
-          onChange={(e) => {
-            setFieldValue(
-              "populatingYear",
-              parseInt(e.target.value) || ''
-            );
-          }}
-        /></Grid><Grid item xs={6}>
-
-        <TextField
-          value={values.description}
-          id="outlined-basic"
-          label="תאור"
-          variant="outlined"
-          {...getFieldProps("description")}
-        />
-      </Grid>
-
-      {/* <DialogActions> */}
-      <Button autoFocus onClick={() => navigate(`/initiators/${initiatorId}`)}>
-        ביטול
-      </Button>
-      <Button autoFocus onClick={() => handleSubmit()}>
-        עידכון
-      </Button>
-
-      {/* </DialogActions> */}
+                /></Grid><Grid item xs={6}>
 
 
-      {/* </Dialog> */}
-    </Grid></Card></>}</>
+                <TextField
+                  value={values.startConstructionYear}
+                  id="outlined-basic"
+                  label="שנת תחילת הבניה"
+                  variant="outlined"
+                  {...getFieldProps("startConstructionYear")}
+                  onChange={(e) => {
+                    setFieldValue(
+                      "startConstructionYear",
+                      parseInt(e.target.value) || ''
+                    );
+                  }}
+                /></Grid><Grid item xs={6}>
+
+                <TextField
+                  value={values.populatingYear}
+                  id="outlined-basic"
+                  label="שנת איכלוס"
+                  variant="outlined"
+                  {...getFieldProps("populatingYear")}
+                  onChange={(e) => {
+                    setFieldValue(
+                      "populatingYear",
+                      parseInt(e.target.value) || ''
+                    );
+                  }}
+                /></Grid><Grid item xs={6}>
+
+                <TextField
+                  value={values.description}
+                  id="outlined-basic"
+                  label="תאור"
+                  variant="outlined"
+                  {...getFieldProps("description")}
+                />
+              </Grid>
+
+              {/* <DialogActions> */}
+              <Button autoFocus onClick={() => navigate(`/initiators/${initiatorId}`)}>
+                ביטול
+              </Button>
+              <Button autoFocus onClick={() => handleSubmit()}>
+                עידכון
+              </Button>
+
+              {/* </DialogActions> */}
+
+
+              {/* </Dialog> */}
+            </Grid></Card></>}</>
   );
 }
 

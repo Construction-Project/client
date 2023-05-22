@@ -56,16 +56,8 @@ const Register = () => {
   //   }
   return (
     <>
-    <Box flexDirection={'column'}>
-      <div style={{
-        display: "flex",
-        flexDirection: "colom",
-        alignItems: "center",
-        justifyContent: "center"
-
-
-
-      }}>
+    
+     
         <form onSubmit={handleSubmit} style={{ paddingTop: "60px" }}>
           <h2>register</h2>
 
@@ -117,8 +109,8 @@ const Register = () => {
         </form>
 
 
-        <Link to="/initiatorRegister">רוצה להירשם כיזם? לחץ כאן</Link></div><div />
-        </Box>
+        <Link to="/initiatorRegister">רוצה להירשם כיזם? לחץ כאן</Link><div />
+        
     </>
 
   )
