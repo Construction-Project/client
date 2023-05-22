@@ -30,11 +30,7 @@ const Uploader = ({ picture, setPicture, label }) => {
   return (
     <>
       <label htmlFor="file">  </label>
-      {/* <Button variant="contained" component="label">
-        טען תמונה מהמחשב
-        <input hidden type="file" onChange={onSelectFile} name="file" />
-      </Button> */}
-               <Button variant="outlined" component="label">
+      <Button variant="outlined" component="label">
          <UploadIcon></UploadIcon>
           {label || "טען תמונה מהמחשב"}
           <input hidden type="file" onChange={onSelectFile} name="file" />

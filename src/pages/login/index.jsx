@@ -69,7 +69,7 @@ const Login = () => {
           
          value={values.email} 
          id="outlined-basic" 
-         label=" מייל"
+         label=" *מייל"
          variant="outlined" 
           {...getFieldProps("email")} 
           onChange={handleChange}

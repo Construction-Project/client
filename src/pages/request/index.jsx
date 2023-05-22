@@ -12,6 +12,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import InitiatorItemLess from "./initiatorItemLess";
 import SearchIcon from '@mui/icons-material/Search';
 import { Card, Box } from "@mui/material";
+import { res } from "react-email-validator";
 
 const Request = () => {
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ const Request = () => {
   const [query, SetQuery] = useState('');
   const [tama, setTama] = useState(true);
   const [pinuiBinui, setPinuiBinui] = useState(true);
+  const [sortRating, setSortRating] = useState(false);
   const [filteredInitiators, setFilteredInitiators] = useState([]);
   const [initiatorsIds, setInitiatorsIds] = useState([]);
 
@@ -33,9 +35,7 @@ const Request = () => {
 
   const filtered = () => {
     const keys = ['name', 'company_name'] //fields to search in
-    return initiators.filter((item) => {
-
-      //console.log("adsfasdf", item)
+    var res = initiators.filter((item) => {
       if (
         (query === "" || item.name.toLowerCase().indexOf(query) > -1)
         &&
@@ -46,12 +46,13 @@ const Request = () => {
           ||
           (pinuiBinui === true && pinuiBinui === item.pinuyBinuy)
         )
-      )
-
+        )
         return true
-
       return false
     })
+    // (sortRating == true && res.sort((a, b) => (a.rating < b.rating) ? 1 : ((b.rating < a.rating) ? -1 : 0)))
+  //(sortRating==true&&res.sort((a,b)=>(a.rating < b.rating) ? 1 : ((b.rating < a.rating) ? -1 : 0)))
+    return sortRating?res.sort((a,b)=>(a.rating < b.rating) ? 1 : ((b.rating < a.rating) ? -1 : 0)):res
   }
 
   const validationSchema = yup.object({
@@ -76,7 +77,7 @@ const Request = () => {
   useEffect(() => {
     const dataFiltered = filtered()
     setFilteredInitiators(dataFiltered)
-  }, [query, tama, pinuiBinui]);
+  }, [query, tama, pinuiBinui,sortRating]);
 
   useEffect(() => {
     console.log({ initiatorsIds })
@@ -164,74 +165,75 @@ const Request = () => {
         
         <FormControlLabel onChange={() => { setTama(!tama) }} control={<Checkbox defaultChecked />} label="תמא 38" />
         <FormControlLabel onChange={() => { setPinuiBinui(!pinuiBinui) }} control={<Checkbox defaultChecked />} label="פינוי בינוי" />
+        <FormControlLabel onChange={() => { setSortRating(!sortRating) }} control={<Checkbox/>} label="מיון לפי דרוג" />
 
   <FormControlLabel  
         control={<Checkbox defaultChecked 
           onChange={(e)=> setSelectAllChecked(e.target.checked)} checked={selectAllChecked}/>}
          label="בחר הכל"/>
                 <Card margin={'100px'}>
-                <Box sx={{ display: 'flex'}} justifyContent={'center'} spacing={'70px '}>
-                  <TextField
-                    value={values.name}
-                    id="outlined-basic"
-                    label="שם"
-                    variant="outlined"
-                    {...getFieldProps("name")}
-                    onChange={handleChange}
-                    error={touched.name && Boolean(errors.name)}
-                    helperText={touched.name && errors.name}
-                  />
-                  
-                  <TextField
+                  <Box sx={{ display: 'flex' }} justifyContent={'center'} spacing={'70px '}>
+                    <TextField
+                      value={values.name}
+                      id="outlined-basic"
+                      label="שם"
+                      variant="outlined"
+                      {...getFieldProps("name")}
+                      onChange={handleChange}
+                      error={touched.name && Boolean(errors.name)}
+                      helperText={touched.name && errors.name}
+                    />
 
-                    value={values.email}
-                    id="outlined-basic"
-                    label="אימייל"
-                    variant="outlined"
-                    {...getFieldProps("email")}
-                    onChange={handleChange}
-                    error={touched.email && Boolean(errors.email)}
-                    helperText={touched.email && errors.email}
-                  />
-                </Box>
-               
-                <Box sx={{ display: 'flex'}} justifyContent={'center'} >
-                <TextField
-                  value={values.phone}
-                  id="outlined-basic"
-                  label="פלאפון"
-                  type="phone"
-                  variant="outlined"
-                  {...getFieldProps("phone")}
-                  onChange={handleChange}
-                  error={touched.phone && Boolean(errors.phone)}
-                  helperText={touched.phone && errors.phone}
-                />
-                <TextField
-                  value={values.addressProject}
-                  id="outlined-basic"
-                  label="כתובת הפרויקט"
-                  type="phone"
-                  variant="outlined"
-                  {...getFieldProps("addressProject")}
-                  onChange={handleChange}
-                  error={touched.addressProject && Boolean(errors.addressProject)}
-                  helperText={touched.addressProject && errors.addressProject}
-                />
-                <TextField
-                  value={values.comments}
-                  id="outlined-basic"
-                  label="הערות"
-                  type="phone"
-                  variant="outlined"
-                  {...getFieldProps("comments")}
-                  onChange={handleChange}
-                  error={touched.comments && Boolean(errors.comments)}
-                  helperText={touched.comments && errors.comments}
-                /></Box>
-                <Box sx={{ display: 'flex'}} justifyContent={'center'} margin={'30px'}>
-                <Button type="submit" variant="outlined">שלח</Button>
-                </Box>
+                    <TextField
+                      value={values.email}
+                      id="outlined-basic"
+                      label="אימייל"
+                      variant="outlined"
+                      {...getFieldProps("email")}
+                      onChange={handleChange}
+                      error={touched.email && Boolean(errors.email)}
+                      helperText={touched.email && errors.email}
+                    />
+                  </Box>
+                  <br></br>
+                  <br></br>
+                  <Box sx={{ display: 'flex' }} justifyContent={'center'} >
+                    <TextField
+                      value={values.phone}
+                      id="outlined-basic"
+                      label="פלאפון"
+                      type="phone"
+                      variant="outlined"
+                      {...getFieldProps("phone")}
+                      onChange={handleChange}
+                      error={touched.phone && Boolean(errors.phone)}
+                      helperText={touched.phone && errors.phone}
+                    />
+                    <TextField
+                      value={values.addressProject}
+                      id="outlined-basic"
+                      label="כתובת הפרויקט"
+                      type="phone"
+                      variant="outlined"
+                      {...getFieldProps("addressProject")}
+                      onChange={handleChange}
+                      error={touched.addressProject && Boolean(errors.addressProject)}
+                      helperText={touched.addressProject && errors.addressProject}
+                    />
+                    <TextField
+                      value={values.comments}
+                      id="outlined-basic"
+                      label="הערות"
+                      type="phone"
+                      variant="outlined"
+                      {...getFieldProps("comments")}
+                      onChange={handleChange}
+                      error={touched.comments && Boolean(errors.comments)}
+                      helperText={touched.comments && errors.comments}
+                    /></Box>
+                  <Box sx={{ display: 'flex' }} justifyContent={'center'} margin={'30px'}>
+                    <Button type="submit" variant="outlined">שלח</Button>
+                  </Box>
                 </Card>
 
               </form>

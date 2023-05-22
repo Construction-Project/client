@@ -1,75 +1,94 @@
-import { useState ,useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Navigate } from "react-router-dom";
 import axios from "axios";
 import InitiatorItem from './initiatorItem';
 import Cities from '../City';
-import { Table,TableBody,TableHead ,TableRow,Input,Checkbox} from '@mui/material';
+import { Table, TableBody, TableHead, TableRow, Input, Checkbox } from '@mui/material';
 import StyledTableCell from '../../initiators/Single/projects/styleTable/StyledTableCell'
 import { Grid } from "@material-ui/core";
 
 const InitiatorsList = () => {
-    const [initiators, setInitiators] = useState([]);
-    // const [filteredInitiators, setFilteredInitiators] = useState(initiators);
-    // const [initiatorsIds, setInitiatorsIds] = useState(initiators);
+  const [initiators, setInitiators] = useState([]);
+  // const [filteredInitiators, setFilteredInitiators] = useState(initiators);
+  // const [initiatorsIds, setInitiatorsIds] = useState(initiators);
 
-    const[filterInitiatorByTamaAndPinuyBinuy,SetFilterInitiatorByTamaAndPinuyBinuy]=useState(false);
-    const[searchName,SetSearchName]=useState('');
+  const [filterInitiatorByTamaAndPinuyBinuy, SetFilterInitiatorByTamaAndPinuyBinuy] = useState(false);
+  const [searchName, SetSearchName] = useState('');
 
-  
-     const[query,SetQuery]=useState('');
-     const[tama,SetTama]=useState(true);
-     const[pin,Setpin]=useState(true);
-    const[sortNumOfProject,setSortNumOfProject]=useState(true);
-    const[sortRating,SetSortRating]=useState(true);
 
-    const[loadInitiator,setLoadInitiator]=useState(false);
+  const [query, SetQuery] = useState('');
+  const [tama, SetTama] = useState(true);
+  const [sortNumOfProject, setSortNumOfProject] = useState(true);
+  const [sortRating, SetSortRating] = useState(true);
+  const [pinuiBinui, setPinuiBinui] = useState(true);
+  const [filteredInitiators, setFilteredInitiators] = useState([]);
+  const [loadInitiator, setLoadInitiator] = useState(false);
 
-    useEffect(() => {
-      async function fetchData() {
-          const {data:_initiators} = await axios.get("http://localhost:3600/initiator")
-          if(_initiators?.length)
-          {
-            console.log(_initiators);
-            setInitiators(_initiators)  
+  useEffect(() => {
+    async function fetchData() {
+      const { data: _initiators } = await axios.get("http://localhost:3600/initiator")
+      if (_initiators?.length) {
+        console.log(_initiators);
+        setInitiators(_initiators)
 
-          }        
-          
-        }
-        fetchData()
-    }, [loadInitiator]);
+      }
 
-    const filtered = ()=>{
-      var res=[];
-      const keys = ['name','company_name'] //fields to search in
-        res= initiators.filter((item) =>
-          keys.some((key) => item[key]?.toLowerCase().includes(query)));
-
-          // sortNumOfProject &&
-          //  res.sort((a, b) => (a.numOfProject > b.numOfProject) ? 1 : ((b.numOfProject > a.numOfProject) ? -1 : 0))
-           sortRating && res.sort((a, b) => (a.rating < b.rating) ? 1 : ((b.rating < a.rating) ? -1 : 0))
-          // res.sort((a, b) => (a.rating - b.rating || a.numOfProject?.localeCompare(b.numOfProject)));
-
-//https://mui.com/material-ui/react-toggle-button/ במקום cheakbox
-          return res; 
     }
+    fetchData()
+  }, [loadInitiator]);
+  const filtered = () => {
+    const keys = ['name', 'company_name'] //fields to search in
+    var res = initiators.filter((item) => {
+      if (
+        (query === "" || item.name.toLowerCase().indexOf(query) > -1)
+        &&
+        (
+          (tama === true && pinuiBinui === true)
+          ||
+          (tama == true && tama == item.tama38)
+          ||
+          (pinuiBinui === true && pinuiBinui === item.pinuyBinuy)
+        )
+        )
+        return true
+      return false
+    })
+    return sortRating?res.sort((a,b)=>(a.rating < b.rating) ? 1 : ((b.rating < a.rating) ? -1 : 0)):res
+  }
+  // const filtered = () => {
+  //   var res = [];
+  //   const keys = ['name', 'company_name'] //fields to search in
+  //   res = initiators.filter((item) =>
+  //     keys.some((key) => item[key]?.toLowerCase().includes(query)));
 
-  return (   
+  //   // sortNumOfProject &&
+  //   //  res.sort((a, b) => (a.numOfProject > b.numOfProject) ? 1 : ((b.numOfProject > a.numOfProject) ? -1 : 0))
+  //   sortRating && res.sort((a, b) => (a.rating < b.rating) ? 1 : ((b.rating < a.rating) ? -1 : 0))
+  //   // res.sort((a, b) => (a.rating - b.rating || a.numOfProject?.localeCompare(b.numOfProject)));
+
+  //   //https://mui.com/material-ui/react-toggle-button/ במקום cheakbox
+  //   return res;
+  // }
+  
+
+  return (
     <>
-     <div>initiators---</div>
-     <>ממוין לפי א-ב </>
-{sortRating?<>ממוין לפי דירוג </>:<></>}
-{sortNumOfProject?<>ממוין לפי מספר פרויקטים </>:<></>}
- <Input placeholder='חיפוש לפי שם יזם/חברה' onChange={(e)=>{SetQuery(e.target.value)}}></Input>
 
- <Checkbox defaultChecked />
- <Checkbox defaultChecked />
- <br></br>  <br></br> 
+      <div style={{ paddingTop: "60px" }}>initiators---</div>
+      <>ממוין לפי א-ב </>
+      {sortRating ? <>ממוין לפי דירוג </> : <></>}
+      {sortNumOfProject ? <>ממוין לפי מספר פרויקטים </> : <></>}
+      <Input placeholder='חיפוש לפי שם יזם/חברה' onChange={(e) => { SetQuery(e.target.value) }}></Input>
+
+      <Checkbox defaultChecked />
+      <Checkbox defaultChecked />
+      <br></br>  <br></br>
 
 
 
-   <Table>
+      <Table>
 
-    {/* <TableHead>
+        {/* <TableHead>
 
     <TableRow>
             <StyledTableCell align="left">יזם</StyledTableCell>
@@ -86,14 +105,14 @@ const InitiatorsList = () => {
           </TableHead> */}
 
 
-      <TableBody>
-      <Grid container spacing={2}>
+        <TableBody>
+          <Grid container spacing={2}>
 
-       {initiators?.length && filtered().map((initiator)=>{return <Grid item xs={4}><InitiatorItem initiator={initiator} loadInitiator={loadInitiator}  setLoadInitiator={setLoadInitiator}/></Grid> })} 
-       </Grid>
-    </TableBody>
-    </Table> 
-    
+            {initiators?.length && filtered().map((initiator) => { return <Grid item xs={4}><InitiatorItem initiator={initiator} loadInitiator={loadInitiator} setLoadInitiator={setLoadInitiator} /></Grid> })}
+          </Grid>
+        </TableBody>
+      </Table>
+
     </>
   )
 }
