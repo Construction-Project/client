@@ -50,8 +50,6 @@ const Request = () => {
         return true
       return false
     })
-    // (sortRating == true && res.sort((a, b) => (a.rating < b.rating) ? 1 : ((b.rating < a.rating) ? -1 : 0)))
-  //(sortRating==true&&res.sort((a,b)=>(a.rating < b.rating) ? 1 : ((b.rating < a.rating) ? -1 : 0)))
     return sortRating?res.sort((a,b)=>(a.rating < b.rating) ? 1 : ((b.rating < a.rating) ? -1 : 0)):res
   }
 
