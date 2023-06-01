@@ -21,10 +21,9 @@ const InitiatorItemLess = ({ initiator, initiatorsIds, setInitiatorsIds, selectI
     const { id, phone, address, company_name, numOfProject, rating, tama38, pinuyBinuy, description, logo, name } = initiator
 
     const navigate = useNavigate()
-    return (
+    return
+     (
         <>
-            {/* {console.log(initiator,id)} */}
-            <Card sx={{ minHeight: 200, maxWidth: 345, maxHeight: 450 }} raised>
             <Card sx={{ maxWidth: 345, maxHeight: 450 ,minHeight:250}} raised>
                 {/* <Checkbox checked={initiatorsIds.find(id => id === initiatorsIds)}
                     onChange={(e, checked) => {

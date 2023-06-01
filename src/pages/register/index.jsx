@@ -93,9 +93,10 @@ const Register = () => {
 
           />
           <Button type="submit" variant="outlined">לחץ כדי להירשם</Button>
+          <Link to="/initiatorRegister">רוצה להירשם כיזם? לחץ כאן</Link><div />
+
         </Box>
         </form>
-        <Link to="/initiatorRegister">רוצה להירשם כיזם? לחץ כאן</Link><div />
     </>
 
   )
